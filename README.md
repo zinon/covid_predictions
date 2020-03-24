@@ -31,6 +31,6 @@ Predictions for total confirmed cases using a logistic model.
 Predictions for mortality rate.
 ![Prophet mortality](images/prophet_mortality.png?raw=true "Predictions mortality rate")
 
-Predictions for deaths.
+Predictions for deaths using a logistic model.
 ![Prophet deaths](images/prophet_deaths.png?raw=true "Predictions deaths")
 
