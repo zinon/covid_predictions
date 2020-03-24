@@ -1,3 +1,4 @@
 # COVID-19 Predictions
 
-![Global growth](images/overall.png?raw=true "Title")
+Global growth
+![Global growth](images/overall.png?raw=true "Global growth")
