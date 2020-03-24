@@ -3,29 +3,43 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 import numpy as np
+#
+def name(odir, ofile):
 
+    if not os.path.exists(odir):
+        os.mkdir(odir)
+        
+    return os.path.join( odir, ofile+'.png')
+#
+def save(fn):
+    if fn:
+        print("Saving '%s'" % fn)
+        plt.savefig(fn)
+        
+#options
+kshow=False
+koverall = True
+klead = False
+krates = False
+kmortal=False
+kmortaldense=False
+odir = "images"
+
+
+#data
 ld = xp.DataLoader()
-
 tb = ld.table
 leaders = ld.leaders
 groups = ld.grouped
 mortal = ld.mortality
 
-if not os.path.exists("images"):
-    os.mkdir("images")
 
+# figure
 sns.set()
 sns.set_style("whitegrid")
-
 fig, ax = plt.subplots(figsize=(15,7))
 
-koverall = False
-klead = False
-krates = False
-kmortal=False
-kmortaldense=True
-
-#
+#plot
 if koverall:
     ax0 = sns.lineplot(x="Date",
                        y="Confirmed",
@@ -51,6 +65,7 @@ if koverall:
                        ax = ax1)
 
 
+    save(name(odir, "overall"))
 #
 if klead:
     print("lead:", lead.head)
@@ -85,8 +100,7 @@ if krates:
                        color = "orange",
                        label = "Global Confirmed",
                        ax = ax0)
-
-
+    
 if kmortal:
     print("mortal:", mortal.head)
     
@@ -123,7 +137,9 @@ if kmortaldense:
     ax0.set(xlabel='Date', ylabel='Mortality / Population Density')
 
 plt.tight_layout()
-plt.show()
+
+if kshow:
+    plt.show()
 
 
-#fig.write_image("images/all.png")
+
