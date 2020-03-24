@@ -1,5 +1,8 @@
 # COVID-19 Predictions
 
+## Data Source
+https://github.com/CSSEGISandData/COVID-19
+
 ## Global growth
 ![Global growth](images/overall.png?raw=true "Global growth")
 
@@ -12,9 +15,6 @@
 
 ## Percentage Rates
 ![Percentage Rates](images/rates.png?raw=true "Percentage rates")
-
-## Data Source
-https://github.com/CSSEGISandData/COVID-19
 
 # Predictions
 
