@@ -1,21 +1,10 @@
 import proc as xp
+import tools as xt
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 import numpy as np
-#
-def name(odir, ofile):
-
-    if not os.path.exists(odir):
-        os.mkdir(odir)
-        
-    return os.path.join( odir, ofile+'.png')
-#
-def save(fig, fn):
-    if fn:
-        print("Saving '%s'" % fn)
-        fig.savefig(fn)
-        
+#        
 #options
 kshow=True
 koverall = True
@@ -68,7 +57,7 @@ if koverall:
                        ax = ax1)
 
     ax.legend()
-    save(fig, name(odir, "overall"))
+    xt.save(fig, xt.name(odir, "overall"))
 #
 if klead:
     print("lead:", leaders.head)
@@ -80,9 +69,11 @@ if klead:
                        data = leaders,
                        ax = ax)
     ax.legend()
-    save(fig, name(odir, "leaders"))
+    xt.save(fig, xt.name(odir, "leaders"))
 
 if krates:
+    ymin = 0
+    ymax = 70
     print("lead:", leaders.head)
     fig, ax = plt.subplots(figsize=(15,7))
     ax0 = sns.lineplot(x='Date',
@@ -91,7 +82,6 @@ if krates:
                       color = "red",
                        label = "Deaths",
                        ax = ax)
-    ax0.set(xlabel='Date', ylabel='Percentage')
     
 
     ax1 = sns.lineplot(x='Date',
@@ -107,8 +97,14 @@ if krates:
                        color = "orange",
                        label = "Global Confirmed",
                        ax = ax0)
+    ax.set(xlabel='Date', ylabel='Percentage')
+    ax.set_ylim([ymin,ymax])
+    start, end = ax.get_ylim()
+    stepsize = 2
+    ax.yaxis.set_ticks(np.arange(start, end, stepsize))
+
     ax.legend()
-    save(fig, name(odir, "rates"))
+    xt.save(fig, xt.name(odir, "rates"))
         
 if kmortal:
     print("mortal:", mortal.head)
@@ -126,10 +122,10 @@ if kmortal:
                        data = mortal,
                        ax = ax)
 
-    ax0.set(xlabel='Date', ylabel='Mortality Percentage')
+    ax.set(xlabel='Date', ylabel='Mortality Percentage')
     ax.legend()
     
-    save(fig, name(odir, "mortality"))
+    xt.save(fig, xt.name(odir, "mortality"))
 
 if kmortaldense:
     print("mortal density:", mortal.head)
@@ -148,7 +144,7 @@ if kmortaldense:
 
     ax0.set(xlabel='Date', ylabel='Mortality / Population Density')
 
-    save(fig, name(odir, "mortality_normalized_per_pop_density"))
+    xt.save(fig, xt.name(odir, "mortality_normalized_per_pop_density"))
 
     
 plt.tight_layout()

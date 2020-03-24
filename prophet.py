@@ -6,27 +6,9 @@ from matplotlib.ticker import FuncFormatter
 import matplotlib.pyplot as plt
 
 import proc as xp
+import tools as xt
 
-
-def y_fmt(y, pos):
-    decades = [1e9, 1e6, 1e3, 1e0, 1e-3, 1e-6, 1e-9 ]
-    suffix  = ["G", "M", "k", "" , "m" , "u", "n"  ]
-    if y == 0:
-        return str(0)
-    for i, d in enumerate(decades):
-        if np.abs(y) >=d:
-            val = y/float(d)
-            signf = len(str(val).split(".")[1])
-            if signf == 0:
-                return '{val:d} {suffix}'.format(val=int(val), suffix=suffix[i])
-            else:
-                if signf == 1:
-                    if str(val).split(".")[1] == "0":
-                        return '{val:d} {suffix}'.format(val=int(round(val)), suffix=suffix[i]) 
-                tx = "{"+"val:.{signf}f".format(signf = signf) +"} {suffix}"
-                return tx.format(val=val, suffix=suffix[i])
-    return y
-
+odir = 'images'
 #
 ld = xp.DataLoader()
 
@@ -103,23 +85,28 @@ d_forecast = m_prophet.predict(d_future)
 
 
 c_log_fig = c_log_prophet.plot(c_log_forecast)
-ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(y_fmt))
-
+ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
+xt.save(c_log_fig, xt.name(odir, "prophet_logistic_confirmed"))
+    
 c_log_comp_fig = c_log_prophet.plot_components(c_log_forecast)
-ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(y_fmt))
+ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
+xt.save(c_log_comp_fig, xt.name(odir, "prophet_logistic_confirmed_components"))
 
 c_lin_fig = c_lin_prophet.plot(c_lin_forecast)
-ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(y_fmt))
+ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
+xt.save(c_lin_fig, xt.name(odir, "prophet_linear_confirmed"))
 
 c_lin_comp_fig = c_lin_prophet.plot_components(c_lin_forecast)
-ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(y_fmt))
+ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
+xt.save(c_lin_comp_fig, xt.name(odir, "prophet_linear_confirmed_components"))
 
 m_fig = m_prophet.plot(m_forecast)
-ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(y_fmt))
+ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
+xt.save(m_fig, xt.name(odir, "prophet_mortality"))
 
 d_fig = d_prophet.plot(d_forecast)
-ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(y_fmt))
-
+ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
+xt.save(d_fig, xt.name(odir, "prophet_deaths"))
 
 
 plt.tight_layout()
