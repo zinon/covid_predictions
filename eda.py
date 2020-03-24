@@ -19,10 +19,10 @@ def save(fn):
 #options
 kshow=False
 koverall = True
-klead = False
-krates = False
-kmortal=False
-kmortaldense=False
+klead = True
+krates = True
+kmortal= True
+kmortaldense = False
 odir = "images"
 
 
@@ -68,13 +68,14 @@ if koverall:
     save(name(odir, "overall"))
 #
 if klead:
-    print("lead:", lead.head)
+    print("lead:", leaders.head)
     
     ax = sns.lineplot(x='Date',
                  y='Confirmed All',
                  hue="Country",
                  data = leaders)
-    
+
+    save(name(odir, "leaders"))
 
 if krates:
     print("lead:", leaders.head)
@@ -100,7 +101,9 @@ if krates:
                        color = "orange",
                        label = "Global Confirmed",
                        ax = ax0)
-    
+
+    save(name(odir, "rates"))
+        
 if kmortal:
     print("mortal:", mortal.head)
     
@@ -118,6 +121,7 @@ if kmortal:
 
     ax0.set(xlabel='Date', ylabel='Mortality Percentage')
 
+    save(name(odir, "mortality"))
 
 if kmortaldense:
     print("mortal density:", mortal.head)
@@ -136,6 +140,9 @@ if kmortaldense:
 
     ax0.set(xlabel='Date', ylabel='Mortality / Population Density')
 
+    save(name(odir, "mortality_normalized_per_pop_density"))
+
+    
 plt.tight_layout()
 
 if kshow:
