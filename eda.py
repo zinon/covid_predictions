@@ -11,13 +11,13 @@ def name(odir, ofile):
         
     return os.path.join( odir, ofile+'.png')
 #
-def save(fn):
+def save(fig, fn):
     if fn:
         print("Saving '%s'" % fn)
-        plt.savefig(fn)
+        fig.savefig(fn)
         
 #options
-kshow=False
+kshow=True
 koverall = True
 klead = True
 krates = True
@@ -37,16 +37,19 @@ mortal = ld.mortality
 # figure
 sns.set()
 sns.set_style("whitegrid")
-fig, ax = plt.subplots(figsize=(15,7))
+
 
 #plot
 if koverall:
+    fig, ax = plt.subplots(figsize=(15,7))
+    
     ax0 = sns.lineplot(x="Date",
                        y="Confirmed",
                        markers=True,
                        color = 'orange',
                        label="Confirmed",
-                       data=tb)
+                       data=tb,
+                       ax = ax)
     
     ax1 = sns.lineplot(x="Date",
                        y="Recovered",
@@ -64,27 +67,30 @@ if koverall:
                        label="Deceased",
                        ax = ax1)
 
-
-    save(name(odir, "overall"))
+    ax.legend()
+    save(fig, name(odir, "overall"))
 #
 if klead:
     print("lead:", leaders.head)
-    
-    ax = sns.lineplot(x='Date',
-                 y='Confirmed All',
-                 hue="Country",
-                 data = leaders)
 
-    save(name(odir, "leaders"))
+    fig, ax = plt.subplots(figsize=(15,7))
+    ax0 = sns.lineplot(x='Date',
+                       y='Confirmed All',
+                       hue="Country",
+                       data = leaders,
+                       ax = ax)
+    ax.legend()
+    save(fig, name(odir, "leaders"))
 
 if krates:
     print("lead:", leaders.head)
-    
+    fig, ax = plt.subplots(figsize=(15,7))
     ax0 = sns.lineplot(x='Date',
                       y='Deaths_All_Frac',
                       data = groups,
                       color = "red",
-                      label = "Deaths")
+                       label = "Deaths",
+                       ax = ax)
     ax0.set(xlabel='Date', ylabel='Percentage')
     
 
@@ -101,12 +107,12 @@ if krates:
                        color = "orange",
                        label = "Global Confirmed",
                        ax = ax0)
-
-    save(name(odir, "rates"))
+    ax.legend()
+    save(fig, name(odir, "rates"))
         
 if kmortal:
     print("mortal:", mortal.head)
-    
+    fig, ax = plt.subplots(figsize=(15,7))
     #We filter out where mortality rate is above 10% 
     mortal = mortal[mortal.mortality_rate < 10]
 
@@ -117,11 +123,13 @@ if kmortal:
     ax0 = sns.lineplot(x='Date',
                        y='mortality_rate',
                        hue='Country',
-                       data = mortal)
+                       data = mortal,
+                       ax = ax)
 
     ax0.set(xlabel='Date', ylabel='Mortality Percentage')
-
-    save(name(odir, "mortality"))
+    ax.legend()
+    
+    save(fig, name(odir, "mortality"))
 
 if kmortaldense:
     print("mortal density:", mortal.head)
@@ -140,7 +148,7 @@ if kmortaldense:
 
     ax0.set(xlabel='Date', ylabel='Mortality / Population Density')
 
-    save(name(odir, "mortality_normalized_per_pop_density"))
+    save(fig, name(odir, "mortality_normalized_per_pop_density"))
 
     
 plt.tight_layout()
