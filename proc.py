@@ -183,10 +183,10 @@ class DataLoader():
     def reporter(self):
         latest = self.__covid_data[self.__covid_data['Date'] == self.__covid_data['Date'].max()]
         print('Last update: ' + str(self.__covid_data["Date"].max()))
-        print('Total confirmed cases: %.d' %np.sum(latest['Confirmed']))
-        print('Total death cases: %.d' %np.sum(latest['Deaths']))
-        print('Total recovered cases: %.d' %np.sum(latest['Recovered']))
-        print('Death rate %%: %.2f' % (np.sum(latest['Deaths'])/np.sum(latest['Confirmed'])*100))
+        print('\nTotal confirmed cases: %.d' %np.sum(latest['Confirmed']))
+        print('\nTotal death cases: %.d' %np.sum(latest['Deaths']))
+        print('\nTotal recovered cases: %.d' %np.sum(latest['Recovered']))
+        print('\nDeath rate %%: %.2f' % (np.sum(latest['Deaths'])/np.sum(latest['Confirmed'])*100))
 
         cty = latest.groupby('Country').sum()
         cty['Death Rate'] = cty['Deaths'] / cty['Confirmed'] * 100

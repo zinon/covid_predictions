@@ -4,11 +4,14 @@
 https://github.com/CSSEGISandData/COVID-19
 
 ## Overall Statistics
-Last update: 2020-03-23 00:00:00
-Total confirmed cases: 378287
-Total death cases: 16497
-Total recovered cases: 100958
-Death rate %: 4.36
+
+Overall statistics information
+- Last update: 2020-03-23 00:00:00
+- Total confirmed cases: 378287
+- Total death cases: 16497
+- Total recovered cases: 100958
+- Death rate %: 4.36
+
 | Country        |   Confirmed |   Deaths |   Recovered |   Death Rate |   Recovery Rate |   Active |
 |:---------------|------------:|---------:|------------:|-------------:|----------------:|---------:|
 | Mainland China |       81116 |     3270 |       72709 |      4.03126 |        89.6358  |     5137 |
