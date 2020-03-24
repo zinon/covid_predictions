@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 class DataLoader():
     def __init__(self):
@@ -75,6 +76,7 @@ class DataLoader():
 
         self.__country_data = pd.read_csv("data/countries of the world.csv")
 
+        print("Shape:", self.__covid_data.shape)
         return True
 
     #prevent division by zero
@@ -101,6 +103,15 @@ class DataLoader():
         print("Null covid data values", self.__covid_data.isnull().sum() )
         print("Null country data values", self.__country_data.isnull().sum() )
 
+        #sort
+        self.__covid_data = self.__covid_data.sort_values(['Date','Country','State'])
+
+        # Add column of days since first case
+        self.__covid_data['first_date'] = self.__covid_data.groupby('Country')['Date'].transform('min')
+        self.__covid_data['days'] = (self.__covid_data['Date'] -
+                                     self.__covid_data['first_date']).dt.days
+
+        
         #countries
         pd_col = 'Pop. Density (per sq. mi.)'
         self.__country_data[pd_col] = self.__country_data[pd_col].str.replace(",","").astype(float)
@@ -169,7 +180,24 @@ class DataLoader():
         
         return True
 
+    def reporter(self):
+        latest = self.__covid_data[self.__covid_data['Date'] == self.__covid_data['Date'].max()]
+        print('Last update: ' + str(self.__covid_data["Date"].max()))
+        print('Total confirmed cases: %.d' %np.sum(latest['Confirmed']))
+        print('Total death cases: %.d' %np.sum(latest['Deaths']))
+        print('Total recovered cases: %.d' %np.sum(latest['Recovered']))
+        print('Death rate %%: %.2f' % (np.sum(latest['Deaths'])/np.sum(latest['Confirmed'])*100))
 
+        cty = latest.groupby('Country').sum()
+        cty['Death Rate'] = cty['Deaths'] / cty['Confirmed'] * 100
+        cty['Recovery Rate'] = cty['Recovered'] / cty['Confirmed'] * 100
+        cty['Active'] = cty['Confirmed'] - cty['Deaths'] - cty['Recovered']
+        cty = cty.drop('days',axis=1).sort_values('Confirmed', ascending=False)
+
+        print("\n", cty.head(10).to_markdown(showindex=True))
+        
+        #print(tabulate(df, tablefmt="pipe", headers="keys"))
+        
     def modeller(self):
         # Prophet requires columns to be labelled ds and y.
         # For the logaritmic model a cap rate and a floor is nessecary.
