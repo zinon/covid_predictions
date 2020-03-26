@@ -26,9 +26,9 @@ Overall statistics information
 | UK             |        6726 |      336 |         140 |      4.99554 |         2.08147 |     6250 |
 
 
-## Overall 
-![Global growth](images/overall.png?raw=true "Global growth")
-Overall statistics for top affected countries.
+## Overview 
+![Global growth](images/overall.png?raw=true "Overview")
+Overview statistics for top affected countries.
 
 ## Global growth
 ![Global growth](images/overall.png?raw=true "Global growth")
