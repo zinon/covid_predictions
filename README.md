@@ -27,7 +27,7 @@ Overall statistics information
 
 
 ## Overview 
-![Global growth](images/overview.png?raw=true "Overview")
+![Overview stats](images/overview.png?raw=true "Overview")
 Overview statistics for top affected countries.
 
 ## Global growth
