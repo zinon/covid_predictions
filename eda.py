@@ -4,24 +4,66 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 import numpy as np
-#        
+import pandas as pd
+#
+def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
+    if column == 'Death Rate':
+        _df = df[df['Deaths'] >=10 ].sort_values('Death Rate', ascending=False).head(head)
+    else:
+        _df = df.sort_values(column, ascending=False).head(head)
+
+    #fig, ax = plt.subplots(2, 2, figsize=(15, 10))
+    g = sns.barplot(_df[column], _df.index, color = 'b')
+    plt.title(title, fontsize=12)
+    plt.ylabel(None)
+    plt.xlabel(None)
+    plt.grid(axis='x')
+
+    for p in g.patches:
+        width = p.get_width()
+        f = 1.
+        if width < 100:
+            f = 1.1
+        elif width < 1000:
+            f = 1.05
+        elif width < 10000:
+            f = 1.01
+        
+        #plt.text(width*f,
+        #         p.get_y(), #+0.55*p.get_height(),
+        #         '{:1.0f}'.format(width),
+        #         ha='center', va='center')
+    
+    #for p in g.patches:
+    #    g.annotate(str(p.get_height()), (p.get_x() * 1.005, p.get_height() * 1.005))
+    
+    for i, v in enumerate(_df[column]):
+        if column == 'Death Rate':
+            g.text(v*1.01, i+0.2, str(round(v,2)), size =10)
+        else:
+            g.text(v*1.01, i+0.2, str(int(v)), size = 10)
+
+   
 #options
-kshow=True
-koverall = True
-klead = True
-krates = True
-kmortal= True
+kshow= True
+
+koverview = True
+koverall = False
+klead = False
+krates = False
+kmortal= False
 kmortaldense = False
 odir = "images"
 
 
 #data
-ld = xp.DataLoader()
+top=10
+ld = xp.DataLoader(top=top)
 tb = ld.table
 leaders = ld.leaders
 groups = ld.grouped
 mortal = ld.mortality
-
+cty = ld.cty_data
 
 # figure
 sns.set()
@@ -29,9 +71,22 @@ sns.set_style("whitegrid")
 
 
 #plot
+if koverview:
+    plt.figure(figsize=(15, 9))
+    plt.subplot(411)
+    plot_report(cty, 'Confirmed','Confirmed cases top %i countries'%(top), top)
+    plt.subplot(412)
+    plot_report(cty, 'Deaths','Death cases top %i countries'%(top), top)
+    plt.subplot(413)
+    plot_report(cty, 'Active','Active cases top %i countries'%(top), top)
+    plt.subplot(414)
+    plot_report(cty, 'Death Rate','Death rate top %i countries (>=10 deaths only)'%(top), top)
+
+    xt.save(fig=plt, fn = xt.name(odir, "overview"))
+    
 if koverall:
     fig, ax = plt.subplots(figsize=(15,7))
-    
+
     ax0 = sns.lineplot(x="Date",
                        y="Confirmed",
                        markers=True,
@@ -146,10 +201,12 @@ if kmortaldense:
 
     xt.save(fig, xt.name(odir, "mortality_normalized_per_pop_density"))
 
+
     
-plt.tight_layout()
+
 
 if kshow:
+    plt.tight_layout()
     plt.show()
 
 

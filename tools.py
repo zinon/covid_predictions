@@ -10,7 +10,7 @@ def name(odir, ofile):
         
     return os.path.join( odir, ofile+'.png')
 
-def save(fig, fn):
+def save(fig = None, fn = None):
     """
     store figure
     """
