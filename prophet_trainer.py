@@ -125,6 +125,6 @@ class ProphetTrainer():
 
         self.__cv_metrics.fig_mape = plot_cross_validation_metric(self.__cv_metrics.df_cv, metric='mape')
 
-        self.__cv_metrics.manual_mappe = self.mean_absolute_percentage_error(self.__cv_metrics.df_cv.y,
+        self.__cv_metrics.manual_mape = self.mean_absolute_percentage_error(self.__cv_metrics.df_cv.y,
                                                                              self.__cv_metrics.df_cv.yhat)
         
