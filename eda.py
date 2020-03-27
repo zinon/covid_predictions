@@ -48,10 +48,10 @@ def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
 kshow= True
 
 koverview = True
-koverall = False
-klead = False
-krates = False
-kmortal= False
+koverall = True
+klead = True
+krates = True
+kmortal= True
 kmortaldense = False
 odir = "images"
 
@@ -81,7 +81,8 @@ if koverview:
     plot_report(cty, 'Active','Active cases top %i countries'%(top), top)
     plt.subplot(414)
     plot_report(cty, 'Death Rate','Death rate top %i countries (>=10 deaths only)'%(top), top)
-
+    plt.tight_layout()
+    
     xt.save(fig=plt, fn = xt.name(odir, "overview"))
     
 if koverall:

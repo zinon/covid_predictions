@@ -5,25 +5,24 @@ https://github.com/CSSEGISandData/COVID-19
 
 ## Overall Statistics
 
-Overall statistics information
-- Last update: 2020-03-23 00:00:00
-- Total confirmed cases: 378287
-- Total death cases: 16497
-- Total recovered cases: 100958
-- Death rate %: 4.36
+- Last update: 2020-03-26 00:00:00
+- Total confirmed cases: 529591
+- Total death cases: 23969
+- Total recovered cases: 121285
+- Death rate %: 4.53
 
-| Country        |   Confirmed |   Deaths |   Recovered |   Death Rate |   Recovery Rate |   Active |
+ | Country        |   Confirmed |   Deaths |   Recovered |   Death Rate |   Recovery Rate |   Active |
 |:---------------|------------:|---------:|------------:|-------------:|----------------:|---------:|
-| Mainland China |       81116 |     3270 |       72709 |      4.03126 |        89.6358  |     5137 |
-| Italy          |       63927 |     6077 |        7432 |      9.50616 |        11.6258  |    50418 |
-| US             |       43667 |      552 |           0 |      1.26411 |         0       |    43115 |
-| Spain          |       35136 |     2311 |        3355 |      6.5773  |         9.54861 |    29470 |
-| Germany        |       29056 |      123 |         453 |      0.42332 |         1.55906 |    28480 |
-| Iran           |       23049 |     1812 |        8376 |      7.86151 |        36.34    |    12861 |
-| France         |       20123 |      862 |        2207 |      4.28366 |        10.9675  |    17054 |
-| South Korea    |        8961 |      111 |        3166 |      1.2387  |        35.3309  |     5684 |
-| Switzerland    |        8795 |      120 |         131 |      1.36441 |         1.48948 |     8544 |
-| UK             |        6726 |      336 |         140 |      4.99554 |         2.08147 |     6250 |
+| US             |       83836 |     1209 |           0 |     1.4421   |         0       |    82627 |
+| Mainland China |       81298 |     3287 |       74061 |     4.04315  |        91.0982  |     3950 |
+| Italy          |       80589 |     8215 |       10361 |    10.1937   |        12.8566  |    62013 |
+| Spain          |       57786 |     4365 |        7015 |     7.55373  |        12.1396  |    46406 |
+| Germany        |       43938 |      267 |        5673 |     0.607674 |        12.9114  |    37998 |
+| France         |       29551 |     1698 |        4955 |     5.746    |        16.7676  |    22898 |
+| Iran           |       29406 |     2234 |       10457 |     7.59709  |        35.5608  |    16715 |
+| UK             |       11812 |      580 |         150 |     4.91026  |         1.2699  |    11082 |
+| Switzerland    |       11811 |      191 |         131 |     1.61714  |         1.10914 |    11489 |
+| South Korea    |        9241 |      131 |        4144 |     1.4176   |        44.8436  |     4966 |
 
 
 ## Overview 

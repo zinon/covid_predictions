@@ -10,12 +10,14 @@ def name(odir, ofile):
         
     return os.path.join( odir, ofile+'.png')
 
-def save(fig = None, fn = None):
+def save(fig = None, fn = None, txt = None):
     """
     store figure
     """
     if fn:
         print("Saving '%s'" % fn)
+        if txt:
+            fig.text(.1, .8, txt, fontsize=12)
         fig.savefig(fn)
 
 

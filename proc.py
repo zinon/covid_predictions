@@ -18,9 +18,9 @@ class DataLoader():
         self.__cty_data = None
         #
         self.__confirmed_floor = 0
-        self.__confirmed_population = 250000 *2
+        self.__confirmed_population = 1e6
         self.__deaths_floor = 0
-        self.__deaths_population = 25000
+        self.__deaths_population = 50e3
         self.__countries = ['Mainland China', 'Italy', 'Germany', 'Iran', 'US', 'Spain']
         #
         self.__loaded = self.loader()
