@@ -12,70 +12,116 @@ import proc as xp
 import tools as xt
 import prophet_trainer as pt
 import optparam as op
+import xquery as xq
+
+def plotter(train = None, title = "", ylabel = "", fn = "test", add_chpts = False):
+#figure
+    fig = plt.figure(facecolor='w', figsize=(10, 7))
+    ax = fig.add_subplot(111)
+    plt.title(title, fontsize=18, y = 1.05)
+
+    #train result
+    train_fig = train.model.plot(train.forecast,  ax = ax, xlabel = "Date", ylabel = ylabel)
+    if add_chpts:
+        cpts = add_changepoints_to_plot(train_fig.gca(), train.model, train.forecast)
+    ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
+    c_txt = "RMSE=%.1f MAPE=%.1f%%"%(train.param.rmse, train.cv_metrics.manual_mape)
+    xt.save(train_fig, xt.name(odir, fn+"_prediction"), c_txt)
+
+    #components
+    train_comp_fig = train.model.plot_components(train.forecast)
+    ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
+    xt.save(train_comp_fig, xt.name(odir, fn+"_components"))
+    
+    #MAPE
+    train_cv_mape = train.cv_mape_fig()
+    ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
+    xt.save(train_cv_mape, xt.name(odir, fn+"_cv_mape"))
+
+    
+    plt.tight_layout()
+    plt.show()
+
+    
+#
+confirmed_logistic = True
+confirmed_linear = False
+deaths_logistic = False
+deaths_linear = False
+mortality_linear = True
 
 odir = 'images'
 
+q0 = xq.Query("All Period", "Confirmed > 0 and Date < '2021-01-01'")
+q1 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-15' and Date < '2021-01-01'")
+
 #
-ld = xp.DataLoader()
+ld = xp.DataLoader(query = q0)
 
 #datasets
 ds_confirmed = ld.train_ds_confirmed
 ds_mortality = ld.train_ds_mortality
 ds_deaths = ld.train_ds_deaths
 tb = ld.table
-
-   
+periods = 21
 
 #prediction for confirmed - logistic
-c_param = op.Param(rmse = 0.,
-                   floor = 0,
-                   cap = 1e6,
-                   smode = "additive",
-                   periods = 21,
-                   cpps = 0.05)
+if confirmed_logistic:
+    param = op.Param(growth = 'logistic',
+                     floor = 0.,
+                     cap =  900e3,
+                     smode = "additive",
+                     periods = 21,
+                     cpps = 0.05,
+                     iw = 0.95)
 
-c_log =  pt.ProphetTrainer(c_param, ds_confirmed, tb)
+    train =  pt.ProphetTrainer("Confirmed", param, ds_confirmed, tb)
 
-#c_log_model = c_log.model
-#c_log_forecast = c_log.forecast
-
+    plotter(train, "Confirmed cases", "Logistic Model", "prophet_logistic_confirmed", False)
 
 #prediction for confirmed - linear
-c_lin_prophet = Prophet(growth="linear",
-                    interval_width=0.98,
-                    # changepoint_prior_scale=0.05,
-                    #changepoint_range=0.9,
-                    yearly_seasonality=False,
-                    weekly_seasonality=False,
-                    daily_seasonality=True,
-                    seasonality_mode='additive')
+if confirmed_linear:
+    param = op.Param(growth = 'linear',
+                     smode = "additive",
+                     periods = 21,
+                     cpps = 0.5,
+                     iw = 0.95)
 
-c_lin_prophet.fit(ds_confirmed)
-c_lin_future = c_lin_prophet.make_future_dataframe(periods=20)
-print("confirmed future tail -linear", c_lin_future.tail())
-c_lin_forecast = c_lin_prophet.predict(c_lin_future)
-print(c_lin_forecast[['ds','yhat', 'yhat_lower', 'yhat_upper']])
-c_lin_rmse = np.sqrt(mean_squared_error(tb["Confirmed"],
-                                 c_lin_forecast['yhat'].head(tb.shape[0])))
-print("RMSE for Linear Prophet Model - Confirmed:", c_lin_rmse)
+    train =  pt.ProphetTrainer("Confirmed", param, ds_confirmed, tb)
+
+    plotter(train, "Confirmed cases", "Linear Model", "prophet_linear_confirmed", False)
+
+#prediction for confirmed - logistic
+if deaths_logistic:
+    param = op.Param(growth = 'logistic',
+                     floor = 0,
+                     cap =  50e3,
+                     smode = "additive",
+                     periods = 21,
+                     cpps = 0.05,
+                     iw = 0.95)
+
+    train =  pt.ProphetTrainer("Deaths", param, ds_deaths, tb)
+
+    plotter(train, "Deaths", "Logistic Model", "prophet_logistic_deaths", False)
 
 
+#prediction for confirmed - logistic
+if deaths_linear:
+    param = op.Param(growth = 'linear',
+                     smode = "additive",
+                     periods = 21,
+                     cpps = 0.05,
+                     iw = 0.95)
 
-# Deaths model
-d_prophet = Prophet(growth="logistic",
-                    interval_width=0.95,
-                    yearly_seasonality=False,
-                    weekly_seasonality=False,
-                    daily_seasonality=True,
-                    seasonality_mode='additive')
-d_prophet.fit(ds_deaths)
+    train =  pt.ProphetTrainer("Deaths", param, ds_deaths, tb)
 
-d_future = d_prophet.make_future_dataframe(periods=21)
-d_future['cap'] = ld.deaths_population
-d_future['floor'] = ld.deaths_floor
-d_forecast = d_prophet.predict(d_future)
+    plotter(train, "Deaths", "Linear Model", "prophet_linear_deaths", False)
 
-# Mortality rate model
+
+if mortality_linear:
+    pass
+    # Mortality rate model
 m_prophet = Prophet ()
 m_prophet.fit(ds_mortality)
 m_future = m_prophet.make_future_dataframe(periods=31)
@@ -86,18 +132,15 @@ m_forecast = m_prophet.predict(m_future)
 #illustrate
 #fig, ax = plt.subplots(figsize=(15,7))
 
+# plot logistic
 
-c_log_fig = c_log.model.plot(c_log.forecast, xlabel = "Date", ylabel = "Confirmed cases")
-#c_log_chpt = add_changepoints_to_plot(c_log_fig.gca(),  c_log_prophet, c_log_forecast)
+#free
+c_lin_fig = c_lin_prophet.plot(c_lin_forecast, xlabel = "Date", ylabel = "Confirmed cases")
 ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
-xt.save(c_log_fig, xt.name(odir, "prophet_logistic_confirmed"))
-    
-c_log_comp_fig = c_log.model.plot_components(c_log.forecast)
-ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
-c_txt = "RMSE=%.1f MAPE=%f.1"%(c_log.param.rmse, c_log.cv_metrics.manual_mape)
-xt.save(c_log_comp_fig, xt.name(odir, "prophet_logistic_confirmed_components"), c_txt)
+xt.save(c_lin_fig, xt.name(odir, "prophet_linear_confirmed"), "RMSE=%.1f"%(c_lin_rmse) )
 
-c_lin_fig = c_lin_prophet.plot(c_lin_forecast)
+#linear
+c_lin_fig = c_lin_prophet.plot(c_lin_forecast, xlabel = "Date", ylabel = "Confirmed cases")
 ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
 xt.save(c_lin_fig, xt.name(odir, "prophet_linear_confirmed"), "RMSE=%.1f"%(c_lin_rmse) )
 
@@ -113,7 +156,4 @@ d_fig = d_prophet.plot(d_forecast)
 ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
 xt.save(d_fig, xt.name(odir, "prophet_deaths"))
 
-
-plt.tight_layout()
-plt.show()
 

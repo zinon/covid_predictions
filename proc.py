@@ -2,8 +2,9 @@ import pandas as pd
 import numpy as np
 
 class DataLoader():
-    def __init__(self, top = 10):
+    def __init__(self, top = 10, query = None):
         self.__n_top = top
+        self.__query = query
         #
         self.__covid_data = None
         self.__country_data = None
@@ -122,8 +123,11 @@ class DataLoader():
         print("Null country data values", self.__country_data.isnull().sum() )
 
         # Clean up rows with zero cases
-        self.__covid_data = self.__covid_data[(self.__covid_data['Confirmed']>0) &
-                                              (self.__covid_data['Date'] < '2021-01-01')]
+        if self.__query:
+            self.__covid_data = self.__covid_data.query( self.__query.query )
+            #self.__covid_data[(self.__covid_data['Confirmed']>0) &
+         #                                     (self.__covid_data['Date'] > '2020-02-15') &
+         #                                     (self.__covid_data['Date'] < '2021-01-01') ]
 
         #sort
         self.__covid_data = self.__covid_data.sort_values(['Date','Country','State'])
