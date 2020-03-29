@@ -1,10 +1,11 @@
 import pandas as pd
 import numpy as np
 
-class DataLoader():
-    def __init__(self, top = 10, query = None):
-        self.__n_top = top
-        self.__query = query
+class DataLoader(object):
+    def __init__(self, **kwargs):
+        self.__top = kwargs.get('top', 10)
+        self.__query = kwargs.get('query', None)
+        self.__logistic_params  = kwargs.get('logistic_params', None)
         #
         self.__covid_data = None
         self.__country_data = None
@@ -12,21 +13,20 @@ class DataLoader():
         self.__leaders = None
         self.__grouped = None
         self.__mortality = None
-        self.__train_ds_confirmed = None
-        self.__train_ds_deaths = None
-        self.__train_ds_mortality = None
         self.__latest = None
         self.__cty_data = None
         #
-        self.__confirmed_floor = 0
-        self.__confirmed_population = 1e6
-        self.__deaths_floor = 0
-        self.__deaths_population = 50e3
+        self.__train_ds_confirmed = None
+        self.__train_ds_deaths = None
+        self.__train_ds_active = None
+        self.__train_ds_recovered = None
+        self.__train_ds_mortality = None
+        #
         self.__countries = ['Mainland China', 'Italy', 'Germany', 'Iran', 'US', 'Spain']
         #
-        self.__loaded = self.loader()
+        self.__loaded = self.loader() if len(kwargs) else False
         self.__processed = self.processor() if self.__loaded else False
-        self.__modelled = self.modeller() if self.__processed else False
+        self.__modelled = self.modeller() if self.__processed and self.__logistic_params else False
         #last status in chain
         self.__status = self.__processed
         
@@ -56,24 +56,21 @@ class DataLoader():
         return self.__train_ds_deaths
 
     @property
+    def train_ds_active(self):
+        return self.__train_ds_active
+
+    @property
+    def train_ds_recovered(self):
+        return self.__train_ds_recovered
+
+    @property
     def train_ds_mortality(self):
         return self.__train_ds_mortality
 
     @property
-    def confirmed_floor(self):
-        return self.__confirmed_floor
+    def logistic_params(self):
+        return self.__logistic_params
 
-    @property
-    def confirmed_population(self):
-        return self.__confirmed_population
-
-    @property
-    def deaths_floor(self):
-        return self.__deaths_floor
-
-    @property
-    def deaths_population(self):
-        return self.__deaths_population
 
     @property
     def cty_data(self):
@@ -116,8 +113,14 @@ class DataLoader():
 
         #make sure again that this is a datetime
         self.__covid_data["Date"] = pd.to_datetime(self.__covid_data["Date"])
-        
+
+        #add active
+        self.__covid_data['Active'] = self.__covid_data['Confirmed'] - self.__covid_data['Deaths'] - self.__covid_data['Recovered']
+
+
+        #print
         print("\ncovid:", self.__covid_data.head())
+
         # check null values
         print("Null covid data values", self.__covid_data.isnull().sum() )
         print("Null country data values", self.__country_data.isnull().sum() )
@@ -128,6 +131,7 @@ class DataLoader():
             #self.__covid_data[(self.__covid_data['Confirmed']>0) &
          #                                     (self.__covid_data['Date'] > '2020-02-15') &
          #                                     (self.__covid_data['Date'] < '2021-01-01') ]
+
 
         #sort
         self.__covid_data = self.__covid_data.sort_values(['Date','Country','State'])
@@ -141,7 +145,8 @@ class DataLoader():
         # We convert the data into daily.
         # If the data for the latest day is not available, we will fill it with previous available data.
         #This creates a table that sums up every element in the Confirmed, Deaths, and recovered columns.
-        self.__table = self.__covid_data.groupby('Date')['Confirmed', 'Deaths', 'Recovered'].sum()
+        self.__table = self.__covid_data.groupby('Date')['Confirmed', 'Deaths', 'Recovered', 'Active'].sum()
+
         #Reset index coverts the index series, in this case date, into an index value. 
         self.__table = self.__table.reset_index()
         self.__table = self.__table.sort_values('Date', ascending=False)
@@ -186,15 +191,15 @@ class DataLoader():
         self.__mortality = self.__mortality[self.__mortality.Deaths != 0]
         self.__mortality = self.__mortality[self.__mortality.Confirmed != 0]
 
-        self.__mortality['mortality_rate'] = self.__mortality.apply(lambda row :
-                                                                    ((row.Deaths)/self.if_null((row.Confirmed)))*100,
-                                                                    axis=1)
+        self.__mortality['Mortality'] = self.__mortality.apply(lambda row :
+                                                               ((row.Deaths)/self.if_null((row.Confirmed)))*100,
+                                                               axis=1)
+        
 
-
-        self.__mortality['dense_normed'] = self.__mortality.apply(lambda row :
-                                                                  ((row.Deaths)/self.if_null( row.Confirmed )),
-                                                                  axis=1)
-
+        self.__mortality['MortalityNormed'] = self.__mortality.apply(lambda row :
+                                                                     ((row.Deaths)/self.if_null( row.Confirmed )),
+                                                                     axis=1)
+        
         #latest
         self.__latest = self.__covid_data[self.__covid_data['Date'] == self.__covid_data['Date'].max()]
 
@@ -213,12 +218,23 @@ class DataLoader():
             print('- Last update: ' + str(self.__covid_data["Date"].max()))
             print('- Total confirmed cases: %.d' %np.sum(self.__latest['Confirmed']))
             print('- Total death cases: %.d' %np.sum(self.__latest['Deaths']))
+            print('- Total active cases: %.d' %np.sum(self.__latest['Active']))
             print('- Total recovered cases: %.d' %np.sum(self.__latest['Recovered']))
             print('- Death rate %%: %.2f' % (np.sum(self.__latest['Deaths'])/np.sum(self.__latest['Confirmed'])*100))
             
             print("\n", self.__cty_data.head(self.__n_top).to_markdown(showindex=True))
         else:
             print("Unable to print makrdown table -- empty DF.")
+    def get_covid_group(self, col = ''):
+        return pd.DataFrame(self.__covid_data.groupby('Date')[col].sum().reset_index()).rename(columns={'Date': 'ds', col: 'y'})
+
+    def get_mortality_group(self, col = ''):
+        return pd.DataFrame(self.__mortality.groupby('Date')[col].mean().reset_index()).rename(columns={'Date': 'ds',
+                                                                                                        'Mortality': 'y'})
+
+    def set_log_params(self, df = None, col = ''):
+        df['floor'] = self.__logistic_params[col].floor
+        df['cap'] = self.__logistic_params[col].cap
         
     def modeller(self):
         # Prophet requires columns to be labelled ds and y.
@@ -227,17 +243,23 @@ class DataLoader():
         # Use a constant cap rate. Right now it's assumed to be constant.
         
         #Modelling total confirmed cases 
-        self.__train_ds_confirmed = pd.DataFrame(self.__covid_data.groupby('Date')['Confirmed'].sum().reset_index()).rename(columns={'Date': 'ds', 'Confirmed': 'y'})
-        #confirmed_training_dataset.insert(0,'floor',1)
-        self.__train_ds_confirmed['floor'] = self.__confirmed_floor
-        self.__train_ds_confirmed['cap'] = self.__confirmed_population
-
-        #Modelling mortality rate
-        self.__train_ds_mortality = pd.DataFrame(self.__mortality.groupby('Date')['mortality_rate'].mean().reset_index()).rename(columns={'Date': 'ds', 'mortality_rate': 'y'})
+        self.__train_ds_confirmed = self.get_covid_group("Confirmed")
+        self.set_log_params(self.__train_ds_confirmed, "Confirmed")
 
         #Modelling deaths
-        self.__train_ds_deaths = pd.DataFrame(self.__covid_data.groupby('Date')['Deaths'].sum().reset_index()).rename(columns={'Date': 'ds', 'Deaths': 'y'})
-        self.__train_ds_deaths['floor'] = self.__confirmed_floor
-        self.__train_ds_deaths['cap'] = self.__deaths_population
+        self.__train_ds_deaths = self.get_covid_group("Deaths")
+        self.set_log_params(self.__train_ds_deaths, "Deaths")
+
+        #Modelling active
+        self.__train_ds_active = self.get_covid_group("Active")
+        self.set_log_params(self.__train_ds_active, "Active")
+
+        #Modelling recovered
+        self.__train_ds_recovered = self.get_covid_group("Recovered")
+        self.set_log_params(self.__train_ds_recovered, "Recovered")
+
+        #Modelling mortality rate
+        self.__train_ds_mortality = self.get_mortality_group("Mortality")
+        self.set_log_params(self.__train_ds_mortality, "Mortality")
 
 

@@ -166,14 +166,27 @@ if kmortal:
     print("mortal:", mortal.head)
     fig, ax = plt.subplots(figsize=(15,7))
     #We filter out where mortality rate is above 10% 
-    mortal = mortal[mortal.mortality_rate < 10]
+    mortal = mortal[mortal['Mortality'] < 10]
 
     #We want only to plot countries with more than 100 confirmed cases,
     # as the situation evolves, more countries will enter this list.
     mortal = mortal[mortal.Confirmed > 100]
 
+    import matplotlib.dates as mdates
+    myFmt = mdates.DateFormatter('%d-%m')
+    ax.xaxis.set_major_formatter(myFmt)
+
+    #ticks
+    import matplotlib.ticker as plticker
+    loc = plticker.MultipleLocator(base=2.0) # this locator puts ticks at regular intervals
+    ax.xaxis.set_major_locator(loc)
+    #plt.xticks(np.arange(min(x), max(x)+1, 1.0))
+
+    ## Rotate date labels automatically
+    fig.autofmt_xdate()
+
     ax0 = sns.lineplot(x='Date',
-                       y='mortality_rate',
+                       y='Mortality',
                        hue='Country',
                        data = mortal,
                        ax = ax)

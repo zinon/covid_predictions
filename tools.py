@@ -17,7 +17,7 @@ def save(fig = None, fn = None, txt = None):
     if fn:
         print("Saving '%s'" % fn)
         if txt:
-            fig.text(.15, .85, txt, fontsize=12)
+            fig.text(.15, .92, txt, fontsize=10)
         fig.savefig(fn)
 
 

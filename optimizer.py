@@ -7,8 +7,8 @@ import prophet_trainer as pt
 
 ds = xp.DataLoader().train_ds_confirmed
 tb = xp.DataLoader().table
-floor_points = [0, 10e3, 20e3, 50e3]
-cap_lower = 800e3
+floor_points = [0]#, 10e3, 20e3, 50e3]
+cap_lower = 700e3
 cap_upper = 1200e3
 cap_step = 100e3
 cap_benchpoints = np.arange(cap_lower,
@@ -16,8 +16,7 @@ cap_benchpoints = np.arange(cap_lower,
                             cap_step).tolist()
 seasonality_modes = ['multiplicative', 'additive']
 future_periods = [21]
-#changepoint_prior_scales = [0.05, 0.1, 0.5]
-changepoint_prior_scales = [0.05]
+changepoint_prior_scales = [0.05, 0.5]
 interval_widths = [0.90, 0.95]
 
 print("Logistic scan points:", cap_benchpoints)
@@ -30,7 +29,7 @@ for cap in cap_benchpoints:
             for periods in future_periods:
                 for cpps in changepoint_prior_scales:
                     for iw in interval_widths:
-                        p = op.Param(rmse = 0.,
+                        p = op.Param(growth='logistic',
                                      floor = floor,
                                      cap = cap,
                                      smode = smode,
@@ -41,7 +40,7 @@ for cap in cap_benchpoints:
 
 trains = []
 for op in optparams:
-    trains.append( pt.ProphetTrainer(op, ds, tb) )
+    trains.append( pt.ProphetTrainer("Confirmed", op, ds, tb) )
 
 trains.sort(key=lambda x : x.param.rmse, reverse=False)   
 

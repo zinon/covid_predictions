@@ -1,74 +1,30 @@
 from fbprophet import Prophet
 from fbprophet.diagnostics import cross_validation, performance_metrics
 from fbprophet.plot import plot_cross_validation_metric
-import optparam as op
 import pandas as pd
 import numpy as np
 from sklearn.metrics import mean_squared_error
 
-class CVMetrics(object):
-    def __init__(self):
-        self.__auto_mape = None
-        self.__manual_mape = None
-        self.__df_cv = None
-        self.__df_perf = None
-        #self.__fig_mape = None
+import optparam as op
+import proc as xp
+import cvmetrics as cv
 
-    @property
-    def auto_mape(self):
-        return self.__auto_mape
-
-    @auto_mape.setter
-    def auto_mape(self, x):
-        self.__auto_mape = x
-
-    @property
-    def manual_mape(self):
-        return self.__manual_mape
-
-    @manual_mape.setter
-    def manual_mape(self, x):
-        self.__manual_mape = x
-
-    @property
-    def df_cv(self):
-        return self.__df_cv
-
-    @df_cv.setter
-    def df_cv(self, x):
-        self.__df_cv = x
-
-    @property
-    def df_perf(self):
-        return self.__df_perf
-
-    @df_perf.setter
-    def df_perf(self, x):
-        self.__df_perf = x
-
-    #@property
-    #def fig_mape(self):
-    #    return self.__fig_mape
-
-    #@fig_mape.setter
-    #def fig_mape(self, x):
-    #    self.__fig_mape = x
-    
 class ProphetTrainer():
     def __init__(self,
                  variable : str,
                  param : op.Param(),#:None, None, None, None, None, None, None),
-                 data : pd.DataFrame(),
-                 table : pd.DataFrame(),
+                 dloader : xp.DataLoader()
     ):
         self.__variable = variable
         self.__param = param
-        self.__data = data
-        self.__table = table
+        self.__dloader = dloader
+        #set these
+        self.__data = self.fetch_data()
+        self.__table = self.__dloader.table
         #
         self.__model = None
         self.__forecast = None
-        self.__cv_metrics = CVMetrics()
+        self.__cv_metrics = cv.CVMetrics()
         self.__trained = self.trainer()
         self.__validated = self.validator()
 
@@ -88,6 +44,19 @@ class ProphetTrainer():
     def cv_metrics(self):
         return self.__cv_metrics
 
+    def fetch_data(self):
+        if self.__variable == "Confirmed":
+            return self.__dloader.train_ds_confirmed
+        elif self.__variable == "Deaths":
+            return self.__dloader.train_ds_deaths
+        elif self.__variable == "Active":
+            return self.__dloader.train_ds_active
+        elif self.__variable == "Recovered":
+            return self.__dloader.train_ds_recovered
+        elif self.__variable == "Mortality":
+            return self.__dloader.train_ds_mortality
+
+        
     def mean_absolute_percentage_error(self, y_true, y_pred):
         '''Calculates MAPE'''
         y_true, y_pred = np.array(y_true), np.array(y_pred)
@@ -128,8 +97,13 @@ class ProphetTrainer():
 
         #RMSE
         if self.__variable:
-            self.__param.rmse = np.sqrt(mean_squared_error(self.__table[self.__variable],
-                                                           self.__forecast['yhat'].head(self.__table.shape[0])))
+            if self.__param.is_rate:
+                self.__param.rmse = np.sqrt(mean_squared_error(self.__data['y'],
+                                                               self.__forecast['yhat'].head(self.__data.shape[0])))
+            else:
+                self.__param.rmse = np.sqrt(mean_squared_error(self.__table[self.__variable],
+                                                               self.__forecast['yhat'].head(self.__table.shape[0])))
+
 
         print("forecast:\n", self.__forecast[['ds','yhat', 'yhat_lower', 'yhat_upper']])
         print("confirmed future tail:\n", future.tail())
