@@ -222,7 +222,7 @@ class DataLoader(object):
             print('- Total recovered cases: %.d' %np.sum(self.__latest['Recovered']))
             print('- Death rate %%: %.2f' % (np.sum(self.__latest['Deaths'])/np.sum(self.__latest['Confirmed'])*100))
             
-            print("\n", self.__cty_data.head(self.__n_top).to_markdown(showindex=True))
+            print("\n", self.__cty_data.head(self.__top).to_markdown(showindex=True))
         else:
             print("Unable to print makrdown table -- empty DF.")
     def get_covid_group(self, col = ''):

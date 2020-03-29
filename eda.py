@@ -5,6 +5,9 @@ import seaborn as sns
 import os
 import numpy as np
 import pandas as pd
+import matplotlib.dates as mdates
+import matplotlib.ticker as plticker
+
 #
 def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
     if column == 'Death Rate':
@@ -53,7 +56,8 @@ klead = True
 krates = True
 kmortal= True
 kmortaldense = False
-odir = "images"
+odir = "images/eda"
+
 
 
 #data
@@ -172,12 +176,11 @@ if kmortal:
     # as the situation evolves, more countries will enter this list.
     mortal = mortal[mortal.Confirmed > 100]
 
-    import matplotlib.dates as mdates
+    #format date
     myFmt = mdates.DateFormatter('%d-%m')
     ax.xaxis.set_major_formatter(myFmt)
 
     #ticks
-    import matplotlib.ticker as plticker
     loc = plticker.MultipleLocator(base=2.0) # this locator puts ticks at regular intervals
     ax.xaxis.set_major_locator(loc)
     #plt.xticks(np.arange(min(x), max(x)+1, 1.0))
