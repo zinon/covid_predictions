@@ -54,9 +54,9 @@ Percentage rates for deaths, recovered cases and confirmed cases on a global sca
 ## Predictions for global confirmed cases.
 
 Predictions are performed using an additive forecasting model
-\\[
+```math
 y(t) = g(t) + s(t) + h(t) + \epsilon_\text{t}
-\\]
+```
 where
 <img src="https://render.githubusercontent.com/render/math?math=g(t)">
 represents the trend,
