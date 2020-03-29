@@ -51,9 +51,19 @@ Percentage rates for deaths, recovered cases and confirmed cases on a global sca
 ## Predictions for global confirmed cases.
 
 Predictions are performed using an additive forecasting model
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;\epsilon" />
 
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;y(t) = g(t) + s(t) + h(t) + \epsilon_\mathrm{t}" />
 
+where
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;g(t)" />
+represents the trend,
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;s(t)" />
+the periodic component,
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;h(t)" />
+holiday related events and
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;\epsilon_\mathrm{t}" />
+the error. The data are provided on a daily basis.
+Also, the current model is not aware of holidays.
 
 ### Linear model
 ![](images/predictions/)
