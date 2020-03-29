@@ -92,7 +92,7 @@ q1 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-15' and Date < '20
 q2 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-20' and Date < '2021-01-01'")
 
 #data loader
-dloader = xp.DataLoader(query = q0, logistic_params = logparams)
+dloader = xp.DataLoader(query = q2, logistic_params = logparams)
 
 #forecasting periods
 periods = 21
