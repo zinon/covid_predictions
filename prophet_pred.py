@@ -63,15 +63,15 @@ def plotter(train = None, title = "", ylabel = "", fn = "test", plot = True, add
 
     plt.close('all')
 #
-plot = False
-confirmed_logistic = True
-confirmed_linear = True
-deaths_logistic = True
-deaths_linear = True
-active_logistic = True
-active_linear = True
-recovered_logistic = True
-recovered_linear = True
+plot = True
+confirmed_logistic = False
+confirmed_linear = False
+deaths_logistic = False
+deaths_linear = False
+active_logistic = False
+active_linear = False
+recovered_logistic = False
+recovered_linear = False
 mortality_linear = True
 
 #case, floor, cap
