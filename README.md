@@ -53,8 +53,7 @@ Percentage rates for deaths, recovered cases and confirmed cases on a global sca
 # Predictions with Facebook Prophet
 
 Predictions are performed using an additive forecasting model
-<img src="https://latex.codecogs.com/svg.latex?1+sin(x)" border="0"/>
-<img src="https://latex.codecogs.com/svg.latex?y(t) = g(t) + s(t) + h(t) + \epsilon_\text{t}" />
+<img src="https://latex.codecogs.com/svg.latex?y(t)=g(t)+s(t)+h(t)+\epsilon_\text{t}" />
 where
 <img src="https://latex.codecogs.com/svg.latex?\Large&space;=g(t)">
 represents the trend,
