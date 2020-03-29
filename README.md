@@ -65,7 +65,7 @@ holiday related events and
 the error. The data are provided on a daily basis.
 Also, the current model is not aware of holidays.
 
-## Predictions for global confirmed cases.
+## Predictions for global confirmed cases
 
 ### Linear model
 ![linear confirmed](images/predictions/prophet_linear_confirmed_prediction.png)
@@ -73,7 +73,7 @@ Also, the current model is not aware of holidays.
 ### Logistic model
 ![log confirmed](images/predictions/prophet_logistic_confirmed_prediction.png)
 
-## Predictions for global death cases.
+## Predictions for global death cases
 
 ### Linear model
 ![linear deaths](images/predictions/prophet_linear_deaths_prediction.png)
@@ -81,51 +81,22 @@ Also, the current model is not aware of holidays.
 ### Logistic model
 ![log deaths](images/predictions/prophet_logistic_deaths_prediction.png)
 
-## Predictions for global active cases.
+## Predictions for global active cases
 
 ### Linear model
-![](images/predictions/)
+![linear active](images/predictions/prophet_linear_active_prediction.png)
 
 ### Logistic model
-![](images/predictions/)
+![log active](images/predictions/prophet_logistic_active_prediction.png)
 
-## Predictions for global recovered cases.
+## Predictions for global recovered cases
 
 ### Linear model
-![](images/predictions/)
+![linear recovered](images/predictions/prophet_linear_recovered_prediction.png)
 
 ### Logistic model
-![](images/predictions/)
+![log recovered](images/predictions/prophet_logistic_recovered_prediction.png)
 
 
-
-
-
-### Predictions for total confirmed cases using a logistic model.
-![](images/predictions/)
-
-### Predictions for total confirmed cases using a logistic model.
-![](images/predictions/)
-![](images/predictions/)
-![](images/predictions/)
-![](images/predictions/)
-
-
-
-![Prophet Linear](images/predictions/prophet_linear_confirmed.png)
-Predictions for total confirmed cases using a linear model.
-
-![Prophet Linear Components](images/prophet_linear_confirmed_components.png "Components")
-Components of linear forecasting model.
-
-![Prophet Logistic](images/prophet_logistic_confirmed.png "Predictions")
-Predictions for total confirmed cases using a logistic model.
-
-![Prophet Logistic Components](images/prophet_logistic_confirmed_components.png "Components")
-Components of logistic forecasting model.
-
-![Prophet mortality](images/prophet_mortality.png "Predictions mortality rate")
-Predictions for mortality rate.
-
-![Prophet deaths](images/prophet_deaths.png "Predictions deaths")
-Predictions for deaths using a logistic model.
+## Predictions for global mortality rate
+![linear mortality](images/predictions/prophet_linear_mortality_prediction.png)
