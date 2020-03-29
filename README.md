@@ -53,9 +53,7 @@ Percentage rates for deaths, recovered cases and confirmed cases on a global sca
 # Predictions with Facebook Prophet
 
 Predictions are performed using an additive forecasting model
-$$
-y(t) = g(t) + s(t) + h(t) + \epsilon_\text{t}
-$$
+<img src="https://render.githubusercontent.com/render/math?math=y(t) = g(t) + s(t) + h(t) + \epsilon_\text{t}">
 where
 <img src="https://render.githubusercontent.com/render/math?math=g(t)">
 represents the trend,
@@ -70,7 +68,7 @@ Also, the current model is not aware of holidays.
 ## Predictions for global confirmed cases.
 
 ### Linear model
-![](images/predictions/prophet_linear_confirmed_prediction.png)
+![linear confrimed](images/predictions/prophet_linear_confirmed_prediction.png)
 
 ### Logistic model
 ![](images/predictions/prophet_logistic_confirmed_prediction.png)
