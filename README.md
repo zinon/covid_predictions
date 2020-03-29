@@ -52,8 +52,6 @@ Percentage rates for deaths, recovered cases and confirmed cases on a global sca
 
 # Predictions with Facebook Prophet
 
-## Predictions for global confirmed cases.
-
 Predictions are performed using an additive forecasting model
 $$
 y(t) = g(t) + s(t) + h(t) + \epsilon_\text{t}
@@ -69,11 +67,13 @@ holiday related events and
 the error. The data are provided on a daily basis.
 Also, the current model is not aware of holidays.
 
+## Predictions for global confirmed cases.
+
 ### Linear model
-![](images/predictions/)
+![](images/predictions/prophet_linear_confirmed_prediction.png)
 
 ### Logistic model
-![](images/predictions/)
+![](images/predictions/prophet_logistic_confirmed_prediction.png)
 
 ## Predictions for global death cases.
 

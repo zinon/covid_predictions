@@ -44,7 +44,7 @@ def plotter(train = None, title = "", ylabel = "", fn = "test", plot = True, add
     fig.autofmt_xdate()
 
     
-    xt.save(train_fig, xt.name(odir, fn+"_prediction" + "_changepoints" if add_chpts else ""), c_txt)
+    xt.save(train_fig, xt.name(odir, fn+"_prediction" + ("_changepoints" if add_chpts else "") ), c_txt)
 
     ### components
     train_comp_fig = train.model.plot_components(train.forecast)
