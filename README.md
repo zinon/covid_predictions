@@ -53,15 +53,15 @@ Percentage rates for deaths, recovered cases and confirmed cases on a global sca
 # Predictions with Facebook Prophet
 
 Predictions are performed using an additive forecasting model
-<img src="https://latex.codecogs.com/svg.latex?y(t)=g(t)+s(t)+h(t)+\epsilon_\text{t}" />
+<img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;y(t)=g(t)&plus;s(t)&plus;h(t)&plus;\epsilon_t" />
 where
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;=g(t)">
+<img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;g(t)">
 represents the trend,
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;s(t)" />
+<img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;s(t)" />
 the periodic component,
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;h(t)" />
+<img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;h(t)" />
 holiday related events and
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;\epsilon_\text{t}" />
+<img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;\epsilon_t" />
 the error. The data are provided on a daily basis.
 Also, the current model is not aware of holidays.
 
@@ -113,14 +113,14 @@ The spread of infectious disease can be modeled using a logistic curve rather th
 A logistic function or logistic curve is a common S-shaped curve (sigmoid curve) with equation
 
 
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;f(t)=\frac{L}{1+e^{-k(t-t_0)}}" />
+<img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;f(t)=\frac{L}{1&plus;e^{-k(t-t_0)}}" />
 
 where
 
-- <img src="https://latex.codecogs.com/svg.latex?\Large&space;t" /> = the time variable
-- <img src="https://latex.codecogs.com/svg.latex?\Large&space;t_0" /> = the sigmoid's midpoint / inflection point 
-- <img src="https://latex.codecogs.com/svg.latex?\Large&space;L" /> = the curve's maximum value (plateau)
-- <img src="https://latex.codecogs.com/png.latex?k"/> = the logistic growth rate or steepness of the curve
+- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;t" /> = the time variable
+- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;t_0" /> = the sigmoid's midpoint / inflection point 
+- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;L" /> = the curve's maximum value (plateau)
+- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;k"/> = the logistic growth rate or steepness of the curve
 
 
 The following growth metrics can be considered for the confirmed cases for each country:
