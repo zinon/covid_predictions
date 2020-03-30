@@ -125,7 +125,7 @@ where
 
 The following growth metrics can be considered for the confirmed cases for each country:
 
-* Growth Factor =  <img src="https://latex.codecogs.com/svg.latex?\Large&space;\frac{\Delta{L_i}}{{\Delta{L_{i-1}}}" /> with i=days, weeks, months, ...
+* Growth Factor =  <img src="https://latex.codecogs.com/png.latex?\dpi{150}&space;\frac{\Delta&space;L_i&space;}{\Delta&space;L_{i-1}&space;}" /> with i=days, weeks, months, ...
 * Growth Ratio
 * Growth Rate
 * 2nd Derivative
