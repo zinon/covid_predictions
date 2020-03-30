@@ -65,6 +65,8 @@ holiday related events and
 the error. The data are provided on a daily basis.
 Also, the current model is not aware of holidays.
 
+Prophet allows you to make forecasts using a logistic growth trend model, with a specified carrying capacity which is indicated by a horizontal dashed line in each of the plots.
+
 ## Predictions for global confirmed cases
 
 ### Linear model
@@ -100,3 +102,37 @@ Also, the current model is not aware of holidays.
 
 ## Predictions for global mortality rate
 ![linear mortality](images/predictions/prophet_linear_mortality_prediction.png)
+
+# Factor Analysis
+
+## Logistic function
+The spread of infectious disease can be modeled using a logistic curve rather than an exponential curve or a linear function. The growth starts exponentially, but must slow down after some point called the inflection point. The inflection point is essentially the midpoint of the spread. We attempt to model the number of COVID-19 cases using a logistic curve.
+
+![logistic function](images/theory/logfn_ext.png)
+
+A logistic function or logistic curve is a common S-shaped curve (sigmoid curve) with equation
+
+
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;f(t)=\frac{L}{1+e^{-k(t-t_0)}}" />
+
+where
+
+- <img src="https://latex.codecogs.com/svg.latex?\Large&space;t" /> = the time variable
+- <img src="https://latex.codecogs.com/svg.latex?\Large&space;t_0" /> = the sigmoid's midpoint / inflection point 
+- <img src="https://latex.codecogs.com/svg.latex?\Large&space;L" /> = the curve's maximum value (plateau)
+- <img src="https://latex.codecogs.com/svg.latex?\Large&space;k" /> = the logistic growth rate or steepness of the curve
+
+
+The following growth metrics can be considered for the confirmed cases for each country:
+
+* Growth Factor =  <img src="https://latex.codecogs.com/svg.latex?\Large&space;\frac{\Delta{L_i}}{{\Delta{L_{i-1}}}" /> with i=days, weeks, months, ...
+* Growth Ratio
+* Growth Rate
+* 2nd Derivative
+
+These growth metrics can be explored to gain insight into which countries may have already hit their inflection points.
+For example, if a country's growth factor has stabilized around 1.0 then this can be a sign that that country has reached it's inflection point.  When fitting data with a logistic function, we may predict if a country has hit their inflection point, and therefore we can predict when they will reach a possible maximum number of confirmed cases.
+
+
+
+

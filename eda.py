@@ -20,7 +20,7 @@ def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
     plt.title(title, fontsize=12)
     plt.ylabel(None)
     plt.xlabel(None)
-    plt.grid(axis='x')
+    plt.grid(axis='x', linestyle='--')
 
     for p in g.patches:
         width = p.get_width()
