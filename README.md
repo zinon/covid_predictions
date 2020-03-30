@@ -117,7 +117,7 @@ A logistic function or logistic curve is a common S-shaped curve (sigmoid curve)
 
 where
 
-- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;t" /> = the time variable
+- <img src="https://latex.codecogs.com/png.latex?\dpi{150}&space;t" /> = the time variable
 - <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;t_0" /> = the sigmoid's midpoint / inflection point 
 - <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;L" /> = the curve's maximum value (plateau)
 - <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;k"/> = the logistic growth rate or steepness of the curve
