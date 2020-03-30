@@ -120,7 +120,7 @@ where
 - <img src="https://latex.codecogs.com/svg.latex?\Large&space;t" /> = the time variable
 - <img src="https://latex.codecogs.com/svg.latex?\Large&space;t_0" /> = the sigmoid's midpoint / inflection point 
 - <img src="https://latex.codecogs.com/svg.latex?\Large&space;L" /> = the curve's maximum value (plateau)
-- <img src="https://latex.codecogs.com/svg.latex?\Large&space;k" /> = the logistic growth rate or steepness of the curve
+- <img src="https://latex.codecogs.com/gif.latex?k" /. = the logistic growth rate or steepness of the curve
 
 
 The following growth metrics can be considered for the confirmed cases for each country:
