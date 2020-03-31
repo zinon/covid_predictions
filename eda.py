@@ -51,6 +51,7 @@ def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
 kshow= True
 
 koverview = True
+kstates = True
 koverall = True
 klead = True
 krates = True
@@ -65,6 +66,7 @@ top=10
 ld = xp.DataLoader(top=top)
 tb = ld.table
 leaders = ld.leaders
+states = ld.states
 groups = ld.grouped
 mortal = ld.mortality
 cty = ld.cty_data
@@ -131,6 +133,18 @@ if klead:
     ax.legend()
     xt.save(fig, xt.name(odir, "leaders"))
 
+if kstates:
+    print("states:", states.head)
+
+    fig, ax = plt.subplots(figsize=(15,7))
+    ax0 = sns.lineplot(x='Date',
+                       y='Confirmed',
+                       hue="State",
+                       data = states,
+                       ax = ax)
+    ax.legend()
+    xt.save(fig, xt.name(odir, "states"))
+
 if krates:
     ymin = 0
     ymax = 70
@@ -169,8 +183,8 @@ if krates:
 if kmortal:
     print("mortal:", mortal.head)
     fig, ax = plt.subplots(figsize=(15,7))
-    #We filter out where mortality rate is above 10% 
-    mortal = mortal[mortal['Mortality'] < 10]
+    #We filter out where mortality rate is above 15% 
+    mortal = mortal[mortal['Mortality'] < 15]
 
     #We want only to plot countries with more than 100 confirmed cases,
     # as the situation evolves, more countries will enter this list.

@@ -11,6 +11,7 @@ class DataLoader(object):
         self.__country_data = None
         self.__table = None
         self.__leaders = None
+        self.__states = None
         self.__grouped = None
         self.__mortality = None
         self.__latest = None
@@ -23,6 +24,7 @@ class DataLoader(object):
         self.__train_ds_mortality = None
         #
         self.__countries = ['Mainland China', 'Italy', 'Germany', 'Iran', 'US', 'Spain']
+        self.__country_states = ['Germany']
         #
         self.__loaded = self.loader() if len(kwargs) else False
         self.__processed = self.processor() if self.__loaded else False
@@ -42,6 +44,10 @@ class DataLoader(object):
     @property
     def leaders(self):
         return self.__leaders if self.__status else None
+
+    @property
+    def states(self):
+        return self.__states if self.__status else None
 
     @property
     def mortality(self):
@@ -209,6 +215,13 @@ class DataLoader(object):
         self.__cty_data['Recovery Rate'] = self.__cty_data['Recovered'] / self.__cty_data['Confirmed'] * 100
         self.__cty_data['Active'] = self.__cty_data['Confirmed'] - self.__cty_data['Deaths'] - self.__cty_data['Recovered']
         self.__cty_data = self.__cty_data.drop('days', axis=1).sort_values('Confirmed', ascending=False)
+
+        #states
+        self.__states = self.__covid_data[self.__covid_data['Country'].isin(self.__country_states)]
+        self.__states = self.__states.groupby(['Date', 'Country', 'State']).agg({'Confirmed': ['sum']})
+        self.__states.columns = ['Confirmed']
+        self.__states = self.__states.reset_index()
+        print("\nstates:", self.__states)
 
         return True
 

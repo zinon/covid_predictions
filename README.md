@@ -5,26 +5,27 @@ https://github.com/CSSEGISandData/COVID-19
 
 ## Overall Statistics
 
-- Last update: 2020-03-28 00:00:00
-- Total confirmed cases: 660706
-- Total death cases: 30651
-- Total active cases: 492178
-- Total recovered cases: 137877
-- Death rate %: 4.64
+- Last update: 2020-03-30 00:00:00
+- Total confirmed cases: 782365
+- Total death cases: 37581
+- Total active cases: 586328
+- Total recovered cases: 158456
+- Death rate %: 4.80
 
  | Country        |   Confirmed |   Deaths |   Recovered |   Active |   Death Rate |   Recovery Rate |
 |:---------------|------------:|---------:|------------:|---------:|-------------:|----------------:|
-| US             |      121478 |     2026 |           0 |   119452 |     1.66779  |        0        |
-| Italy          |       92472 |    10023 |       12384 |    70065 |    10.839    |       13.3922   |
-| Mainland China |       81401 |     3295 |       74978 |     3128 |     4.04786  |       92.1094   |
-| Spain          |       73235 |     5982 |       12285 |    54968 |     8.16823  |       16.7748   |
-| Germany        |       57695 |      433 |        8481 |    48781 |     0.750498 |       14.6997   |
-| France         |       38105 |     2317 |        5724 |    30064 |     6.08057  |       15.0217   |
-| Iran           |       35408 |     2517 |       11679 |    21212 |     7.10856  |       32.9841   |
-| UK             |       17312 |     1021 |         151 |    16140 |     5.89764  |        0.872227 |
-| Switzerland    |       14076 |      264 |        1530 |    12282 |     1.87553  |       10.8696   |
-| Netherlands    |        9819 |      640 |           6 |     9173 |     6.51798  |        0.061106 |
+| US             |      161807 |     2978 |           0 |   158829 |     1.84046  |        0        |
+| Italy          |      101739 |    11591 |       14620 |    75528 |    11.3929   |       14.3701   |
+| Spain          |       87956 |     7716 |       16780 |    63460 |     8.77257  |       19.0777   |
+| Mainland China |       81478 |     3304 |       75790 |     2384 |     4.05508  |       93.019    |
+| Germany        |       66885 |      645 |       13500 |    52740 |     0.964342 |       20.1839   |
+| France         |       45170 |     3030 |        7964 |    34176 |     6.70799  |       17.6312   |
+| Iran           |       41495 |     2757 |       13911 |    24827 |     6.64417  |       33.5245   |
+| UK             |       22453 |     1411 |         171 |    20871 |     6.28424  |        0.761591 |
+| Switzerland    |       15922 |      359 |        1823 |    13740 |     2.25474  |       11.4496   |
+| Belgium        |       11899 |      513 |        1527 |     9859 |     4.31129  |       12.833    |
 
+Rates are reported in percentage.
 
 ## Overview 
 ![Overview stats](images/eda/overview.png?raw=true "Overview")

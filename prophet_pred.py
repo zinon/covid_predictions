@@ -76,9 +76,9 @@ mortality_linear = True
 
 #case, floor, cap
 logparams = op.LogParams()
-logparams += op.LogParam("Confirmed", 0, 900e3)
+logparams += op.LogParam("Confirmed", 0, 1.5e6)
 logparams += op.LogParam("Deaths", 0, 100e3)
-logparams += op.LogParam("Active", 0, 900e3)
+logparams += op.LogParam("Active", 0, 750e3)
 logparams += op.LogParam("Recovered", 0, 300e3)
 logparams += op.LogParam("Mortality", 0, 100e3)
 print(logparams)
@@ -90,6 +90,7 @@ odir = 'images/predictions'
 q0 = xq.Query("All Period", "Confirmed > 0 and Date < '2021-01-01'")
 q1 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-15' and Date < '2021-01-01'")
 q2 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-20' and Date < '2021-01-01'")
+q3 = xq.Query("Bavaria", "Confirmed > 0 and Country == 'Germany'")
 
 #data loader
 dloader = xp.DataLoader(query = q2, logistic_params = logparams)
