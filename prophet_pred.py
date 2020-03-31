@@ -67,17 +67,17 @@ plot = True
 confirmed_logistic = False
 confirmed_linear = False
 deaths_logistic = False
-deaths_linear = False
+deaths_linear = True
 active_logistic = False
 active_linear = False
 recovered_logistic = False
 recovered_linear = False
-mortality_linear = True
+mortality_linear = False
 
 #case, floor, cap
 logparams = op.LogParams()
-logparams += op.LogParam("Confirmed", 0, 1.5e6)
-logparams += op.LogParam("Deaths", 0, 100e3)
+logparams += op.LogParam("Confirmed", 0, 0.5e6) #1.5e6
+logparams += op.LogParam("Deaths", 0, 5e3)#100e3
 logparams += op.LogParam("Active", 0, 750e3)
 logparams += op.LogParam("Recovered", 0, 300e3)
 logparams += op.LogParam("Mortality", 0, 100e3)
@@ -92,8 +92,9 @@ q1 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-15' and Date < '20
 q2 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-20' and Date < '2021-01-01'")
 q3 = xq.Query("Bavaria", "Confirmed > 0 and Country == 'Germany'")
 
+tag = "Germany"
 #data loader
-dloader = xp.DataLoader(query = q2, logistic_params = logparams)
+dloader = xp.DataLoader(query = q3, logistic_params = logparams)
 
 #forecasting periods
 periods = 21
@@ -110,7 +111,8 @@ if confirmed_logistic:
  
     train =  pt.ProphetTrainer("Confirmed", param, dloader)
 
-    plotter(train, "Confirmed cases", "Logistic Model", "prophet_logistic_confirmed", plot = plot, add_chpts = False)
+    plotter(train, "Confirmed cases", "Logistic Model", "prophet_logistic_confirmed" + ("_" + tag if tag else ""),
+            plot = plot, add_chpts = False)
 
 #prediction for confirmed - linear
 if confirmed_linear:
@@ -122,7 +124,8 @@ if confirmed_linear:
 
     train =  pt.ProphetTrainer("Confirmed", param, dloader)
 
-    plotter(train, "Confirmed cases", "Linear Model", "prophet_linear_confirmed", plot = plot, add_chpts = False)
+    plotter(train, "Confirmed cases", "Linear Model", "prophet_linear_confirmed"  + ("_" + tag if tag else ""),
+            plot = plot, add_chpts = False)
 
 #prediction for confirmed - logistic
 if deaths_logistic:
@@ -136,7 +139,8 @@ if deaths_logistic:
 
     train =  pt.ProphetTrainer("Deaths", param, dloader)
 
-    plotter(train, "Deaths", "Logistic Model", "prophet_logistic_deaths", plot = plot, add_chpts = False)
+    plotter(train, "Deaths", "Logistic Model", "prophet_logistic_deaths" + ("_" + tag if tag else ""),
+            plot = plot, add_chpts = False)
 
 
 #prediction for confirmed - logistic
@@ -149,7 +153,8 @@ if deaths_linear:
 
     train =  pt.ProphetTrainer("Deaths", param, dloader)
 
-    plotter(train, "Deaths", "Linear Model", "prophet_linear_deaths", plot = plot, add_chpts = False)
+    plotter(train, "Deaths", "Linear Model", "prophet_linear_deaths" + ("_" + tag if tag else ""),
+            plot = plot, add_chpts = False)
 
 
 #prediction for active - logistic
@@ -164,7 +169,8 @@ if active_logistic:
 
     train =  pt.ProphetTrainer("Active", param, dloader)
 
-    plotter(train, "Active", "Logistic Model", "prophet_logistic_active", plot = plot, add_chpts = False)
+    plotter(train, "Active", "Logistic Model", "prophet_logistic_active" + ("_" + tag if tag else ""),
+            plot = plot, add_chpts = False)
 
 #prediction for active - linear
 if active_linear:
@@ -176,7 +182,8 @@ if active_linear:
 
     train =  pt.ProphetTrainer("Active", param, dloader)
 
-    plotter(train, "Active", "Linear Model", "prophet_linear_active", plot = plot, add_chpts = False)
+    plotter(train, "Active", "Linear Model", "prophet_linear_active" + ("_" + tag if tag else ""),
+            plot = plot, add_chpts = False)
 
 
 #prediction for recovered - logistic
@@ -191,7 +198,8 @@ if recovered_logistic:
 
     train =  pt.ProphetTrainer("Recovered", param, dloader)
 
-    plotter(train, "Recovered", "Logistic Model", "prophet_logistic_recovered", plot = plot, add_chpts = False)
+    plotter(train, "Recovered", "Logistic Model", "prophet_logistic_recovered" + ("_" + tag if tag else ""),
+            plot = plot, add_chpts = False)
 
 #prediction for recovered - linear
 if recovered_linear:
@@ -203,7 +211,8 @@ if recovered_linear:
 
     train =  pt.ProphetTrainer("Recovered", param, dloader)
 
-    plotter(train, "Recovered", "Linear Model", "prophet_linear_recovered", plot = plot, add_chpts = False)
+    plotter(train, "Recovered", "Linear Model", "prophet_linear_recovered" + ("_" + tag if tag else ""),
+            plot = plot, add_chpts = False)
 
     
 if mortality_linear:
@@ -216,5 +225,6 @@ if mortality_linear:
 
     train =  pt.ProphetTrainer("Mortality", param, dloader)
 
-    plotter(train, "Mortality", "Linear Model", "prophet_linear_mortality", plot = plot, add_cv = False)
+    plotter(train, "Mortality", "Linear Model", "prophet_linear_mortality" + ("_" + tag if tag else ""),
+            plot = plot, add_cv = False)
 

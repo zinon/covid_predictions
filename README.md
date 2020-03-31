@@ -67,10 +67,18 @@ Prophet allows you to make forecasts using a logistic growth trend model, with a
 ## Predictions for global confirmed cases
 
 ### Linear model
+#### Global
 ![linear confirmed](images/predictions/prophet_linear_confirmed_prediction.png)
 
+#### Germany
+![linear confirmed](images/predictions/prophet_linear_Germany_confirmed_prediction.png)
+
 ### Logistic model
+#### Global
 ![log confirmed](images/predictions/prophet_logistic_confirmed_prediction.png)
+
+#### Germany
+![log confirmed](images/predictions/prophet_logistic_Germany_confirmed_prediction.png)
 
 ## Predictions for global death cases
 
