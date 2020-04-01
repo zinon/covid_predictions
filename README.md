@@ -27,6 +27,41 @@ https://github.com/CSSEGISandData/COVID-19
 
 Rates are reported in percentage.
 
+## Doubling Times for Confirmed Cases
+
+The doubling time is time it takes for a population to double in size.
+When the relative growth rate
+<img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;k" />
+for an exponentially growing population
+
+<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;N(t)&space;=&space;N(0)e^{kt}" />
+
+is constant, the quantity undergoes exponential growth and has a constant doubling time or period,
+which can be calculated directly from the growth rate as follows
+
+https://latex.codecogs.com/gif.latex?\dpi{120}&space;T&space;=&space;\frac{\ln&space;2}{k}
+
+For the coronavirus pandemia, the bigger doubling time (measured in days) the better is in terms of a slowing down spread.
+Small values indicate steeply increasing populations.
+
+
+### Today
+
+|    | Country        |   Doubling Time |   Doubling Time Error |
+|---:|:---------------|----------------:|----------------------:|
+|  0 | Mainland China |        39.554   |             4.53451   |
+|  1 | South Korea    |        15.387   |             1.19856   |
+|  6 | Iran           |         8.08672 |             0.255562  |
+|  4 | Italy          |         6.79855 |             0.207929  |
+|  8 | Greece         |         6.45465 |             0.248193  |
+|  9 | Cyprus         |         5.37158 |             0.23878   |
+|  7 | France         |         5.02591 |             0.0898325 |
+|  2 | Germany        |         4.82182 |             0.114185  |
+|  5 | Spain          |         4.59721 |             0.103548  |
+|  3 | US             |         3.43474 |             0.0649632 |
+
+
+
 ## Overview 
 ![Overview stats](images/eda/overview.png?raw=true "Overview")
 Overview statistics for top affected countries.
@@ -54,7 +89,7 @@ Predictions are performed using an additive forecasting model
 <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;y(t)=g(t)&plus;s(t)&plus;h(t)&plus;\epsilon_t" />
 
 where
-- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;g(t)"> represents the trend
+- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;g(t)" /> represents the trend
 - <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;s(t)" /> the periodic component
 - <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;h(t)" /> holiday related events
 - <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;\epsilon_t" /> the error.

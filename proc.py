@@ -6,6 +6,8 @@ class DataLoader(object):
         self.__top = kwargs.get('top', 10)
         self.__query = kwargs.get('query', None)
         self.__logistic_params  = kwargs.get('logistic_params', None)
+        self.__countries_default = ['Mainland China', 'Italy', 'Germany', 'Iran', 'US', 'Spain']
+        self.__countries = kwargs.get('countries', self.__countries_default)
         #
         self.__covid_data = None
         self.__country_data = None
@@ -23,7 +25,6 @@ class DataLoader(object):
         self.__train_ds_recovered = None
         self.__train_ds_mortality = None
         #
-        self.__countries = ['Mainland China', 'Italy', 'Germany', 'Iran', 'US', 'Spain']
         self.__country_states = ['Germany']
         #
         self.__loaded = self.loader() if len(kwargs) else False
@@ -32,6 +33,9 @@ class DataLoader(object):
         #last status in chain
         self.__status = self.__processed
         
+    @property
+    def covid_data(self):
+        return self.__covid_data if self.__status else None
         
     @property
     def table(self):
@@ -132,7 +136,7 @@ class DataLoader(object):
         print("Null country data values", self.__country_data.isnull().sum() )
 
         # Clean up rows with zero cases
-        if self.__query:
+        if self.__query and  len(self.__query):
             self.__covid_data = self.__covid_data.query( self.__query.query )
             #self.__covid_data[(self.__covid_data['Confirmed']>0) &
          #                                     (self.__covid_data['Date'] > '2020-02-15') &
@@ -143,16 +147,19 @@ class DataLoader(object):
         self.__covid_data = self.__covid_data.sort_values(['Date','Country','State'])
 
         # Add column of days since first case
-        self.__covid_data['first_date'] = self.__covid_data.groupby('Country')['Date'].transform('min')
-        self.__covid_data['days'] = (self.__covid_data['Date'] -
-                                     self.__covid_data['first_date']).dt.days
+        self.__covid_data['FirstDate'] = self.__covid_data.groupby('Country')['Date'].transform('min')
+        self.__covid_data['Days'] = (self.__covid_data['Date'] -
+                                     self.__covid_data['FirstDate']).dt.days
         
 
         # We convert the data into daily.
         # If the data for the latest day is not available, we will fill it with previous available data.
         #This creates a table that sums up every element in the Confirmed, Deaths, and recovered columns.
-        self.__table = self.__covid_data.groupby('Date')['Confirmed', 'Deaths', 'Recovered', 'Active'].sum()
-
+        self.__table = self.__covid_data.groupby('Date')['Confirmed',
+                                                         'Deaths',
+                                                         'Recovered',
+                                                         'Active'].sum()
+        
         #Reset index coverts the index series, in this case date, into an index value. 
         self.__table = self.__table.reset_index()
         self.__table = self.__table.sort_values('Date', ascending=False)
@@ -163,6 +170,12 @@ class DataLoader(object):
         self.__leaders = self.__leaders.groupby(['Date', 'Country']).agg({'Confirmed': ['sum']})
         self.__leaders.columns = ['Confirmed All']
         self.__leaders = self.__leaders.reset_index()
+        self.__leaders = self.__leaders.sort_values('Date', ascending=False)
+        self.__leaders['FirstDate'] = self.__covid_data.groupby(['Country'])['Date'].transform('min')
+        self.__leaders['Days'] = (self.__leaders['Date'] -
+                                  self.__leaders['FirstDate']).dt.days
+        
+
         print("\nlead:", self.__leaders)
         
         #groups
@@ -214,7 +227,7 @@ class DataLoader(object):
         self.__cty_data['Death Rate'] = self.__cty_data['Deaths'] / self.__cty_data['Confirmed'] * 100
         self.__cty_data['Recovery Rate'] = self.__cty_data['Recovered'] / self.__cty_data['Confirmed'] * 100
         self.__cty_data['Active'] = self.__cty_data['Confirmed'] - self.__cty_data['Deaths'] - self.__cty_data['Recovered']
-        self.__cty_data = self.__cty_data.drop('days', axis=1).sort_values('Confirmed', ascending=False)
+        self.__cty_data = self.__cty_data.drop('Days', axis=1).sort_values('Confirmed', ascending=False)
 
         #states
         self.__states = self.__covid_data[self.__covid_data['Country'].isin(self.__country_states)]

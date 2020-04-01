@@ -19,7 +19,9 @@ class Query:
     def __add__(self, other): 
         return Query(self.__name + "+" + other.__name,
                      self.__combine(other.__query) )
-    
+
+    def __len__(self):
+        return len(self.__query)
     @property
     def name(self):
         return self.__name
