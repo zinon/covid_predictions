@@ -61,6 +61,38 @@ Small values indicate steeply increasing populations.
 |  3 | US             |         3.43474 |             0.0649632 |
 
 
+### As of 31 March 2020
+|    | Country        |   Doubling Time |   Doubling Time Error |
+|---:|:---------------|----------------:|----------------------:|
+|  0 | Mainland China |        39.554   |             4.53451   |
+|  1 | South Korea    |        15.387   |             1.19856   |
+|  6 | Iran           |         8.08672 |             0.255562  |
+|  4 | Italy          |         6.79855 |             0.207929  |
+|  8 | Greece         |         6.45465 |             0.248193  |
+|  9 | Cyprus         |         5.37158 |             0.23878   |
+|  7 | France         |         5.02591 |             0.0898325 |
+|  2 | Germany        |         4.82182 |             0.114185  |
+|  5 | Spain          |         4.59721 |             0.103548  |
+|  3 | US             |         3.43474 |             0.0649632 |
+
+
+### As of 15 March 2020
+Saving 'images/doubling_time/Greece.png'
+|    | Country        |   Doubling Time |   Doubling Time Error |
+|---:|:---------------|----------------:|----------------------:|
+|  0 | Mainland China |        24.0957  |             2.61058   |
+|  1 | South Korea    |         7.53423 |             0.530588  |
+|  6 | Iran           |         4.46829 |             0.250428  |
+|  4 | Italy          |         3.66472 |             0.0808904 |
+|  8 | Greece         |         2.87314 |             0.214045  |
+|  7 | France         |         2.7764  |             0.0668084 |
+|  3 | US             |         2.54285 |             0.03191   |
+|  2 | Germany        |         2.52113 |             0.0732814 |
+|  5 | Spain          |         1.88387 |             0.0761202 |
+
+
+### Germany Today
+![Germany's doubling time](images/doubling_time/Germany.png "Germany's doubling time")
 
 ## Overview 
 ![Overview stats](images/eda/overview.png?raw=true "Overview")

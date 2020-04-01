@@ -156,7 +156,7 @@ def fit(country = '', query = None, do_1st_order = True, do_2nd_order = False, s
 
     plt.legend(loc='upper left',fontsize=18)
     plt.tight_layout()
-    xt.save(fig, xt.name(odir, country))
+    xt.save(fig, xt.name(odir, country.replace(" ", "_") ))
     if show:
         plt.show()
     plt.close('all')
@@ -166,7 +166,7 @@ def fit(country = '', query = None, do_1st_order = True, do_2nd_order = False, s
 #########################################################################
 q0 = xq.Query("All Period", "Confirmed > 0 and Date < '2021-01-01'")
 q3 = xq.Query("Germany", " 'Confirmed All' > 0 and Country == 'Germany'")
-q4 = xq.Query("Basic", "Date < '2021-03-01'")
+q4 = xq.Query("Basic", "Date < '2020-03-31'")
 
 
 countries = ['Mainland China', 'South Korea', 'Germany', 'US', 'Italy', 'Spain', 'Iran', 'France', 'Greece', 'Cyprus']
@@ -179,6 +179,7 @@ show = False
 
 
 for country in countries:
+    print("Doubling time", country)
     t, dt = fit(country = country, query = q4, do_1st_order = True, do_2nd_order = False, show = show)
     doubling_time.append(t)
     doubling_time_error.append(dt)
