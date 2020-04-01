@@ -39,7 +39,7 @@ for an exponentially growing population
 is constant, the quantity undergoes exponential growth and has a constant doubling time or period,
 which can be calculated directly from the growth rate as follows
 
-https://latex.codecogs.com/gif.latex?\dpi{120}&space;T&space;=&space;\frac{\ln&space;2}{k}
+<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;T&space;=&space;\frac{\ln&space;2}{k}" />
 
 For the coronavirus pandemia, the bigger doubling time (measured in days) the better is in terms of a slowing down spread.
 Small values indicate steeply increasing populations.
