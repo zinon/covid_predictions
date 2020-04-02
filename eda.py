@@ -78,7 +78,7 @@ sns.set_style("whitegrid")
 
 #plot
 if koverview:
-    plt.figure(figsize=(15, 9))
+    plt.figure(figsize=(15, 10))
     plt.subplot(411)
     plot_report(cty, 'Confirmed','Confirmed cases top %i countries'%(top), top)
     plt.subplot(412)
@@ -124,7 +124,7 @@ if koverall:
 if klead:
     print("lead:", leaders.head)
 
-    fig, ax = plt.subplots(figsize=(15,7))
+    fig, ax = plt.subplots(figsize=(15,10))
     ax0 = sns.lineplot(x='Date',
                        y='Confirmed All',
                        hue="Country",
@@ -136,7 +136,7 @@ if klead:
 if kstates:
     print("states:", states.head)
 
-    fig, ax = plt.subplots(figsize=(15,7))
+    fig, ax = plt.subplots(figsize=(15,10))
     ax0 = sns.lineplot(x='Date',
                        y='Confirmed',
                        hue="State",
@@ -149,7 +149,7 @@ if krates:
     ymin = 0
     ymax = 70
     print("lead:", leaders.head)
-    fig, ax = plt.subplots(figsize=(15,7))
+    fig, ax = plt.subplots(figsize=(15,10))
     ax0 = sns.lineplot(x='Date',
                       y='Deaths_All_Frac',
                       data = groups,
@@ -182,7 +182,7 @@ if krates:
         
 if kmortal:
     print("mortal:", mortal.head)
-    fig, ax = plt.subplots(figsize=(15,7))
+    fig, ax = plt.subplots(figsize=(15,10))
     #We filter out where mortality rate is above 15% 
     mortal = mortal[mortal['Mortality'] < 15]
 
