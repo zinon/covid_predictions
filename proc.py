@@ -6,7 +6,7 @@ class DataLoader(object):
         self.__top = kwargs.get('top', 10)
         self.__query = kwargs.get('query', None)
         self.__logistic_params  = kwargs.get('logistic_params', None)
-        self.__countries_default = ['Mainland China', 'Italy', 'Germany', 'Iran', 'US', 'Spain']
+        self.__countries_default = ['Mainland China', 'Italy', 'Germany', 'Iran', 'US', 'Spain', 'UK', 'France']
         self.__countries = kwargs.get('countries', self.__countries_default)
         #
         self.__covid_data = None
@@ -124,24 +124,28 @@ class DataLoader(object):
         #make sure again that this is a datetime
         self.__covid_data["Date"] = pd.to_datetime(self.__covid_data["Date"])
 
+        #set time base
+        #self.__covid_data = self.__covid_data[ (self.__covid_data['Date'] > '2020-02-15') ] 
+        #print("covid shape after date base", self.__covid_data.shape)
+
         #add active
-        self.__covid_data['Active'] = self.__covid_data['Confirmed'] - self.__covid_data['Deaths'] - self.__covid_data['Recovered']
-
-
-        #print
-        print("\ncovid:", self.__covid_data.head())
+        self.__covid_data['Active'] = self.__covid_data['Confirmed'] - \
+            self.__covid_data['Deaths'] - self.__covid_data['Recovered']
 
         # check null values
-        print("Null covid data values", self.__covid_data.isnull().sum() )
-        print("Null country data values", self.__country_data.isnull().sum() )
+        print("\nNull covid data values", self.__covid_data.isnull().sum() )
+        print("\nNull country data values", self.__country_data.isnull().sum() )
 
         # Clean up rows with zero cases
         if self.__query and  len(self.__query):
             self.__covid_data = self.__covid_data.query( self.__query.query )
+            print("covid shape after query", self.__covid_data.shape)
+
             #self.__covid_data[(self.__covid_data['Confirmed']>0) &
          #                                     (self.__covid_data['Date'] > '2020-02-15') &
          #                                     (self.__covid_data['Date'] < '2021-01-01') ]
 
+        
 
         #sort
         self.__covid_data = self.__covid_data.sort_values(['Date','Country','State'])
@@ -151,6 +155,9 @@ class DataLoader(object):
         self.__covid_data['Days'] = (self.__covid_data['Date'] -
                                      self.__covid_data['FirstDate']).dt.days
         
+
+        print("\ncovid head:\n", self.__covid_data.head())
+        print("\ncovid tail:\n", self.__covid_data.tail())
 
         # We convert the data into daily.
         # If the data for the latest day is not available, we will fill it with previous available data.
@@ -163,7 +170,7 @@ class DataLoader(object):
         #Reset index coverts the index series, in this case date, into an index value. 
         self.__table = self.__table.reset_index()
         self.__table = self.__table.sort_values('Date', ascending=False)
-        print("\ntable:", self.__table.head())
+        print("\ntable:\n", self.__table.head())
 
         #leaders
         self.__leaders = self.__covid_data[self.__covid_data['Country'].isin(self.__countries)]
@@ -171,12 +178,15 @@ class DataLoader(object):
         self.__leaders.columns = ['Confirmed All']
         self.__leaders = self.__leaders.reset_index()
         self.__leaders = self.__leaders.sort_values('Date', ascending=False)
-        self.__leaders['FirstDate'] = self.__covid_data.groupby(['Country'])['Date'].transform('min')
+        #self.__leaders['FirstDate'] = self.__covid_data.groupby(['Country'])['Date'].transform('min')
+        self.__leaders['FirstDate'] = self.__leaders.groupby(['Country'])['Date'].transform('min')
+        print(self.__leaders['FirstDate'])
+
         self.__leaders['Days'] = (self.__leaders['Date'] -
                                   self.__leaders['FirstDate']).dt.days
         
-
-        print("\nlead:", self.__leaders)
+        print("\nlead head:\n", self.__leaders.head())
+        print("\nlead tail:\n", self.__leaders.tail())
         
         #groups
         self.__grouped = self.__covid_data.groupby(['Date']).agg({'Deaths': ['sum'],

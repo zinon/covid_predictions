@@ -64,10 +64,10 @@ def plotter(train = None, title = "", ylabel = "", fn = "test", plot = True, add
     plt.close('all')
 #
 plot = True
-confirmed_logistic = False
-confirmed_linear = False
+confirmed_logistic = True
+confirmed_linear = True
 deaths_logistic = False
-deaths_linear = True
+deaths_linear = False
 active_logistic = False
 active_linear = False
 recovered_logistic = False
@@ -90,7 +90,7 @@ odir = 'images/predictions'
 q0 = xq.Query("All Period", "Confirmed > 0 and Date < '2021-01-01'")
 q1 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-15' and Date < '2021-01-01'")
 q2 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-20' and Date < '2021-01-01'")
-q3 = xq.Query("Bavaria", "Confirmed > 0 and Country == 'Germany'")
+q3 = xq.Query("Germany", "Confirmed > 0 and Country == 'Germany'")
 
 tag = "Germany"
 #data loader

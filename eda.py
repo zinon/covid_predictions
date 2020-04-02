@@ -92,7 +92,7 @@ if koverview:
     xt.save(fig=plt, fn = xt.name(odir, "overview"))
     
 if koverall:
-    fig, ax = plt.subplots(figsize=(15,7))
+    fig, ax = plt.subplots(figsize=(15,10))
 
     ax0 = sns.lineplot(x="Date",
                        y="Confirmed",
@@ -210,7 +210,8 @@ if kmortal:
 
     ax.set(xlabel='Date', ylabel='Mortality Percentage')
     ax.legend()
-    
+
+        
     xt.save(fig, xt.name(odir, "mortality"))
 
 if kmortaldense:

@@ -5,91 +5,87 @@ https://github.com/CSSEGISandData/COVID-19
 
 ## Overall Statistics
 
-- Last update: 2020-03-30 00:00:00
-- Total confirmed cases: 782365
-- Total death cases: 37581
-- Total active cases: 586328
-- Total recovered cases: 158456
-- Death rate %: 4.80
+- Total confirmed cases: 932605
+- Total death cases: 46808
+- Total active cases: 702418
+- Total recovered cases: 183379
+- Death rate %: 5.02
 
  | Country        |   Confirmed |   Deaths |   Recovered |   Active |   Death Rate |   Recovery Rate |
 |:---------------|------------:|---------:|------------:|---------:|-------------:|----------------:|
-| US             |      161807 |     2978 |           0 |   158829 |     1.84046  |        0        |
-| Italy          |      101739 |    11591 |       14620 |    75528 |    11.3929   |       14.3701   |
-| Spain          |       87956 |     7716 |       16780 |    63460 |     8.77257  |       19.0777   |
-| Mainland China |       81478 |     3304 |       75790 |     2384 |     4.05508  |       93.019    |
-| Germany        |       66885 |      645 |       13500 |    52740 |     0.964342 |       20.1839   |
-| France         |       45170 |     3030 |        7964 |    34176 |     6.70799  |       17.6312   |
-| Iran           |       41495 |     2757 |       13911 |    24827 |     6.64417  |       33.5245   |
-| UK             |       22453 |     1411 |         171 |    20871 |     6.28424  |        0.761591 |
-| Switzerland    |       15922 |      359 |        1823 |    13740 |     2.25474  |       11.4496   |
-| Belgium        |       11899 |      513 |        1527 |     9859 |     4.31129  |       12.833    |
+| US             |      213372 |     4757 |           0 |   208615 |      2.22944 |        0        |
+| Italy          |      110574 |    13155 |       16847 |    80572 |     11.897   |       15.236    |
+| Spain          |      104118 |     9387 |       22647 |    72084 |      9.01573 |       21.7513   |
+| Mainland China |       81555 |     3312 |       76248 |     1995 |      4.06106 |       93.4927   |
+| Germany        |       77872 |      920 |       18700 |    58252 |      1.18143 |       24.0138   |
+| France         |       57749 |     4043 |       11053 |    42653 |      7.00099 |       19.1397   |
+| Iran           |       47593 |     3036 |       15473 |    29084 |      6.37909 |       32.5111   |
+| UK             |       29865 |     2357 |         179 |    27329 |      7.89218 |        0.599364 |
+| Switzerland    |       17768 |      488 |        2967 |    14313 |      2.74651 |       16.6986   |
+| Turkey         |       15679 |      277 |         333 |    15069 |      1.76669 |        2.12386  |
+
 
 Rates are reported in percentage.
 
 ## Doubling Times for Confirmed Cases
 
-The doubling time is time it takes for a population to double in size.
+The "doubling time" refers to the time it takes for a population to double in size.
 When the relative growth rate
 <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;k" />
 for an exponentially growing population
 
 <img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;N(t)&space;=&space;N(0)e^{kt}" />
 
-is constant, the quantity undergoes exponential growth and has a constant doubling time or period,
+is constant over a time interval,
+the quantity undergoes exponential growth and has a constant doubling time or period,
 which can be calculated directly from the growth rate as follows
 
 <img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;T&space;=&space;\frac{\ln&space;2}{k}" />
 
-For the coronavirus pandemia, the bigger doubling time (measured in days) the better is in terms of a slowing down spread.
-Small values indicate steeply increasing populations.
+An increase in the epidemic or pandemic doubling time indicates a slowdown of the disease transmission.
+In particular for he coronavirus pandemia, the bigger doubling time (measured in days)
+the better is in terms of a slowingdown spread. Small values indicate steeply increasing populations.
+
+We assume that the outbreak in Europe occured around 10-15 February 2020.
+
+### 15 February - Today
+|    | Country   |   Doubling Time |   Doubling Time Error |
+|---:|:----------|----------------:|----------------------:|
+|  2 | Italy     |         6.81088 |             0.244844  |
+|  5 | Greece    |         6.45466 |             0.248195  |
+|  4 | France    |         5.02641 |             0.11177   |
+|  0 | Germany   |         4.82211 |             0.137639  |
+|  3 | Spain     |         4.59738 |             0.120638  |
+|  1 | UK        |         3.88707 |             0.0610509 |
+|  6 | US        |         3.43474 |             0.0820507 |
 
 
-### Today
+### 15 February - 31 March 2020
+|    | Country   |   Doubling Time |   Doubling Time Error |
+|---:|:----------|----------------:|----------------------:|
+|  2 | Italy     |         6.50204 |             0.220959  |
+|  5 | Greece    |         6.20843 |             0.240083  |
+|  4 | France    |         4.82414 |             0.100359  |
+|  0 | Germany   |         4.55695 |             0.116807  |
+|  3 | Spain     |         4.34995 |             0.101768  |
+|  1 | UK        |         3.71551 |             0.0476741 |
+|  6 | US        |         3.22256 |             0.0693933 |
 
+
+### 15 February - 15 March 2020
 |    | Country        |   Doubling Time |   Doubling Time Error |
 |---:|:---------------|----------------:|----------------------:|
-|  0 | Mainland China |        39.554   |             4.53451   |
-|  1 | South Korea    |        15.387   |             1.19856   |
-|  6 | Iran           |         8.08672 |             0.255562  |
-|  4 | Italy          |         6.79855 |             0.207929  |
-|  8 | Greece         |         6.45465 |             0.248193  |
-|  9 | Cyprus         |         5.37158 |             0.23878   |
-|  7 | France         |         5.02591 |             0.0898325 |
-|  2 | Germany        |         4.82182 |             0.114185  |
-|  5 | Spain          |         4.59721 |             0.103548  |
-|  3 | US             |         3.43474 |             0.0649632 |
+|  8 | South Korea    |         7.92763 |             0.817927  |
+|  9 | Iran           |         4.46828 |             0.250423  |
+|  2 | Italy          |         3.6665  |             0.102771  |
+|  5 | Greece         |         2.87314 |             0.214048  |
+|  4 | France         |         2.77615 |             0.0915842 |
+|  1 | UK             |         2.61483 |             0.130392  |
+|  6 | US             |         2.54253 |             0.0432671 |
+|  0 | Germany        |         2.5209  |             0.0961247 |
+|  3 | Spain          |         1.88386 |             0.0955873 |
 
-
-### As of 31 March 2020
-|    | Country        |   Doubling Time |   Doubling Time Error |
-|---:|:---------------|----------------:|----------------------:|
-|  0 | Mainland China |        39.554   |             4.53451   |
-|  1 | South Korea    |        15.387   |             1.19856   |
-|  6 | Iran           |         8.08672 |             0.255562  |
-|  4 | Italy          |         6.79855 |             0.207929  |
-|  8 | Greece         |         6.45465 |             0.248193  |
-|  9 | Cyprus         |         5.37158 |             0.23878   |
-|  7 | France         |         5.02591 |             0.0898325 |
-|  2 | Germany        |         4.82182 |             0.114185  |
-|  5 | Spain          |         4.59721 |             0.103548  |
-|  3 | US             |         3.43474 |             0.0649632 |
-
-
-### As of 15 March 2020
-Saving 'images/doubling_time/Greece.png'
-|    | Country        |   Doubling Time |   Doubling Time Error |
-|---:|:---------------|----------------:|----------------------:|
-|  0 | Mainland China |        24.0957  |             2.61058   |
-|  1 | South Korea    |         7.53423 |             0.530588  |
-|  6 | Iran           |         4.46829 |             0.250428  |
-|  4 | Italy          |         3.66472 |             0.0808904 |
-|  8 | Greece         |         2.87314 |             0.214045  |
-|  7 | France         |         2.7764  |             0.0668084 |
-|  3 | US             |         2.54285 |             0.03191   |
-|  2 | Germany        |         2.52113 |             0.0732814 |
-|  5 | Spain          |         1.88387 |             0.0761202 |
-
+Note: China does not expose an exponential growth.
 
 ### Germany Today
 ![Germany's doubling time](images/doubling_time/Germany.png "Germany's doubling time")

@@ -41,7 +41,7 @@ def fit(country = '', query = None, do_1st_order = True, do_2nd_order = False, s
     dloader = xp.DataLoader(query = query, countries = _countries)
     df = dloader.leaders
 
-    print("Fit:", df.head(65))
+    print("Fit:", df.head())
 
     x_data = np.flip( df['Days'].to_numpy() )
     y_data = np.flip( df[y_data_label].to_numpy() )
@@ -166,10 +166,29 @@ def fit(country = '', query = None, do_1st_order = True, do_2nd_order = False, s
 #########################################################################
 q0 = xq.Query("All Period", "Confirmed > 0 and Date < '2021-01-01'")
 q3 = xq.Query("Germany", " 'Confirmed All' > 0 and Country == 'Germany'")
-q4 = xq.Query("Basic", "Date < '2020-03-31'")
+q4 = xq.Query("Basic", "Date < '2021-01-01'")
+q5 = xq.Query("Basic", "Date < '2020-03-30'")
 
 
-countries = ['Mainland China', 'South Korea', 'Germany', 'US', 'Italy', 'Spain', 'Iran', 'France', 'Greece', 'Cyprus']
+qbase = xq.Query("Base", "Date > '2020-01-01'")
+qkink = xq.Query("Base", "Date > '2020-02-15'")
+
+
+q1 = xq.Query("Basic", "Date < '2020-03-15'")
+q2 = xq.Query("Basic", "Date < '2020-03-30'")
+q3 = xq.Query("Basic", "Date < '2021-01-11'")
+
+query = qkink + q3
+
+print("Query", query)
+
+
+asia = ['Mainland China', 'South Korea', 'Iran']
+europe = ['Germany',  'UK', 'Italy','Spain', 'France', 'Greece']#, 'Cyprus']
+amerika = ['US']
+
+countries = europe + amerika # + asia
+
 doubling_time = []
 doubling_time_error = []
 
@@ -180,7 +199,7 @@ show = False
 
 for country in countries:
     print("Doubling time", country)
-    t, dt = fit(country = country, query = q4, do_1st_order = True, do_2nd_order = False, show = show)
+    t, dt = fit(country = country, query = query, do_1st_order = True, do_2nd_order = False, show = show)
     doubling_time.append(t)
     doubling_time_error.append(dt)
 
