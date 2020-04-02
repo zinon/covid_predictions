@@ -33,15 +33,11 @@ The "doubling time" refers to the time it takes for a population to double in si
 When the relative growth rate
 <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;k" />
 for an exponentially growing population
-
 <img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;N(t)&space;=&space;N(0)e^{kt}" />
-
 is constant over a time interval,
 the quantity undergoes exponential growth and has a constant doubling time or period,
 which can be calculated directly from the growth rate as follows
-
 <img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;T&space;=&space;\frac{\ln&space;2}{k}" />
-
 An increase in the epidemic or pandemic doubling time indicates a slowdown of the disease transmission.
 In particular for he coronavirus pandemia, the bigger doubling time (measured in days)
 the better is in terms of a slowingdown spread. Small values indicate steeply increasing populations.
