@@ -64,21 +64,21 @@ def plotter(train = None, title = "", ylabel = "", fn = "test", plot = True, add
     plt.close('all')
 #
 plot = True
-confirmed_logistic = True
-confirmed_linear = True
+confirmed_logistic = False
+confirmed_linear = False
 deaths_logistic = False
 deaths_linear = False
-active_logistic = False
+active_logistic = True
 active_linear = False
-recovered_logistic = False
+recovered_logistic = True
 recovered_linear = False
 mortality_linear = False
 
 #case, floor, cap
 logparams = op.LogParams()
-logparams += op.LogParam("Confirmed", 0, 0.5e6) #1.5e6
-logparams += op.LogParam("Deaths", 0, 5e3)#100e3
-logparams += op.LogParam("Active", 0, 750e3)
+logparams += op.LogParam("Confirmed", 0, 1.5e6) #1.5e6
+logparams += op.LogParam("Deaths", 0, 100e3)#100e3
+logparams += op.LogParam("Active", 0, 1e6)
 logparams += op.LogParam("Recovered", 0, 300e3)
 logparams += op.LogParam("Mortality", 0, 100e3)
 print(logparams)
@@ -92,9 +92,9 @@ q1 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-15' and Date < '20
 q2 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-20' and Date < '2021-01-01'")
 q3 = xq.Query("Germany", "Confirmed > 0 and Country == 'Germany'")
 
-tag = "Germany"
+tag = ""
 #data loader
-dloader = xp.DataLoader(query = q3, logistic_params = logparams)
+dloader = xp.DataLoader(query = q0, logistic_params = logparams)
 
 #forecasting periods
 periods = 21
