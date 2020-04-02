@@ -68,11 +68,11 @@ confirmed_logistic = False
 confirmed_linear = False
 deaths_logistic = False
 deaths_linear = False
-active_logistic = True
+active_logistic = False
 active_linear = False
-recovered_logistic = True
+recovered_logistic = False
 recovered_linear = False
-mortality_linear = False
+mortality_linear = True
 
 #case, floor, cap
 logparams = op.LogParams()
@@ -94,7 +94,7 @@ q3 = xq.Query("Germany", "Confirmed > 0 and Country == 'Germany'")
 
 tag = ""
 #data loader
-dloader = xp.DataLoader(query = q0, logistic_params = logparams)
+dloader = xp.DataLoader(query = q2, logistic_params = logparams)
 
 #forecasting periods
 periods = 21
