@@ -18,6 +18,7 @@ class DataLoader(object):
         self.__mortality = None
         self.__latest = None
         self.__cty_data = None
+        self.__grouped_cty = None
         #
         self.__train_ds_confirmed = None
         self.__train_ds_deaths = None
@@ -57,6 +58,10 @@ class DataLoader(object):
     def mortality(self):
         return self.__mortality if self.__status else None
 
+    @property
+    def grouped_cty(self):
+        return self.__grouped_cty  if self.__status else None
+    
     @property
     def train_ds_confirmed(self):
         return self.__train_ds_confirmed
@@ -187,7 +192,7 @@ class DataLoader(object):
         
         print("\nlead head:\n", self.__leaders.head())
         print("\nlead tail:\n", self.__leaders.tail())
-        
+
         #groups
         self.__grouped = self.__covid_data.groupby(['Date']).agg({'Deaths': ['sum'],
                                                                   'Recovered': ['sum'],
@@ -245,6 +250,16 @@ class DataLoader(object):
         self.__states.columns = ['Confirmed']
         self.__states = self.__states.reset_index()
         print("\nstates:", self.__states)
+
+        #grouped countries
+        self.__grouped_cty = self.__latest.copy() 
+        self.__grouped_cty.loc[~self.__grouped_cty['Country'].isin(self.__countries), 'Country'] = 'Others'
+        self.__grouped_cty = self.__grouped_cty.groupby(['Country']).agg({'Confirmed': ['sum']})
+        self.__grouped_cty.columns = ['Confirmed']
+        self.__grouped_cty = self.__grouped_cty.reset_index()
+        self.__grouped_cty = self.__grouped_cty.sort_values(['Confirmed'], ascending = False)
+        
+        print("\ngrouped cty head:\n", self.__grouped_cty.head(10))
 
         return True
 

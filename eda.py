@@ -9,6 +9,49 @@ import matplotlib.dates as mdates
 import matplotlib.ticker as plticker
 
 #
+def pie(title = '', percentages = [], labels = [], folder = 'pies'):
+
+    cc = plt.cycler("color", plt.cm.tab20.colors)
+    plt.style.context({"axes.prop_cycle" : cc})
+    
+    fig, ax = plt.subplots(figsize=(10, 7))
+    plt.rcParams['font.sans-serif'] = 'Arial'
+    plt.rcParams['font.family'] = 'sans-serif'
+    plt.rcParams['text.color'] = '#909090'
+    plt.rcParams['axes.labelcolor']= '#909090'
+    plt.rcParams['xtick.color'] = '#909090'
+    plt.rcParams['ytick.color'] = '#909090'
+    plt.rcParams['font.size'] = 20
+
+    elist = [0]*len(percentages)
+    elist[0] = 0.1
+    explode= tuple( elist )
+    
+    ax.pie(percentages,
+           explode=explode,
+           labels=labels,  
+           #colors=cc,
+           autopct='%1.1f%%', 
+           shadow=False,
+           startangle=15,   
+           pctdistance=1.2,
+           labeldistance=1.42)
+    ax.axis('equal')
+    ax.set_title(title)
+    ax.legend(frameon=False, bbox_to_anchor=(1.5,0.8))
+    name = title.replace(' ', '_')
+
+def make_pie(df = None, title='', case = ''):
+    print("Pie chart", case)
+    print(df)
+    df[case] = df[case] / df[case].values.sum() * 100
+
+    percentages = df[case].tolist()
+    labels = df['Country'].tolist()
+
+    pie(title = title, percentages = percentages, labels = labels)
+
+#
 def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
     if column == 'Death Rate':
         _df = df[df['Deaths'] >=10 ].sort_values('Death Rate', ascending=False).head(head)
@@ -93,6 +136,7 @@ def country_view(ax, df : pd.DataFrame(), country:str):
 #options
 kshow= True
 
+kpieconfirmed = True
 kcountryview = True
 kdeathrates = True
 koverview = True
@@ -116,6 +160,7 @@ states = ld.states
 groups = ld.grouped
 mortal = ld.mortality
 cty = ld.cty_data
+cty_gr = ld.grouped_cty
 
 # figure
 sns.set()
@@ -123,6 +168,11 @@ sns.set_style("whitegrid")
 
 
 #plot
+if kpieconfirmed:
+    fig, ax = plt.subplots(figsize=(15,10))
+    make_pie(df = cty_gr, title='Confirmed cases', case = 'Confirmed')
+    xt.save(fig, xt.name(odir, "pie_confirmed"))
+    
 if kcountryview:
     country = "Germany"
     fig, ax = plt.subplots(2, 2, figsize=(15,9))

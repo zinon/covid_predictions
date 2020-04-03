@@ -28,6 +28,10 @@ https://github.com/CSSEGISandData/COVID-19
 
 Rates are reported in percentage.
 
+## Confirmed Cases for Top Countries
+
+~[Pie confirmed](images/eda/pie_confirmed.png "Pie confirmed")
+
 ## Doubling Times for Confirmed Cases
 
 The "doubling time" refers to the time it takes for a population to double in size.
