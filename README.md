@@ -30,7 +30,7 @@ Rates are reported in percentage.
 
 ## Confirmed Cases for Top Countries
 
-~[Pie confirmed](images/eda/pie_confirmed.png "Pie confirmed")
+![Pie confirmed](images/eda/pie_confirmed.png "Pie confirmed")
 
 ## Doubling Times for Confirmed Cases
 
