@@ -9,7 +9,14 @@ import matplotlib.dates as mdates
 import matplotlib.ticker as plticker
 
 #
-def pie(title = '', percentages = [], labels = [], folder = 'pies'):
+
+def make_pie(df = None, title='', case = ''):
+    print("Pie chart", case)
+    print(df)
+    df[case] = df[case] / df[case].values.sum() * 100
+
+    percentages = df[case].tolist()
+    labels = df['Country'].tolist()
 
     cc = plt.cycler("color", plt.cm.tab20.colors)
     plt.style.context({"axes.prop_cycle" : cc})
@@ -27,29 +34,18 @@ def pie(title = '', percentages = [], labels = [], folder = 'pies'):
     elist[0] = 0.1
     explode= tuple( elist )
     
-    ax.pie(percentages,
-           explode=explode,
-           labels=labels,  
-           #colors=cc,
-           autopct='%1.1f%%', 
-           shadow=False,
-           startangle=15,   
-           pctdistance=1.2,
-           labeldistance=1.42)
+    p = ax.pie(percentages,
+               explode=explode,
+               labels=labels,  
+               #colors=cc,
+               autopct='%1.1f%%', 
+               shadow=False,
+               startangle=15,   
+               pctdistance=1.2,
+               labeldistance=1.42)
     ax.axis('equal')
     ax.set_title(title)
     ax.legend(frameon=False, bbox_to_anchor=(1.5,0.8))
-    name = title.replace(' ', '_')
-
-def make_pie(df = None, title='', case = ''):
-    print("Pie chart", case)
-    print(df)
-    df[case] = df[case] / df[case].values.sum() * 100
-
-    percentages = df[case].tolist()
-    labels = df['Country'].tolist()
-
-    pie(title = title, percentages = percentages, labels = labels)
 
 #
 def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
@@ -169,9 +165,9 @@ sns.set_style("whitegrid")
 
 #plot
 if kpieconfirmed:
-    fig, ax = plt.subplots(figsize=(15,10))
+    plt.figure(figsize=(15,10))
     make_pie(df = cty_gr, title='Confirmed cases', case = 'Confirmed')
-    xt.save(fig, xt.name(odir, "pie_confirmed"))
+    xt.save(fig = plt, fn = xt.name(odir, "pie_confirmed"))
     
 if kcountryview:
     country = "Germany"
@@ -182,12 +178,11 @@ if kcountryview:
     xt.save(fig=plt, fn = xt.name(odir, country+"_view"))
      
 if kdeathrates:
-    N = 10
     plt.figure(figsize=(15,10))
     plt.subplot(211)
-    plot_drate(cty, 'top','Highest death rate top %i (>=10 deaths)'%(N), N)
+    plot_drate(cty, 'top','Highest death rate top %i (>=10 deaths)'%(top), top)
     plt.subplot(212)
-    plot_drate(cty, 'bottom','Lowest death rate top %i (>=500 confirmed)'%(N), N)
+    plot_drate(cty, 'bottom','Lowest death rate top %i (>=500 confirmed)'%(top), top)
 
     plt.tight_layout()    
     xt.save(fig=plt, fn = xt.name(odir, "top_death_rates"))
