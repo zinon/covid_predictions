@@ -16,7 +16,7 @@ def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
         _df = df.sort_values(column, ascending=False).head(head)
 
     #fig, ax = plt.subplots(2, 2, figsize=(15, 10))
-    g = sns.barplot(_df[column], _df.index, color = 'b')
+    g = sns.barplot(_df[column], _df.index)#, color = 'b')
     plt.title(title, fontsize=12)
     plt.ylabel(None)
     plt.xlabel(None)
@@ -46,10 +46,24 @@ def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
         else:
             g.text(v*1.01, i+0.2, str(int(v)), size = 10)
 
-   
+def plot_drate(df : pd.DataFrame(), rank:str, title:str, n:int):
+
+    if rank == 'top':
+        _df = df[df['Deaths']>=10].sort_values('Death Rate', ascending=False).head(n)
+    elif rank == 'bottom':
+        _df = df[df['Confirmed']>=500].sort_values('Death Rate').head(n)
+    g = sns.barplot(_df['Death Rate'], _df.index)
+    plt.title(title, fontsize=14)
+    plt.ylabel(None)
+    plt.xlabel(None)
+    plt.grid(axis='x')
+    for i, q in enumerate(_df['Death Rate']):
+        g.text(q*1.01, i+0.1, str(round(q,2)))
+        
 #options
 kshow= True
 
+kdeathrates = True
 koverview = True
 kstates = True
 koverall = True
@@ -77,6 +91,17 @@ sns.set_style("whitegrid")
 
 
 #plot
+if kdeathrates:
+    N = 10
+    plt.figure(figsize=(15,10))
+    plt.subplot(211)
+    plot_drate(cty, 'top','Highest death rate top %i (>=10 deaths)'%(N), N)
+    plt.subplot(212)
+    plot_drate(cty, 'bottom','Lowest death rate top %i (>=500 confirmed)'%(N), N)
+
+    plt.tight_layout()    
+    xt.save(fig=plt, fn = xt.name(odir, "top_death_rates"))
+    
 if koverview:
     plt.figure(figsize=(15, 10))
     plt.subplot(411)
@@ -87,8 +112,8 @@ if koverview:
     plot_report(cty, 'Active','Active cases top %i countries'%(top), top)
     plt.subplot(414)
     plot_report(cty, 'Death Rate','Death rate top %i countries (>=10 deaths only)'%(top), top)
-    plt.tight_layout()
-    
+
+    plt.tight_layout()    
     xt.save(fig=plt, fn = xt.name(odir, "overview"))
     
 if koverall:
@@ -99,6 +124,7 @@ if koverall:
                        markers=True,
                        color = 'orange',
                        label="Confirmed",
+                       marker = "o",
                        data=tb,
                        ax = ax)
     
@@ -107,6 +133,7 @@ if koverall:
                        markers=True,
                        data=tb,
                        color = 'blue',
+                       marker = "*",
                        label="Recovered",
                        ax = ax0)
 
@@ -115,6 +142,7 @@ if koverall:
                        markers=True,
                        data=tb,
                        color = 'red',
+                       marker = "^",
                        label="Deceased",
                        ax = ax1)
 

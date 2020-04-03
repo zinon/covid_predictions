@@ -102,6 +102,10 @@ Confirmed cases for the most affected countries and Germany.
 ![Mortality rate](images/eda/mortality.png?raw=true "Mortality rate")
 Percentage mortality (death rate) for top affected countries and Germany.
 
+## Death Rates - Head & Tail
+![Death rate](images/eda/top_death_rates.png "Death rates")
+
+
 ## Percentage Rates
 ![Percentage Rates](images/eda/rates.png?raw=true "Percentage rates")
 Percentage rates for deaths, recovered cases and confirmed cases on a global scale. Mainland China is included.
