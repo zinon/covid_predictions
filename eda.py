@@ -103,7 +103,7 @@ if kdeathrates:
     xt.save(fig=plt, fn = xt.name(odir, "top_death_rates"))
     
 if koverview:
-    plt.figure(figsize=(15, 10))
+    plt.figure(figsize=(15, 15))
     plt.subplot(411)
     plot_report(cty, 'Confirmed','Confirmed cases top %i countries'%(top), top)
     plt.subplot(412)
