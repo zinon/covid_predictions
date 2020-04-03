@@ -46,6 +46,7 @@ def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
         else:
             g.text(v*1.01, i+0.2, str(int(v)), size = 10)
 
+#
 def plot_drate(df : pd.DataFrame(), rank:str, title:str, n:int):
 
     if rank == 'top':
@@ -59,10 +60,40 @@ def plot_drate(df : pd.DataFrame(), rank:str, title:str, n:int):
     plt.grid(axis='x')
     for i, q in enumerate(_df['Death Rate']):
         g.text(q*1.01, i+0.1, str(round(q,2)))
-        
+#
+def plot_view(ax, num, col, title):
+
+    ax[num].plot(col, lw=3)
+    ax[num].set_title(title)
+    ax[num].xaxis.set_major_locator(plt.MaxNLocator(7))
+
+    myFmt = mdates.DateFormatter('%d-%m')
+    ax[num].xaxis.set_major_formatter(myFmt)
+
+    #ticks
+    loc = plticker.MultipleLocator(base=4.0) # this locator puts ticks at regular intervals
+    ax[num].xaxis.set_major_locator(loc)
+    #plt.xticks(np.arange(min(x), max(x)+1, 1.0))
+
+    ax[num].grid(True)
+    
+def country_view(ax, df : pd.DataFrame(), country:str):
+    _df = df[df['Country'] == country].groupby('Date')[['Confirmed',
+                                                       'Deaths',
+                                                       'Recovered',
+                                                       'Active']].sum()
+
+    _df['Death Rate'] = _df['Deaths'] / _df['Confirmed'] * 100
+    plot_view(ax, (0,0), _df['Confirmed'], 'Confirmed cases')
+    plot_view(ax, (0,1), _df['Deaths'], 'Death cases')
+    plot_view(ax, (1,0), _df['Active'], 'Active cases')
+    plot_view(ax, (1,1), _df['Death Rate'], 'Death rate')
+    fig.suptitle(country, fontsize=16)
+
 #options
 kshow= True
 
+kcountryview = True
 kdeathrates = True
 koverview = True
 kstates = True
@@ -78,6 +109,7 @@ odir = "images/eda"
 #data
 top=10
 ld = xp.DataLoader(top=top)
+cd = ld.covid_data
 tb = ld.table
 leaders = ld.leaders
 states = ld.states
@@ -91,6 +123,14 @@ sns.set_style("whitegrid")
 
 
 #plot
+if kcountryview:
+    country = "Germany"
+    fig, ax = plt.subplots(2, 2, figsize=(15,9))
+    ## Rotate date labels automatically
+    fig.autofmt_xdate()
+    country_view(ax, cd, country)
+    xt.save(fig=plt, fn = xt.name(odir, country+"_view"))
+     
 if kdeathrates:
     N = 10
     plt.figure(figsize=(15,10))
