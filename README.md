@@ -113,7 +113,6 @@ Percentage rates for deaths, recovered cases and confirmed cases on a global sca
 ![Germany status](images/eda/Germany_view.png "Germany")
 
 # Predictions with Facebook Prophet
-
 Predictions are performed using an additive forecasting model
 
 <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;y(t)=g(t)&plus;s(t)&plus;h(t)&plus;\epsilon_t" />
