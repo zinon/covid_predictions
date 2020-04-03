@@ -186,6 +186,7 @@ if koverall:
                        label="Deceased",
                        ax = ax1)
 
+    ax.set(xlabel='Date', ylabel='Number of cases')
     ax.legend()
     xt.save(fig, xt.name(odir, "overall"))
 #

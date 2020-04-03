@@ -5,24 +5,25 @@ https://github.com/CSSEGISandData/COVID-19
 
 ## Overall Statistics
 
-- Total confirmed cases: 932605
-- Total death cases: 46808
-- Total active cases: 702418
-- Total recovered cases: 183379
-- Death rate %: 5.02
+- Last update: 2020-04-02 00:00:00
+- Total confirmed cases: 1013157
+- Total death cases: 52982
+- Total active cases: 760648
+- Total recovered cases: 199527
+- Death rate %: 5.23
 
  | Country        |   Confirmed |   Deaths |   Recovered |   Active |   Death Rate |   Recovery Rate |
 |:---------------|------------:|---------:|------------:|---------:|-------------:|----------------:|
-| US             |      213372 |     4757 |           0 |   208615 |      2.22944 |        0        |
-| Italy          |      110574 |    13155 |       16847 |    80572 |     11.897   |       15.236    |
-| Spain          |      104118 |     9387 |       22647 |    72084 |      9.01573 |       21.7513   |
-| Mainland China |       81555 |     3312 |       76248 |     1995 |      4.06106 |       93.4927   |
-| Germany        |       77872 |      920 |       18700 |    58252 |      1.18143 |       24.0138   |
-| France         |       57749 |     4043 |       11053 |    42653 |      7.00099 |       19.1397   |
-| Iran           |       47593 |     3036 |       15473 |    29084 |      6.37909 |       32.5111   |
-| UK             |       29865 |     2357 |         179 |    27329 |      7.89218 |        0.599364 |
-| Switzerland    |       17768 |      488 |        2967 |    14313 |      2.74651 |       16.6986   |
-| Turkey         |       15679 |      277 |         333 |    15069 |      1.76669 |        2.12386  |
+| US             |      243453 |     5926 |           0 |   237527 |      2.43415 |        0        |
+| Italy          |      115242 |    13915 |       18278 |    83049 |     12.0746  |       15.8605   |
+| Spain          |      112065 |    10348 |       26743 |    74974 |      9.23393 |       23.8638   |
+| Germany        |       84794 |     1107 |       22440 |    61247 |      1.30552 |       26.4641   |
+| Mainland China |       81589 |     3318 |       76408 |     1863 |      4.06672 |       93.6499   |
+| France         |       59929 |     5398 |       12548 |    41983 |      9.00733 |       20.9381   |
+| Iran           |       50468 |     3160 |       16711 |    30597 |      6.26139 |       33.1121   |
+| UK             |       34173 |     2926 |         192 |    31055 |      8.56232 |        0.561847 |
+| Switzerland    |       18827 |      536 |        4013 |    14278 |      2.84698 |       21.3151   |
+| Turkey         |       18135 |      356 |         415 |    17364 |      1.96305 |        2.28839  |
 
 
 Rates are reported in percentage.
@@ -45,6 +46,18 @@ the better is in terms of a slowingdown spread. Small values indicate steeply in
 We assume that the outbreak in Europe occured around 10-15 February 2020.
 
 ### 15 February - Today
+|    | Country   |   Doubling Time |   Doubling Time Error |
+|---:|:----------|----------------:|----------------------:|
+|  2 | Italy     |         7.80437 |             0.320272  |
+|  5 | Greece    |         7.05933 |             0.243077  |
+|  0 | Germany   |         5.62748 |             0.186466  |
+|  4 | France    |         5.51874 |             0.127942  |
+|  3 | Spain     |         5.37994 |             0.170493  |
+|  1 | UK        |         4.30286 |             0.0697051 |
+|  6 | US        |         4.0121  |             0.0995399 |
+
+
+### 15 February - 1 April 2019
 |    | Country   |   Doubling Time |   Doubling Time Error |
 |---:|:----------|----------------:|----------------------:|
 |  2 | Italy     |         6.81088 |             0.244844  |

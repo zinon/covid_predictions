@@ -76,25 +76,26 @@ mortality_linear = True
 
 #case, floor, cap
 logparams = op.LogParams()
-logparams += op.LogParam("Confirmed", 0, 1.5e6) #1.5e6
-logparams += op.LogParam("Deaths", 0, 100e3)#100e3
-logparams += op.LogParam("Active", 0, 1e6)
-logparams += op.LogParam("Recovered", 0, 300e3)
-logparams += op.LogParam("Mortality", 0, 100e3)
+logparams += op.LogParam("Confirmed", 0, 2e6) #
+logparams += op.LogParam("Deaths", 0, 250e3) #
+logparams += op.LogParam("Active", 0, 1.2e6)
+logparams += op.LogParam("Recovered", 0, 0.5e6)
+logparams += op.LogParam("Mortality", 0, 250e3)
 print(logparams)
 
 #output dir
 odir = 'images/predictions'
 
 #queries - cuts
-q0 = xq.Query("All Period", "Confirmed > 0 and Date < '2021-01-01'")
 q1 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-15' and Date < '2021-01-01'")
-q2 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-20' and Date < '2021-01-01'")
-q3 = xq.Query("Germany", "Confirmed > 0 and Country == 'Germany'")
+
+qmort = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-20' and Date < '2021-01-01'")
+qall = xq.Query("All Period", "Confirmed > 0 and Date < '2021-01-01'")
+qgerm = xq.Query("Germany", "Confirmed > 0 and Country == 'Germany'")
 
 tag = ""
 #data loader
-dloader = xp.DataLoader(query = q2, logistic_params = logparams)
+dloader = xp.DataLoader(query = qmort, logistic_params = logparams)
 
 #forecasting periods
 periods = 21
