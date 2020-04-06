@@ -32,14 +32,17 @@ def errors(params_cov):
     params_err = perrors(params_cov)
     return np.sqrt(np.diag(params_cov))
 
-def fit(country = '', query = None, do_1st_order = True, do_2nd_order = False, show = True):
+def fit(country = '',
+        query_raw = None,
+        query_der = None,
+        do_1st_order = True, do_2nd_order = False, show = True):
     odir = 'images/doubling_time'
     y_data_label = 'Confirmed All'
     _countries = []
     _countries.append(country)
     print(_countries)
-    dloader = xp.DataLoader(query = query, countries = _countries)
-    df = dloader.leaders
+    dloader = xp.DataLoader(query = query_raw, countries = _countries)
+    df = dloader.leaders.query( query_der.query )
 
     print("Fit:", df.head())
 
@@ -149,7 +152,7 @@ def fit(country = '', query = None, do_1st_order = True, do_2nd_order = False, s
 
 
     plt.ylabel(y_data_label)
-    plt.xlabel('Period')
+    plt.xlabel('Day')
         
     plt.legend(loc='best')
 
@@ -164,6 +167,8 @@ def fit(country = '', query = None, do_1st_order = True, do_2nd_order = False, s
     return r, dr
 
 #########################################################################
+
+## query on initial data
 q0 = xq.Query("All Period", "Confirmed > 0 and Date < '2021-01-01'")
 q3 = xq.Query("Germany", " 'Confirmed All' > 0 and Country == 'Germany'")
 q4 = xq.Query("Basic", "Date < '2021-01-01'")
@@ -172,21 +177,23 @@ q5 = xq.Query("Basic", "Date < '2020-03-30'")
 
 qbase = xq.Query("Base", "Date > '2020-01-01'")
 qkink = xq.Query("Base", "Date > '2020-02-15'")
-
-
 q1 = xq.Query("Basic", "Date < '2020-03-15'")
 q2 = xq.Query("Basic", "Date < '2020-03-30'")
 q3 = xq.Query("Basic", "Date < '2021-01-11'")
 
-query = qkink + q3
 
-print("Query", query)
+#query = qkink + q3
+qRaw = qbase
+print("Raw Query", qRaw)
+
+## query on derived data
+qDer = xq.Query("Recent", "RecentDays <=15 ")
+print("Derived Query", qDer)
 
 
 asia = ['Mainland China', 'South Korea', 'Iran']
-europe = ['Germany',  'UK', 'Italy','Spain', 'France', 'Greece']#, 'Cyprus']
+europe = ['Germany',  'UK', 'Italy', 'Spain', 'France', 'Greece']#, 'Cyprus']
 amerika = ['US']
-
 countries = europe + amerika # + asia
 
 doubling_time = []
@@ -199,7 +206,10 @@ show = False
 
 for country in countries:
     print("Doubling time", country)
-    t, dt = fit(country = country, query = query, do_1st_order = True, do_2nd_order = False, show = show)
+    t, dt = fit(country = country,
+                query_raw = qRaw,
+                query_der = qDer,
+                do_1st_order = True, do_2nd_order = False, show = show)
     doubling_time.append(t)
     doubling_time_error.append(dt)
 

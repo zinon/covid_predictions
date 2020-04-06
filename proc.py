@@ -185,11 +185,18 @@ class DataLoader(object):
         self.__leaders = self.__leaders.sort_values('Date', ascending=False)
         #self.__leaders['FirstDate'] = self.__covid_data.groupby(['Country'])['Date'].transform('min')
         self.__leaders['FirstDate'] = self.__leaders.groupby(['Country'])['Date'].transform('min')
-        print(self.__leaders['FirstDate'])
+        print("leaders first day:\n", self.__leaders['FirstDate'])
 
-        self.__leaders['Days'] = (self.__leaders['Date'] -
+        self.__leaders['LastDate'] = self.__leaders.groupby(['Country'])['Date'].transform('max')
+        print("leaders last day:\n", self.__leaders['LastDate'])
+
+
+        self.__leaders['Days'] = (self.__leaders['Date'] - \
                                   self.__leaders['FirstDate']).dt.days
-        
+
+        self.__leaders['RecentDays'] = (self.__leaders['LastDate'] - \
+                                        self.__leaders['Date']).dt.days
+
         print("\nlead head:\n", self.__leaders.head())
         print("\nlead tail:\n", self.__leaders.tail())
 

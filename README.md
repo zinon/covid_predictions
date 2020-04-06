@@ -49,59 +49,22 @@ the better is in terms of a slowingdown spread. Small values indicate steeply in
 
 We assume that the outbreak in Europe occured around 10-15 February 2020.
 
-### 15 February - Today
+### Time window = Last 15 days
 |    | Country   |   Doubling Time |   Doubling Time Error |
 |---:|:----------|----------------:|----------------------:|
-|  2 | Italy     |         7.80437 |             0.320272  |
-|  5 | Greece    |         7.05933 |             0.243077  |
-|  0 | Germany   |         5.62748 |             0.186466  |
-|  4 | France    |         5.51874 |             0.127942  |
-|  3 | Spain     |         5.37994 |             0.170493  |
-|  1 | UK        |         4.30286 |             0.0697051 |
-|  6 | US        |         4.0121  |             0.0995399 |
-
-
-### 15 February - 1 April 2019
-|    | Country   |   Doubling Time |   Doubling Time Error |
-|---:|:----------|----------------:|----------------------:|
-|  2 | Italy     |         6.81088 |             0.244844  |
-|  5 | Greece    |         6.45466 |             0.248195  |
-|  4 | France    |         5.02641 |             0.11177   |
-|  0 | Germany   |         4.82211 |             0.137639  |
-|  3 | Spain     |         4.59738 |             0.120638  |
-|  1 | UK        |         3.88707 |             0.0610509 |
-|  6 | US        |         3.43474 |             0.0820507 |
-
-
-### 15 February - 31 March 2020
-|    | Country   |   Doubling Time |   Doubling Time Error |
-|---:|:----------|----------------:|----------------------:|
-|  2 | Italy     |         6.50204 |             0.220959  |
-|  5 | Greece    |         6.20843 |             0.240083  |
-|  4 | France    |         4.82414 |             0.100359  |
-|  0 | Germany   |         4.55695 |             0.116807  |
-|  3 | Spain     |         4.34995 |             0.101768  |
-|  1 | UK        |         3.71551 |             0.0476741 |
-|  6 | US        |         3.22256 |             0.0693933 |
-
-
-### 15 February - 15 March 2020
-|    | Country        |   Doubling Time |   Doubling Time Error |
-|---:|:---------------|----------------:|----------------------:|
-|  8 | South Korea    |         7.92763 |             0.817927  |
-|  9 | Iran           |         4.46828 |             0.250423  |
-|  2 | Italy          |         3.6665  |             0.102771  |
-|  5 | Greece         |         2.87314 |             0.214048  |
-|  4 | France         |         2.77615 |             0.0915842 |
-|  1 | UK             |         2.61483 |             0.130392  |
-|  6 | US             |         2.54253 |             0.0432671 |
-|  0 | Germany        |         2.5209  |             0.0961247 |
-|  3 | Spain          |         1.88386 |             0.0955873 |
+|  2 | Italy     |        10.2942  |              0.538543 |
+|  5 | Greece    |         8.17605 |              0.194635 |
+|  0 | Germany   |         6.34621 |              0.282157 |
+|  4 | France    |         5.95507 |              0.193496 |
+|  3 | Spain     |         5.8896  |              0.290198 |
+|  1 | UK        |         4.42453 |              0.110834 |
+|  6 | US        |         4.14469 |              0.164233 |
 
 Note: China does not expose an exponential growth.
 
 ### Germany Today
 ![Germany's doubling time](images/doubling_time/Germany.png "Germany's doubling time")
+Growth for Germany considering the last 15 days.
 
 ## Overview 
 ![Overview stats](images/eda/overview.png?raw=true "Overview")
