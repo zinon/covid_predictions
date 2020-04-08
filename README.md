@@ -89,9 +89,9 @@ The relative growth rate
 used in the calculation of the doubling time
 <img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;T&space;=&space;\tfrac{\ln&space;2}{k}" />.
 is derived by dividing the exponential growth function
-https://latex.codecogs.com/gif.latex?\dpi{120}&space;f(t)
+<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;f(t)k" />
 to its the gradient (first derivative) 
-https://latex.codecogs.com/gif.latex?\dpi{120}&space;k=\tfrac{f^\prime(t)}{f(t)}.
+<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;k=\tfrac{f^\prime(t)}{f(t)}k" />.
 
 ![Doubling times grad](images/doubling_time/pie_confirmed_gradients.png "Doubling times using gradients")
 
