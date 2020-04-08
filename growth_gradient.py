@@ -2,7 +2,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import proc as xp
 import xquery as xq
+import tools as xt
 
+odir = 'images/doubling_time'
 query_raw = xq.Query("Base", "Date > '2020-03-01'")
 query_derived = xq.Query("Recent", "")#RecentDays <=15 ")
 
@@ -38,5 +40,7 @@ plt.legend(loc='upper left', fontsize=18)
 plt.grid(axis='x', linestyle='--')
 plt.grid(axis='y', linestyle='--')
 plt.tight_layout()
+
+xt.save(fig = plt, fn = xt.name(odir, "pie_confirmed_gradients"))
 plt.show()
 plt.close('all')

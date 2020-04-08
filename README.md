@@ -5,34 +5,40 @@ https://github.com/CSSEGISandData/COVID-19
 
 ## Overall Statistics
 
-- Last update: 2020-04-02 00:00:00
-- Total confirmed cases: 1013157
-- Total death cases: 52982
-- Total active cases: 760648
-- Total recovered cases: 199527
-- Death rate %: 5.23
+- Last update: 2020-04-07 00:00:00
+- Total confirmed cases: 1426096
+- Total death cases: 81864
+- Total active cases: 1069732
+- Total recovered cases: 274500
+- Death rate %: 5.74
 
  | Country        |   Confirmed |   Deaths |   Recovered |   Active |   Death Rate |   Recovery Rate |
 |:---------------|------------:|---------:|------------:|---------:|-------------:|----------------:|
-| US             |      243453 |     5926 |           0 |   237527 |      2.43415 |        0        |
-| Italy          |      115242 |    13915 |       18278 |    83049 |     12.0746  |       15.8605   |
-| Spain          |      112065 |    10348 |       26743 |    74974 |      9.23393 |       23.8638   |
-| Germany        |       84794 |     1107 |       22440 |    61247 |      1.30552 |       26.4641   |
-| Mainland China |       81589 |     3318 |       76408 |     1863 |      4.06672 |       93.6499   |
-| France         |       59929 |     5398 |       12548 |    41983 |      9.00733 |       20.9381   |
-| Iran           |       50468 |     3160 |       16711 |    30597 |      6.26139 |       33.1121   |
-| UK             |       34173 |     2926 |         192 |    31055 |      8.56232 |        0.561847 |
-| Switzerland    |       18827 |      536 |        4013 |    14278 |      2.84698 |       21.3151   |
-| Turkey         |       18135 |      356 |         415 |    17364 |      1.96305 |        2.28839  |
+| US             |      396223 |    12722 |           0 |   383501 |      3.21082 |        0        |
+| Spain          |      141942 |    14045 |       43208 |    84689 |      9.89489 |       30.4406   |
+| Italy          |      135586 |    17127 |       24392 |    94067 |     12.6318  |       17.9901   |
+| France         |      110065 |    10343 |       19523 |    80199 |      9.39717 |       17.7377   |
+| Germany        |      107663 |     2016 |       36081 |    69566 |      1.87251 |       33.5129   |
+| Mainland China |       81739 |     3331 |       77184 |     1224 |      4.07517 |       94.4274   |
+| Iran           |       62589 |     3872 |       27039 |    31678 |      6.18639 |       43.2009   |
+| UK             |       55949 |     6171 |         325 |    49453 |     11.0297  |        0.580886 |
+| Turkey         |       34109 |      725 |        1582 |    31802 |      2.12554 |        4.63807  |
+| Switzerland    |       22253 |      821 |        8704 |    12728 |      3.68939 |       39.1138   |
 
 
 Rates are reported in percentage.
 
-## Confirmed Cases for Top Countries
+## Pies
 
+### Confirmed Cases for Top Countries
 ![Pie confirmed](images/eda/pie_confirmed.png "Pie confirmed")
 
-## Doubling Times for Confirmed Cases
+### Deaths for Top Countries
+
+![Pie deaths](images/eda/pie_deaths.png "Pie deaths")
+
+
+## Doubling Times for Confirmed Cases using exponential fits
 
 The "doubling time" refers to the time it takes for a population to double in size.
 When the relative growth rate
@@ -49,7 +55,18 @@ the better is in terms of a slowingdown spread. Small values indicate steeply in
 
 We assume that the outbreak in Europe occured around 10-15 February 2020.
 
-### Time window = Last 15 days
+### Time window - Last 15 days (Today)
+|    | Country   |   Doubling Time |   Doubling Time Error |
+|---:|:----------|----------------:|----------------------:|
+|  2 | Italy     |        15.0291  |              0.685628 |
+|  5 | Greece    |        11.2051  |              0.571117 |
+|  0 | Germany   |         9.15512 |              0.535314 |
+|  3 | Spain     |         8.925   |              0.560385 |
+|  4 | France    |         6.17459 |              0.24088  |
+|  6 | US        |         5.60267 |              0.237149 |
+|  1 | UK        |         5.58755 |              0.206167 |
+
+### Time window - Last 15 days (03.04.2020)
 |    | Country   |   Doubling Time |   Doubling Time Error |
 |---:|:----------|----------------:|----------------------:|
 |  2 | Italy     |        10.2942  |              0.538543 |
@@ -62,9 +79,13 @@ We assume that the outbreak in Europe occured around 10-15 February 2020.
 
 Note: China does not expose an exponential growth.
 
-### Germany Today
+### Exponential Growth for Germany (Today)
 ![Germany's doubling time](images/doubling_time/Germany.png "Germany's doubling time")
 Growth for Germany considering the last 15 days.
+
+## Doubling Times for Confirmed Cases using gradients
+
+![Doubling times grad](images/doubling_time/pie_confirmed_gradients.png "Doubling times using gradients")
 
 ## Overview 
 ![Overview stats](images/eda/overview.png?raw=true "Overview")

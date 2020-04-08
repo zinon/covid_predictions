@@ -261,8 +261,9 @@ class DataLoader(object):
         #grouped countries
         self.__grouped_cty = self.__latest.copy() 
         self.__grouped_cty.loc[~self.__grouped_cty['Country'].isin(self.__countries), 'Country'] = 'Others'
-        self.__grouped_cty = self.__grouped_cty.groupby(['Country']).agg({'Confirmed': ['sum']})
-        self.__grouped_cty.columns = ['Confirmed']
+        self.__grouped_cty = self.__grouped_cty.groupby(['Country']).agg({'Confirmed': ['sum'],
+                                                                          'Deaths': ['sum']})
+        self.__grouped_cty.columns = ['Confirmed', 'Deaths']
         self.__grouped_cty = self.__grouped_cty.reset_index()
         self.__grouped_cty = self.__grouped_cty.sort_values(['Confirmed'], ascending = False)
         

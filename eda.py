@@ -41,8 +41,8 @@ def make_pie(df = None, title='', case = ''):
                autopct='%1.1f%%', 
                shadow=False,
                startangle=15,   
-               pctdistance=1.2,
-               labeldistance=1.42)
+               pctdistance=1.1,
+               labeldistance=1.3)
     ax.axis('equal')
     ax.set_title(title)
     ax.legend(frameon=False, bbox_to_anchor=(1.5,0.8))
@@ -132,6 +132,7 @@ def country_view(ax, df : pd.DataFrame(), country:str):
 #options
 kshow= True
 
+kpiedeaths = True
 kpieconfirmed = True
 kcountryview = True
 kdeathrates = True
@@ -168,6 +169,11 @@ if kpieconfirmed:
     plt.figure(figsize=(15,10))
     make_pie(df = cty_gr, title='Confirmed cases', case = 'Confirmed')
     xt.save(fig = plt, fn = xt.name(odir, "pie_confirmed"))
+
+if kpiedeaths:
+    plt.figure(figsize=(15,10))
+    make_pie(df = cty_gr, title='Deaths', case = 'Deaths')
+    xt.save(fig = plt, fn = xt.name(odir, "pie_deaths"))
     
 if kcountryview:
     country = "Germany"
