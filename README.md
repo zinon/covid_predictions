@@ -84,6 +84,14 @@ Note: China does not expose an exponential growth.
 Growth for Germany considering the last 15 days.
 
 ## Doubling Times for Confirmed Cases using gradients
+The relative growth rate
+<img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;k" />
+used in the calculation of the doubling time
+<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;T&space;=&space;\tfrac{\ln&space;2}{k}" />.
+is derived by dividing the exponential growth function
+https://latex.codecogs.com/gif.latex?\dpi{120}&space;f(t)
+to its the gradient (first derivative) 
+https://latex.codecogs.com/gif.latex?\dpi{120}&space;k=\tfrac{f^\prime(t)}{f(t)}.
 
 ![Doubling times grad](images/doubling_time/pie_confirmed_gradients.png "Doubling times using gradients")
 

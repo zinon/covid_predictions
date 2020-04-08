@@ -41,12 +41,12 @@ def make_pie(df = None, title='', case = ''):
                autopct='%1.1f%%', 
                shadow=False,
                startangle=15,   
-               pctdistance=1.1,
-               labeldistance=1.3)
+               pctdistance=1.2,
+               labeldistance=1.4)
     ax.axis('equal')
-    ax.set_title(title)
+    ax.set_title(title, y = 1.08, color = 'black')
     ax.legend(frameon=False, bbox_to_anchor=(1.5,0.8))
-
+    plt.tight_layout()
 #
 def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
     if column == 'Death Rate':
@@ -56,7 +56,7 @@ def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
 
     #fig, ax = plt.subplots(2, 2, figsize=(15, 10))
     g = sns.barplot(_df[column], _df.index)#, color = 'b')
-    plt.title(title, fontsize=12)
+    plt.title(title, fontsize=12)#, y = 1.1)
     plt.ylabel(None)
     plt.xlabel(None)
     plt.grid(axis='x', linestyle='--')
@@ -134,14 +134,14 @@ kshow= True
 
 kpiedeaths = True
 kpieconfirmed = True
-kcountryview = True
-kdeathrates = True
-koverview = True
-kstates = True
-koverall = True
-klead = True
-krates = True
-kmortal= True
+kcountryview = False
+kdeathrates = False
+koverview = False
+kstates = False
+koverall = False
+klead = False
+krates = False
+kmortal= False
 kmortaldense = False
 odir = "images/eda"
 
