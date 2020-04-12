@@ -21,7 +21,7 @@ import matplotlib.ticker as plticker
     
 def plotter(train = None, title = "", ylabel = "", fn = "test", plot = True, add_chpts = False, add_cv = True):
 #figure
-    fig = plt.figure(facecolor='w', figsize=(10, 7))
+    fig = plt.figure(facecolor='w', figsize=(12, 7))
     ax = fig.add_subplot(111)
     plt.title(title, fontsize=18, y = 1.05)
 
@@ -54,7 +54,8 @@ def plotter(train = None, title = "", ylabel = "", fn = "test", plot = True, add
     ### MAPE
     if add_cv:
         train_cv_mape = train.cv_mape_fig()
-        ax = plt.gca(); ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
+        ax = plt.gca()
+        ax.yaxis.set_major_formatter(FuncFormatter(xt.y_fmt))
         xt.save(train_cv_mape, xt.name(odir, fn+"_cv_mape"))
 
     
@@ -75,13 +76,22 @@ recovered_linear = False
 mortality_linear = True
 
 #case, floor, cap
-logparams = op.LogParams()
-logparams += op.LogParam("Confirmed", 0, 2e6) #
-logparams += op.LogParam("Deaths", 0, 250e3) #
-logparams += op.LogParam("Active", 0, 1.2e6)
-logparams += op.LogParam("Recovered", 0, 0.5e6)
-logparams += op.LogParam("Mortality", 0, 250e3)
-print(logparams)
+logparamsGlobal = op.LogParams()
+logparamsGlobal += op.LogParam("Confirmed", 0, 2.5e6) #
+logparamsGlobal += op.LogParam("Deaths", 0, 250e3) #
+logparamsGlobal += op.LogParam("Active", 0, 2e6)
+logparamsGlobal += op.LogParam("Recovered", 0, 1e6)
+logparamsGlobal += op.LogParam("Mortality", 0, 500e3)
+print(logparamsGlobal)
+
+logparamsGerm = op.LogParams()
+logparamsGerm += op.LogParam("Confirmed", 0, 200e3) #
+logparamsGerm += op.LogParam("Deaths", 0, 10e3) #
+logparamsGerm += op.LogParam("Active", 0, 2e6)
+logparamsGerm += op.LogParam("Recovered", 0, 1e6)
+logparamsGerm += op.LogParam("Mortality", 0, 500e3)
+print(logparamsGerm)
+
 
 #output dir
 odir = 'images/predictions'
@@ -89,13 +99,17 @@ odir = 'images/predictions'
 #queries - cuts
 q1 = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-15' and Date < '2021-01-01'")
 
-qmort = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-20' and Date < '2021-01-01'")
-qall = xq.Query("All Period", "Confirmed > 0 and Date < '2021-01-01'")
-qgerm = xq.Query("Germany", "Confirmed > 0 and Country == 'Germany'")
+qMort = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-20' and Date < '2021-01-01'")
+qAll = xq.Query("All Period", "Confirmed > 0 and Date < '2021-01-01'")
+qGerm = xq.Query("Germany", "Confirmed > 0 and Country == 'Germany'")
 
-tag = ""
+tag = "Germany"
+
+query = qGerm
+logparams = logparamsGerm
+
 #data loader
-dloader = xp.DataLoader(query = qmort, logistic_params = logparams)
+dloader = xp.DataLoader(query = query, logistic_params = logparams, prophet = True)
 
 #forecasting periods
 periods = 21

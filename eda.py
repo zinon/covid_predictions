@@ -1,12 +1,12 @@
-import proc as xp
-import tools as xt
+import os
 import matplotlib.pyplot as plt
 import seaborn as sns
-import os
 import numpy as np
 import pandas as pd
 import matplotlib.dates as mdates
 import matplotlib.ticker as plticker
+import proc as xp
+import tools as xt
 
 #
 
@@ -21,7 +21,7 @@ def make_pie(df = None, title='', case = ''):
     cc = plt.cycler("color", plt.cm.tab20.colors)
     plt.style.context({"axes.prop_cycle" : cc})
     
-    fig, ax = plt.subplots(figsize=(10, 7))
+
     plt.rcParams['font.sans-serif'] = 'Arial'
     plt.rcParams['font.family'] = 'sans-serif'
     plt.rcParams['text.color'] = '#909090'
@@ -33,7 +33,8 @@ def make_pie(df = None, title='', case = ''):
     elist = [0]*len(percentages)
     elist[0] = 0.1
     explode= tuple( elist )
-    
+
+    ax = plt.gca()
     p = ax.pie(percentages,
                explode=explode,
                labels=labels,  
@@ -45,7 +46,7 @@ def make_pie(df = None, title='', case = ''):
                labeldistance=1.4)
     ax.axis('equal')
     ax.set_title(title, y = 1.08, color = 'black')
-    ax.legend(frameon=False, bbox_to_anchor=(1.5,0.8))
+    #ax.legend(frameon=False, bbox_to_anchor=(1.5,0.8))
     plt.tight_layout()
 #
 def plot_report(df : pd.DataFrame(), column : str, title : str, head : int):
@@ -134,14 +135,14 @@ kshow= True
 
 kpiedeaths = True
 kpieconfirmed = True
-kcountryview = False
-kdeathrates = False
-koverview = False
-kstates = False
-koverall = False
-klead = False
-krates = False
-kmortal= False
+kcountryview = True
+kdeathrates = True
+koverview = True
+kstates = True
+koverall = True
+klead = True
+krates = True
+kmortal= True
 kmortaldense = False
 odir = "images/eda"
 
@@ -166,12 +167,14 @@ sns.set_style("whitegrid")
 
 #plot
 if kpieconfirmed:
-    plt.figure(figsize=(15,10))
+    fig, ax = plt.subplots(figsize=(15, 10))
+    #plt.figure(figsize=(20,10))
     make_pie(df = cty_gr, title='Confirmed cases', case = 'Confirmed')
-    xt.save(fig = plt, fn = xt.name(odir, "pie_confirmed"))
+    xt.save(fig = fig, fn = xt.name(odir, "pie_confirmed"))
 
 if kpiedeaths:
-    plt.figure(figsize=(15,10))
+    #plt.figure(figsize=(20,10))
+    fig, ax = plt.subplots(figsize=(15, 10))
     make_pie(df = cty_gr, title='Deaths', case = 'Deaths')
     xt.save(fig = plt, fn = xt.name(odir, "pie_deaths"))
     
@@ -248,6 +251,7 @@ if klead:
     ax0 = sns.lineplot(x='Date',
                        y='Confirmed All',
                        hue="Country",
+                       markers = True,
                        data = leaders,
                        ax = ax)
     ax.legend()
@@ -261,6 +265,7 @@ if kstates:
                        y='Confirmed',
                        hue="State",
                        data = states,
+                       markers = True,
                        ax = ax)
     ax.legend()
     xt.save(fig, xt.name(odir, "states"))
@@ -271,9 +276,9 @@ if krates:
     print("lead:", leaders.head)
     fig, ax = plt.subplots(figsize=(15,10))
     ax0 = sns.lineplot(x='Date',
-                      y='Deaths_All_Frac',
-                      data = groups,
-                      color = "red",
+                       y='Deaths_All_Frac',
+                       data = groups,
+                       color = "red",
                        label = "Deaths",
                        ax = ax)
     

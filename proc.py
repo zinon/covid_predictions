@@ -3,37 +3,44 @@ import numpy as np
 
 class DataLoader(object):
     def __init__(self, **kwargs):
-        self.__top = kwargs.get('top', 10)
-        self.__query = kwargs.get('query', None)
-        self.__logistic_params  = kwargs.get('logistic_params', None)
-        self.__countries_default = ['Mainland China', 'Italy', 'Germany', 'Iran', 'US', 'Spain', 'UK', 'France']
-        self.__countries = kwargs.get('countries', self.__countries_default)
+        self.__top               = kwargs.get('top', 10)
+        self.__query             = kwargs.get('query', None)
+        self.__logistic_params   = kwargs.get('logistic_params', None)
+        self.__prophet           = kwargs.get('prophet', False)
+        self.__arima             = kwargs.get('arima', False)
+        self.__countries_default = ['US', 'Spain', 'Italy', 'France', 'Germany',
+                                    'Mainland China', 'UK', 'Iran', 'Turkey', 'Belgium']
+        self.__countries         = kwargs.get('countries', self.__countries_default)
         #
-        self.__covid_data = None
-        self.__country_data = None
-        self.__table = None
-        self.__leaders = None
-        self.__states = None
-        self.__grouped = None
-        self.__mortality = None
-        self.__latest = None
-        self.__cty_data = None
-        self.__grouped_cty = None
+        self.__covid_data         = None
+        self.__country_data       = None
+        self.__table              = None
+        self.__leaders            = None
+        self.__states             = None
+        self.__grouped            = None
+        self.__mortality          = None
+        self.__latest             = None
+        self.__cty_data           = None
+        self.__grouped_cty        = None
         #
         self.__train_ds_confirmed = None
-        self.__train_ds_deaths = None
-        self.__train_ds_active = None
+        self.__train_ds_deaths    = None
+        self.__train_ds_active    = None
         self.__train_ds_recovered = None
         self.__train_ds_mortality = None
         #
         self.__country_states = ['Germany']
         #
-        self.__loaded = self.loader() if len(kwargs) else False
-        self.__processed = self.processor() if self.__loaded else False
-        self.__modelled = self.modeller() if self.__processed and self.__logistic_params else False
-        #last status in chain
+        self.__loaded        = self.loader() if len(kwargs) else False
+        self.__processed     = self.processor() if self.__loaded else False
+        #prophet
+        self.__prophet_model = self.prophet_modeller() if self.__processed \
+             and self.__prophet and self.__logistic_params else False
+        #arima
+        self.__arima_model   = self.arima_modeller() if self.__processed \
+            and self.__arima else False
+        #
         self.__status = self.__processed
-        
     @property
     def covid_data(self):
         return self.__covid_data if self.__status else None
@@ -92,7 +99,7 @@ class DataLoader(object):
         return self.__cty_data
     
     def loader(self):
-        
+        print("")
         self.__covid_data = pd.read_csv('data/covid_19_data.csv',
                                         parse_dates = ['ObservationDate','Last Update'])
 
@@ -285,25 +292,30 @@ class DataLoader(object):
         else:
             print("Unable to print makrdown table -- empty DF.")
     def get_covid_group(self, col = ''):
-        return pd.DataFrame(self.__covid_data.groupby('Date')[col].sum().reset_index()).rename(columns={'Date': 'ds', col: 'y'})
+        return pd.DataFrame(self.__covid_data.groupby('Date')[col].sum().reset_index()).\
+            rename(columns={'Date': 'ds',
+                            col: 'y'})
 
     def get_mortality_group(self, col = ''):
-        return pd.DataFrame(self.__mortality.groupby('Date')[col].mean().reset_index()).rename(columns={'Date': 'ds',
-                                                                                                        'Mortality': 'y'})
+        return pd.DataFrame(self.__mortality.groupby('Date')[col].mean().reset_index()).\
+            rename(columns={'Date': 'ds',
+                            'Mortality': 'y'})
 
     def set_log_params(self, df = None, col = ''):
         df['floor'] = self.__logistic_params[col].floor
         df['cap'] = self.__logistic_params[col].cap
         
-    def modeller(self):
+    def prophet_modeller(self):
         # Prophet requires columns to be labelled ds and y.
         # For the logaritmic model a cap rate and a floor is nessecary.
         # These are inserted into the pandas dataframe.
         # Use a constant cap rate. Right now it's assumed to be constant.
+        print("proc: prophet_modeller...")
         
         #Modelling total confirmed cases 
         self.__train_ds_confirmed = self.get_covid_group("Confirmed")
         self.set_log_params(self.__train_ds_confirmed, "Confirmed")
+        #exit(1)
 
         #Modelling deaths
         self.__train_ds_deaths = self.get_covid_group("Deaths")
@@ -322,3 +334,8 @@ class DataLoader(object):
         self.set_log_params(self.__train_ds_mortality, "Mortality")
 
 
+    def arima_modeller(self):
+        col = 'Confirmed'
+        self.__train_ds_confirmed = pd.DataFrame(self.__covid_data.groupby('Date')[col].sum().reset_index())
+
+        

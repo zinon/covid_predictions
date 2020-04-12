@@ -12,21 +12,21 @@ import cvmetrics as cv
 class ProphetTrainer():
     def __init__(self,
                  variable : str,
-                 param : op.Param(),#:None, None, None, None, None, None, None),
-                 dloader : xp.DataLoader()
+                 param    : op.Param(),
+                 dloader  : xp.DataLoader()
     ):
-        self.__variable = variable
-        self.__param = param
-        self.__dloader = dloader
+        self.__variable   = variable
+        self.__param      = param
+        self.__dloader    = dloader
         #set these
-        self.__data = self.fetch_data()
-        self.__table = self.__dloader.table
+        self.__data       = self.fetch_data()
+        self.__table      = self.__dloader.table
         #
-        self.__model = None
-        self.__forecast = None
+        self.__model      = None
+        self.__forecast   = None
         self.__cv_metrics = cv.CVMetrics()
-        self.__trained = self.trainer()
-        self.__validated = self.validator()
+        self.__trained    = self.trainer()
+        self.__validated  = self.validator()
 
     @property
     def variable(self): return self.__variable
@@ -56,6 +56,7 @@ class ProphetTrainer():
         elif self.__variable == "Mortality":
             return self.__dloader.train_ds_mortality
 
+        return None
         
     def mean_absolute_percentage_error(self, y_true, y_pred):
         '''Calculates MAPE'''
@@ -72,9 +73,13 @@ class ProphetTrainer():
                                daily_seasonality=True,
                                seasonality_mode=self.__param.smode)
 
-        print("training %s model"%(self.__param.growth))
+        print("prophet_trainer: training %s model"%(self.__param.growth))
 
         #fit
+        if self.__data.empty:
+            print("prophet_trainer: data unavailable..."); exit(1)
+         
+        print("prophet_trainer: fitting data\n", self.__data.head(10))
         self.__model.fit(self.__data)
 
         #data frame
@@ -93,7 +98,7 @@ class ProphetTrainer():
         if not future.empty:
             self.__forecast = self.__model.predict(future)
         else:
-            print("empty future"); exit(1)
+            print("prophet_trainer: empty future"); exit(1)
 
         #RMSE
         if self.__variable:

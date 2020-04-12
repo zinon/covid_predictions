@@ -36,6 +36,7 @@ def fit(country = '',
         query_raw = None,
         query_der = None,
         do_1st_order = True, do_2nd_order = False, show = True):
+
     odir = 'images/doubling_time'
     y_data_label = 'Confirmed All'
     _countries = []
@@ -201,9 +202,6 @@ doubling_time_error = []
 
 show = False
 
-
-
-
 for country in countries:
     print("Doubling time", country)
     t, dt = fit(country = country,
@@ -219,42 +217,3 @@ df = pd.DataFrame(results)
 df.sort_values(by=['Doubling Time'], ascending=False, inplace = True)
 
 print(df.to_markdown(showindex=True))
-
-#set ticks and labels
-#x_labels = sorted([ str(x).strip('00:00:00').strip() for x in df[self.__x].tolist() ])
-#print(x_labels)
-#plt.xticks(np.arange(min(x_data), max(x_data)+1, 1.0))
-#ax.set_xticklabels(labels = x_labels,
-#                   rotation = 45 )
-
-#predictions
-#df[y_data_label+'Pred'] = fitfunc(x_data, a, b, c)
-#df[y_data_label+'PredErr'] = fitfunc(x_data, a, b, c) * np.sqrt( (da/a)**2 + x_data**2 * db**2 + x_data**4 * dc**2 )
-
-        
-#alternative
-#delta_func = error_prop(x_data, a, da, b, db, c, dc)
-#fit_up = fit_nom + delta_func
-#fit_down = fit_nom - delta_func
-
-#description
-
-
-
-
-
-
-#print( "Target Variable\n", df[y_data_label] )    
-#print( df[y_data_label].describe())
-#specific prediction
-#xpredictions = [11, 23, 35, 47, 59]
-#for xpred in xpredictions:
-#    print("%i month:"%(xpred),
-#          a + b * xpred,
-#          np.sqrt(da**2 + db**2 * xpred) )
-        
-
-
-
-
-

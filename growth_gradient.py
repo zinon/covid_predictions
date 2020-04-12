@@ -39,8 +39,9 @@ for country in countries:
 plt.legend(loc='upper left', fontsize=18)
 plt.grid(axis='x', linestyle='--')
 plt.grid(axis='y', linestyle='--')
-plt.tight_layout()
-
+#plt.tight_layout()
+ax.set(xlabel='Day', ylabel='doubling time')
+    
 xt.save(fig = plt, fn = xt.name(odir, "pie_confirmed_gradients"))
 plt.show()
 plt.close('all')
