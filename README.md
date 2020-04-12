@@ -89,7 +89,7 @@ used in the calculation of the doubling time
 is derived by dividing the exponential growth function
 <img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;f(t)=e^{kt}" />
 to its the gradient (first derivative) 
-<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;k=\tfrac{f^\prime(t)}{f(t)}k" />.
+<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;k=\tfrac{f^\prime(t)}{f(t)}" />.
 
 ![Doubling times grad](images/doubling_time/pie_confirmed_gradients.png "Doubling times using gradients")
 
