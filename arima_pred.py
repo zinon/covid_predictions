@@ -48,7 +48,7 @@ def auto_corellation_plots(df):
     axes[2, 0].plot(df.diff().diff())
     axes[2, 0].set_title('2nd Order Differencing')
     plot_acf(df.diff().diff().dropna(), ax=axes[2, 1])
-
+    return fig, axes
 
 
 odir = 'images/predictions'
@@ -113,9 +113,8 @@ upper_series = data_pred["prediction_high"]
 
 #visulaize auto-cor
 #auto corellation plots
-fig = plt.figure(figsize=(15,15), dpi=100)
-auto_corellation_plots(data['Confirmed'])
-xt.save(fig, xt.name(odir, "arima_auto_correlation" ))
+fig, axes = auto_corellation_plots(data['Confirmed'])
+xt.save(fig, xt.name(odir, "arima_auto_correlation_plots" ))
 
 # visualize series
 fig = plt.figure(figsize=(12,7), dpi=100)
@@ -146,7 +145,7 @@ xt.save(fig, xt.name(odir, "arima_residuals" ))
 #visualize fit
 fig, ax = plt.subplots(figsize=(15,10))
 fig = model_fit.plot_predict(dynamic=False, ax = ax)
-xt.save(fig, xt.name(odir, "arima_residuals" ))
+xt.save(fig, xt.name(odir, "arima_prediction" ))
 
 ## visualize prediction
 fig, ax = plt.subplots(figsize=(15,10))
@@ -180,6 +179,7 @@ xt.save(fig, xt.name(odir, "arima_train_valid_pred" ), c_txt)
 #visualize auto-corellation
 fig = plt.figure(figsize=(10, 5))
 autocorrelation_plot(data['Confirmed'])
+xt.save(fig, xt.name(odir, "arima_auto_correlation" ), c_txt)
 
 #visualize components
 fig, (ax1,ax2,ax3) = plt.subplots(3, 1,figsize=(11,7))
