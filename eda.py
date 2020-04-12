@@ -254,6 +254,7 @@ if klead:
                        markers = True,
                        data = leaders,
                        ax = ax)
+    plt.setp(ax0.lines,linewidth=2) 
     ax.legend()
     xt.save(fig, xt.name(odir, "leaders"))
 
