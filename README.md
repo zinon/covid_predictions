@@ -264,7 +264,6 @@ to the constant
 ![GF](images/factor_analysis/growth_factor_Germany.png)
 The growth factor on day D is the number of confirmed cases on day D minus confirmed cases on day D-1 divided by the number of confirmed cases on day D-1 minus confirmed cases on day D-2.
 
-
 ### Growth ratio
 ![GRat](images/factor_analysis/growth_ratio_Germany.png)
 The growth ratio on day D is the number of confirmed cases on day D divided by the number of confirmed cases on day D-1.
