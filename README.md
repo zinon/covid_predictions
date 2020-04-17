@@ -250,24 +250,24 @@ For example, if a country's growth factor has stabilized around 1.0 then this ca
 ## Factor analysis for Germany
 
 ### Growth rate
-!(GR)[images/factor_analysis/growth_rate2_Germany.png]
+![GR](images/factor_analysis/growth_rate2_Germany.png)
 The growth rate or first derivative on logarithmus of the exponential growth function gives the constant k that appears in the exponential function.
 
 ### Doubling time
-!(DT)[images/factor_analysis/doubling_time_Germany.png]
+![DT](images/factor_analysis/doubling_time_Germany.png)
 The doubling time is calulcated by dividing
  <img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;\ln(2)" />
 to the constant
 <img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;k" />.
 
 ### Growth factor
-!(GF)[images/factor_analysis/growth_factor_Germany.png]
+![GF](images/factor_analysis/growth_factor_Germany.png)
 The growth factor on day D is the number of confirmed cases on day D minus confirmed cases on day D-1 divided by the number of confirmed cases on day D-1 minus confirmed cases on day D-2.
 
 
 ### Growth ratio
-!(GRat)[images/factor_analysis/growth_ratio_Germany.png]
+![GRat](images/factor_analysis/growth_ratio_Germany.png)
 The growth ratio on day D is the number of confirmed cases on day D divided by the number of confirmed cases on day D-1.
 
-### Second derivative of exponential growth 
-!(2ndDer)[images/factor_analysis/second_derivative_Germany.png]
+### Second derivative of exponential growth
+![2ndDer](images/factor_analysis/second_derivative_Germany.png)
