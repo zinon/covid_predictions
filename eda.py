@@ -8,8 +8,6 @@ import matplotlib.ticker as plticker
 import proc as xp
 import tools as xt
 
-#
-
 def make_pie(df = None, title='', case = ''):
     print("Pie chart", case)
     print(df)
