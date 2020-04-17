@@ -144,6 +144,6 @@ ld = xp.DataLoader(top=top)
 df = ld.covid_data
 cv = country_view(df, country)
 cv = augment_view(cv, "Confirmed")
-plot_view(cv, "Confirmed", country, False)
+plot_view(cv, "Confirmed", country, True)
 print(country, "\n", cv)
 
