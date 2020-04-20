@@ -249,7 +249,7 @@ where
 
 The following growth metrics can be considered for the confirmed cases for each country:
 
-*<img src="https://render.githubusercontent.com/render/math?math=\text{Growth Factor}=\tfrac{\Delta L_i}{\Delta L_{i-1}}" /> with <img src="https://render.githubusercontent.com/render/math?math=i" /> = days, weeks, months, ...
+* <img src="https://render.githubusercontent.com/render/math?math=\text{Growth Factor}=\tfrac{\Delta L_i}{\Delta L_{i-1}}" /> with <img src="https://render.githubusercontent.com/render/math?math=i" /> = days, weeks, months, ...
 * Growth Ratio
 * Growth Rate
 * 2nd Derivative
