@@ -72,6 +72,8 @@ Predictions are performed using an additive forecasting model
 
 <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;y(t)=g(t)&plus;s(t)&plus;h(t)&plus;\epsilon_t" />
 
+https://latex.codecogs.com/gif.latex?y%28t%29%20%3D%20g%28t%29&plus;s%28t%29&plus;%5Cepsilon_t
+
 where
 - <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;g(t)" /> represents the trend
 - <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;s(t)" /> the periodic component
