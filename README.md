@@ -1,5 +1,3 @@
-<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
-
 # COVID-19 Predictions
 
 ## Data Source
@@ -70,8 +68,7 @@ Percentage rates for deaths, recovered cases and confirmed cases on a global sca
 # Predictions with Facebook Prophet
 Predictions are performed using an additive forecasting model
 
-
-![eq](https://latex.codecogs.com/svg.latex?y(t)&space;=&space;g(t)&plus;s(t)&plus;\epsilon_
+<img src="https://render.githubusercontent.com/render/math?math=y(t)=g(t)+s(t)+\epsilon_t">
 
 where
 - <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;g(t)" /> represents the trend
