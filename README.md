@@ -216,11 +216,7 @@ Note: China does not expose an exponential growth.
 Growth for Germany considering the last 15 days.
 
 ## Doubling Times for Confirmed Cases using gradients
-The relative growth rate
-
-<img src="https://render.githubusercontent.com/render/math?math=k" />
-
-used in the calculation of the doubling time
+The relative growth rate <img src="https://render.githubusercontent.com/render/math?math=k" /> used in the calculation of the doubling time
 
 <img src="https://render.githubusercontent.com/render/math?math=T=\tfrac{\ln 2}{k}" />
 
@@ -241,7 +237,7 @@ The spread of infectious disease can be modeled using a logistic curve rather th
 
 A logistic function or logistic curve is a common S-shaped curve (sigmoid curve) with equation
 
-<img src="https://render.githubusercontent.com/render/math?math=f(t)=\frac{L}{1&plus;e^{-k(t-t_0)}}" />
+<img src="https://render.githubusercontent.com/render/math?math=f(t)=\frac{L}{1 %2B e^{-k(t-t_0)}}" />
 
 where
 
