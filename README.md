@@ -161,9 +161,9 @@ with a specified carrying capacity which is indicated by a horizontal dashed lin
 ## Doubling Times for Confirmed Cases using exponential fits
 The "doubling time" refers to the time it takes for a population to double in size.
 When the relative growth rate
-<img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;k" />
+<img src="https://render.githubusercontent.com/render/math?math=k" />
 for an exponentially growing population
-<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;N(t)&space;=&space;N(0)e^{kt}" />
+<img src="https://render.githubusercontent.com/render/math?math=N(t)&space=&space;N(0)e^{kt}" />
 is constant over a time interval,
 the quantity undergoes exponential growth and has a constant doubling time or period,
 which can be calculated directly from the growth rate as follows
