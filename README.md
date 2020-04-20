@@ -1,6 +1,7 @@
 # COVID-19 Predictions
 
 <script type="text/javascript" src="https://www.hostmath.com/Math/MathJax.js?config=OK"></script>
+
 \[\frac{-b\pm\sqrt{b^2-4ac}}{2a}\]
 
 
