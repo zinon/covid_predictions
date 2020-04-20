@@ -278,7 +278,7 @@ to the constant
 
 The growth factor on day D is the number of confirmed cases on day D minus confirmed cases on day D-1 divided by the number of confirmed cases on day D-1 minus confirmed cases on day D-2:
 
-<img src="https://render.githubusercontent.com/render/math?math=\tfrac{N_i - N_{i-1}}{N_{i-1}-N{i-2}}" />
+<img src="https://render.githubusercontent.com/render/math?math=\tfrac{N_i - N_{i-1}}{N_{i-1}-N_{i-2}}" />
 
 with
 
@@ -289,7 +289,7 @@ with
 
 The growth ratio on day D is the number of confirmed cases on day D divided by the number of confirmed cases on day D-1:
 
-<img src="https://render.githubusercontent.com/render/math?math=\tfrac{N}{N-1}" />
+<img src="https://render.githubusercontent.com/render/math?math=\tfrac{N_i}{N_{i-1}}" />
 
 ### Second derivative of exponential growth
 ![2ndDer](images/factor_analysis/second_derivative_Germany.png)
