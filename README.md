@@ -73,6 +73,8 @@ Predictions are performed using an additive forecasting model
 
 ![eq](https://latex.codecogs.com/svg.latex?y(t)&space;=&space;g(t)&plus;s(t)&plus;\epsilon_t)
 
+![img](http://www.sciweavers.org/tex2img.php?eq=s%28t%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+
 where
 - <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;g(t)" /> represents the trend
 - <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;s(t)" /> the periodic component
