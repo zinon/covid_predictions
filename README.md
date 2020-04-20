@@ -1,6 +1,6 @@
 # COVID-19 Predictions
 
-<code>\ln(2)</code>
+<code>$\ln(2)$</code>
 
 
 ## Data Source
