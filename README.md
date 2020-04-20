@@ -163,7 +163,7 @@ The "doubling time" refers to the time it takes for a population to double in si
 When the relative growth rate
 <img src="https://render.githubusercontent.com/render/math?math=k" />
 for an exponentially growing population
-<img src="https://render.githubusercontent.com/render/math?math=N(t)&space=&space;N(0)e^{kt}" />
+<img src="https://render.githubusercontent.com/render/math?math=N(t)=N(0)e^{kt}" />
 is constant over a time interval,
 the quantity undergoes exponential growth and has a constant doubling time or period,
 which can be calculated directly from the growth rate as follows
