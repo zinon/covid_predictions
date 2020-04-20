@@ -1,3 +1,4 @@
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 $$E^2$$
 
 # COVID-19 Predictions
@@ -71,9 +72,7 @@ Percentage rates for deaths, recovered cases and confirmed cases on a global sca
 Predictions are performed using an additive forecasting model
 
 
-![eq](https://latex.codecogs.com/svg.latex?y(t)&space;=&space;g(t)&plus;s(t)&plus;\epsilon_t)
-
-![img](http://www.sciweavers.org/tex2img.php?eq=s%28t%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0)
+![eq](https://latex.codecogs.com/svg.latex?y(t)&space;=&space;g(t)&plus;s(t)&plus;\epsilon_
 
 where
 - <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;g(t)" /> represents the trend
