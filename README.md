@@ -217,12 +217,19 @@ Growth for Germany considering the last 15 days.
 
 ## Doubling Times for Confirmed Cases using gradients
 The relative growth rate
+
 <img src="https://render.githubusercontent.com/render/math?math=k" />
+
 used in the calculation of the doubling time
-<img src="https://render.githubusercontent.com/render/math?math=T=\tfrac{\ln 2}{k}" />.
+
+<img src="https://render.githubusercontent.com/render/math?math=T=\tfrac{\ln 2}{k}" />
+
 is derived by dividing the exponential growth function
+
 <img src="https://render.githubusercontent.com/render/math?math=f(t)=e^{kt}" />
+
 to its the gradient (first derivative) 
+
 <img src="https://render.githubusercontent.com/render/math?math=k=\tfrac{f^\prime(t)}{f(t)}" />.
 
 ![Doubling times grad](images/doubling_time/pie_confirmed_gradients.png "Doubling times using gradients")
@@ -238,15 +245,15 @@ A logistic function or logistic curve is a common S-shaped curve (sigmoid curve)
 
 where
 
-- <img src="https://latex.codecogs.com/png.latex?\dpi{150}&space;t" /> = the time variable
-- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;t_0" /> = the sigmoid's midpoint / inflection point 
-- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;L" /> = the curve's maximum value (plateau)
-- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;k"/> = the logistic growth rate or steepness of the curve
+- <img src="https://render.githubusercontent.com/render/math?math=t" /> = the time variable
+- <img src="https://render.githubusercontent.com/render/math?math=t_0" /> = the sigmoid's midpoint / inflection point 
+- <img src="https://render.githubusercontent.com/render/math?math=L" /> = the curve's maximum value (plateau)
+- <img src="https://render.githubusercontent.com/render/math?math=k"/> = the logistic growth rate or steepness of the curve
 
 
 The following growth metrics can be considered for the confirmed cases for each country:
 
-* Growth Factor =  <img src="https://latex.codecogs.com/png.latex?\dpi{150}&space;\tfrac{\Delta&space;L_i&space;}{\Delta&space;L_{i-1}&space;}" /> with i=days, weeks, months, ...
+* Growth Factor =  <img src="https://render.githubusercontent.com/render/math?math=\tfrac{\Delta&space;L_i&space;}{\Delta&space;L_{i-1}&space;}" /> with <img src="https://render.githubusercontent.com/render/math?math=i" /> = days, weeks, months, ...
 * Growth Ratio
 * Growth Rate
 * 2nd Derivative
