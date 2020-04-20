@@ -63,7 +63,7 @@ Percentage rates for deaths, recovered cases and confirmed cases on a global sca
 ![Germany status](images/eda/Germany_view.png "Germany overview")
 
 ### Daily confirmed cases
-![Germany daily cases](daily_confirmed_germany.png "Germany daily cases")
+![Germany daily cases](images/eda/daily_confirmed_germany.png "Germany daily cases")
 
 # Predictions with Facebook Prophet
 Predictions are performed using an additive forecasting model
