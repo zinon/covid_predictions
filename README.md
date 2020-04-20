@@ -234,7 +234,7 @@ The spread of infectious disease can be modeled using a logistic curve rather th
 
 A logistic function or logistic curve is a common S-shaped curve (sigmoid curve) with equation
 
-<img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;f(t)=\frac{L}{1&plus;e^{-k(t-t_0)}}" />
+<img src="https://render.githubusercontent.com/render/math?math=f(t)=\frac{L}{1&plus;e^{-k(t-t_0)}}" />
 
 where
 
