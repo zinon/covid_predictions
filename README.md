@@ -217,13 +217,13 @@ Growth for Germany considering the last 15 days.
 
 ## Doubling Times for Confirmed Cases using gradients
 The relative growth rate
-<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;k" />
+<img src="https://render.githubusercontent.com/render/math?math=k" />
 used in the calculation of the doubling time
-<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;T&space;=&space;\tfrac{\ln&space;2}{k}" />
+<img src="https://render.githubusercontent.com/render/math?math=T=\tfrac{\ln 2}{k}" />.
 is derived by dividing the exponential growth function
-<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;f(t)=e^{kt}" />
+<img src="https://render.githubusercontent.com/render/math?math=f(t)=e^{kt}" />
 to its the gradient (first derivative) 
-<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;k=\tfrac{f^\prime(t)}{f(t)}" />.
+<img src="https://render.githubusercontent.com/render/math?math=k=\tfrac{f^\prime(t)}{f(t)}" />.
 
 ![Doubling times grad](images/doubling_time/pie_confirmed_gradients.png "Doubling times using gradients")
 
