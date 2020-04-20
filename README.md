@@ -1,6 +1,8 @@
 # COVID-19 Predictions
-\[\frac{-b\pm\sqrt{b^2-4ac}}{2a}\]
+
 <script type="text/javascript" src="https://www.hostmath.com/Math/MathJax.js?config=OK"></script>
+\[\frac{-b\pm\sqrt{b^2-4ac}}{2a}\]
+
 
 ## Data Source
 https://github.com/CSSEGISandData/COVID-19
