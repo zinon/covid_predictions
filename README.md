@@ -167,9 +167,9 @@ for an exponentially growing population
 is constant over a time interval,
 the quantity undergoes exponential growth and has a constant doubling time or period,
 which can be calculated directly from the growth rate as follows
-<img src="https://latex.codecogs.com/gif.latex?\dpi{120}&space;T&space;=&space;\tfrac{\ln&space;2}{k}" />.
+<img src="https://render.githubusercontent.com/render/math?math=T=\tfrac{\ln 2}{k}" />.
 An increase in the epidemic or pandemic doubling time indicates a slowdown of the disease transmission.
-In particular for he coronavirus pandemia, the bigger doubling time (measured in days)
+In particular for he coronavirus pandemia, the bigger doubling time (measured in days D)
 the better is in terms of a slowingdown spread. Small values indicate steeply increasing populations.
 
 Note: We assume that the outbreak in Europe occured around 10-15 February 2020.
