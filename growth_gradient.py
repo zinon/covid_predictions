@@ -29,7 +29,8 @@ for country in countries:
     dy = np.gradient(y, dx )
     k = dy/y
     T = np.log(2)/k
-    
+
+    T[T<0]=0
     
     plt.plot(x,
              T,

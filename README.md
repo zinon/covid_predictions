@@ -4,25 +4,25 @@
 https://github.com/CSSEGISandData/COVID-19
 
 ## Overall Statistics
-- Last update: 2020-04-10 00:00:00
-- Total confirmed cases: 1691719
-- Total death cases: 102524
-- Total active cases: 1247744
-- Total recovered cases: 341451
-- Death rate %: 6.06
+- Last update: 2020-04-19 00:00:00
+- Total confirmed cases: 2401379
+- Total death cases: 165044
+- Total active cases: 1694616
+- Total recovered cases: 541719
+- Death rate %: 6.87
 
  | Country        |   Confirmed |   Deaths |   Recovered |   Active |   Death Rate |   Recovery Rate |
 |:---------------|------------:|---------:|------------:|---------:|-------------:|----------------:|
-| US             |      496535 |    18586 |           0 |   477949 |      3.74314 |        0        |
-| Spain          |      158273 |    16081 |       55668 |    86524 |     10.1603  |       35.1721   |
-| Italy          |      147577 |    18849 |       30455 |    98273 |     12.7723  |       20.6367   |
-| France         |      125931 |    13215 |       25195 |    87521 |     10.4938  |       20.007    |
-| Germany        |      122171 |     2767 |       53913 |    65491 |      2.26486 |       44.1291   |
-| Mainland China |       81907 |     3336 |       77472 |     1099 |      4.07291 |       94.5853   |
-| UK             |       74605 |     8974 |         588 |    65043 |     12.0287  |        0.788151 |
-| Iran           |       68192 |     4232 |       35465 |    28495 |      6.20601 |       52.0076   |
-| Turkey         |       47029 |     1006 |        2423 |    43600 |      2.13911 |        5.15214  |
-| Belgium        |       26667 |     3019 |        5568 |    18080 |     11.3211  |       20.8797   |
+| US             |      759086 |    40661 |           0 |   718425 |     5.35657  |        0        |
+| Spain          |      198674 |    20453 |       77357 |   100864 |    10.2948   |       38.9366   |
+| Italy          |      178972 |    23660 |       47055 |   108257 |    13.2199   |       26.2918   |
+| France         |      154097 |    19744 |       37183 |    97170 |    12.8127   |       24.1296   |
+| Germany        |      145184 |     4586 |       88000 |    52598 |     3.15875  |       60.6127   |
+| UK             |      121172 |    16095 |         436 |   104641 |    13.2828   |        0.359819 |
+| Turkey         |       86306 |     2017 |       11976 |    72313 |     2.33703  |       13.8762   |
+| Mainland China |       82735 |     4632 |       77068 |     1035 |     5.5986   |       93.1504   |
+| Iran           |       82211 |     5118 |       57023 |    20070 |     6.22544  |       69.3618   |
+| Russia         |       42853 |      361 |        3291 |    39201 |     0.842415 |        7.67974  |
 
 
 Rates are reported in percentage.
@@ -35,6 +35,128 @@ Rates are reported in percentage.
 ### Deaths for Top Countries
 ![Pie deaths](images/eda/pie_deaths.png "Pie deaths")
 
+## Overview 
+![Overview stats](images/eda/overview.png?raw=true "Overview")
+Overview statistics for top affected countries.
+
+## Global growth
+![Global growth](images/eda/overall.png?raw=true "Global growth")
+Global growth rate of confirmed cases.
+
+## Leaders
+![Leaders growth](images/eda/leaders.png?raw=true "Leaders growth")
+Confirmed cases for the most affected countries and Germany.
+
+## Mortality
+![Mortality rate](images/eda/mortality.png?raw=true "Mortality rate")
+Percentage mortality (death rate) for top affected countries and Germany.
+
+## Death Rates - Head & Tail
+![Death rate](images/eda/top_death_rates.png "Death rates")
+
+## Percentage Rates
+![Percentage Rates](images/eda/rates.png?raw=true "Percentage rates")
+Percentage rates for deaths, recovered cases and confirmed cases on a global scale. Mainland China is included.
+
+## Germany Overview
+### Cases overview
+![Germany status](images/eda/Germany_view.png "Germany overview")
+
+### Daily confirmed cases
+![Germany daily cases](daily_confirmed_germany.png "Germany daily cases")
+
+# Predictions with Facebook Prophet
+Predictions are performed using an additive forecasting model
+
+<img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;y(t)=g(t)&plus;s(t)&plus;h(t)&plus;\epsilon_t" />
+
+where
+- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;g(t)" /> represents the trend
+- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;s(t)" /> the periodic component
+- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;h(t)" /> holiday related events
+- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;\epsilon_t" /> the error.
+
+The data are provided on a daily basis. Also, the current model is not aware of holidays.
+
+Prophet allows you to make forecasts using a logistic growth trend model,
+with a specified carrying capacity which is indicated by a horizontal dashed line in each of the plots.
+
+## Predictions for Confirmed cases
+
+### Linear model
+#### Global
+![linear confirmed](images/predictions/prophet_linear_confirmed_prediction.png)
+
+#### Germany
+![linear confirmed germany](images/predictions/prophet_linear_confirmed_Germany_prediction.png)
+
+### Logistic model
+#### Global
+![log confirmed](images/predictions/prophet_logistic_confirmed_prediction.png)
+
+#### Germany
+![log confirmed germany](images/predictions/prophet_logistic_confirmed_Germany_prediction.png)
+
+## Predictions for Death cases
+
+### Linear model
+#### Global
+![linear deaths](images/predictions/prophet_linear_deaths_prediction.png)
+
+#### Germany
+![linear deaths germany](images/predictions/prophet_linear_deaths_Germany_prediction.png)
+
+### Logistic model
+#### Global
+![log deaths](images/predictions/prophet_logistic_deaths_prediction.png)
+
+#### Germany
+![lin germany deaths](images/predictions/prophet_logistic_deaths_Germany_prediction.png)
+
+## Predictions for Mortality
+#### Global
+![linear mortality](images/predictions/prophet_linear_mortality_prediction.png)
+
+#### Germany
+![linear mortality germany](images/predictions/prophet_linear_mortality_Germany_prediction.png)
+
+## Predictions for Active cases
+### Linear model
+#### Global
+![linear active](images/predictions/prophet_linear_active_prediction.png)
+
+### Logistic model
+#### Global
+![log active](images/predictions/prophet_logistic_active_prediction.png)
+
+## Predictions for Recovered cases
+### Linear model
+#### Global
+![linear recovered](images/predictions/prophet_linear_recovered_prediction.png)
+
+### Logistic model
+#### Global
+![log recovered](images/predictions/prophet_logistic_recovered_prediction.png)
+
+# Predictions with ARIMA
+## Confirmed Cases
+### Global 
+#### Train - Prediction - Validation
+![train prediction validation](images/predictions/arima_train_valid_pred.png)
+
+#### Auto-corellation 
+![auto correlation](images/predictions/arima_auto_correlation.png)
+
+# Predictions with Auto ARIMA
+## Confirmed Cases
+### Global
+![auto arima confirmed global](images/predictions/auto_arima_forecast.png)
+
+### Germany
+![auto arima confirmed](images/predictions/auto_arima_forecast_Germany.png)
+
+
+# Factor Analysis
 
 ## Doubling Times for Confirmed Cases using exponential fits
 The "doubling time" refers to the time it takes for a population to double in size.
@@ -51,6 +173,18 @@ In particular for he coronavirus pandemia, the bigger doubling time (measured in
 the better is in terms of a slowingdown spread. Small values indicate steeply increasing populations.
 
 Note: We assume that the outbreak in Europe occured around 10-15 February 2020.
+
+### Time window - Last 15 days (19.04.2020)
+|    | Country   |   Doubling Time |   Doubling Time Error |
+|---:|:----------|----------------:|----------------------:|
+|  5 | Greece    |         35.9963 |              2.95836  |
+|  2 | Italy     |         29.2174 |              0.715912 |
+|  0 | Germany   |         26.551  |              1.36846  |
+|  3 | Spain     |         24.2667 |              0.724882 |
+|  4 | France    |         21.7853 |              1.7145   |
+|  6 | US        |         12.5207 |              0.444251 |
+|  1 | UK        |         10.9005 |              0.425185 |
+
 
 ### Time window - Last 15 days (10.04.2020)
 |    | Country   |   Doubling Time |   Doubling Time Error |
@@ -93,135 +227,12 @@ to its the gradient (first derivative)
 
 ![Doubling times grad](images/doubling_time/pie_confirmed_gradients.png "Doubling times using gradients")
 
-## Overview 
-![Overview stats](images/eda/overview.png?raw=true "Overview")
-Overview statistics for top affected countries.
-
-## Global growth
-![Global growth](images/eda/overall.png?raw=true "Global growth")
-Global growth rate of confirmed cases.
-
-## Leaders
-![Leaders growth](images/eda/leaders.png?raw=true "Leaders growth")
-Confirmed cases for the most affected countries and Germany.
-
-## Mortality
-![Mortality rate](images/eda/mortality.png?raw=true "Mortality rate")
-Percentage mortality (death rate) for top affected countries and Germany.
-
-## Death Rates - Head & Tail
-![Death rate](images/eda/top_death_rates.png "Death rates")
-
-## Percentage Rates
-![Percentage Rates](images/eda/rates.png?raw=true "Percentage rates")
-Percentage rates for deaths, recovered cases and confirmed cases on a global scale. Mainland China is included.
-
-## Germany Overview
-![Germany status](images/eda/Germany_view.png "Germany")
-
-# Predictions with Facebook Prophet
-Predictions are performed using an additive forecasting model
-
-<img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;y(t)=g(t)&plus;s(t)&plus;h(t)&plus;\epsilon_t" />
-
-where
-- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;g(t)" /> represents the trend
-- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;s(t)" /> the periodic component
-- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;h(t)" /> holiday related events
-- <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;\epsilon_t" /> the error.
-
-The data are provided on a daily basis.
-Also, the current model is not aware of holidays.
-
-Prophet allows you to make forecasts using a logistic growth trend model,
-with a specified carrying capacity which is indicated by a horizontal dashed line in each of the plots.
-
-## Predictions for confirmed cases
-
-### Linear model
-#### Global
-![linear confirmed](images/predictions/prophet_linear_confirmed_prediction.png)
-
-#### Germany
-![linear confirmed germany](images/predictions/prophet_linear_confirmed_Germany_prediction.png)
-
-### Logistic model
-#### Global
-![log confirmed](images/predictions/prophet_logistic_confirmed_prediction.png)
-
-#### Germany
-![log confirmed germany](images/predictions/prophet_logistic_confirmed_Germany_prediction.png)
-
-## Predictions for death cases
-
-### Linear model
-#### Global
-![linear deaths](images/predictions/prophet_linear_deaths_prediction.png)
-
-#### Germany
-![linear deaths germany](images/predictions/prophet_linear_deaths_Germany_prediction.png)
-
-### Logistic model
-#### Global
-![log deaths](images/predictions/prophet_logistic_deaths_prediction.png)
-
-#### Germany
-![lin germany deaths](images/predictions/prophet_logistic_deaths_Germany_prediction.png)
-
-## Predictions for active cases
-
-### Linear model
-#### Global
-![linear active](images/predictions/prophet_linear_active_prediction.png)
-
-### Logistic model
-#### Global
-![log active](images/predictions/prophet_logistic_active_prediction.png)
-
-## Predictions for recovered cases
-
-### Linear model
-#### Global
-![linear recovered](images/predictions/prophet_linear_recovered_prediction.png)
-
-### Logistic model
-#### Global
-![log recovered](images/predictions/prophet_logistic_recovered_prediction.png)
-
-
-## Predictions for mortality rate
-#### Global
-![linear mortality](images/predictions/prophet_linear_mortality_prediction.png)
-
-#### Germany
-![linear mortality germany](images/predictions/prophet_linear_mortality_Germany_prediction.png)
-
-# Predictions with ARIMA
-## Confirmed Cases
-### Global 
-#### Train - Prediction - Validation
-![train prediction validation](images/predictions/arima_train_valid_pred.png)
-
-#### Auto-corellation 
-![auto correlation](images/predictions/arima_auto_correlation.png)
-
-# Predictions with Auto ARIMA
-## Confirmed Cases
-### Global
-![auto arima confirmed global](images/predictions/auto_arima_forecast.png)
-
-### Germany
-![auto arima confirmed](images/predictions/auto_arima_forecast_Germany.png)
-
-# Factor Analysis
-
 ## Logistic function
 The spread of infectious disease can be modeled using a logistic curve rather than an exponential curve or a linear function. The growth starts exponentially, but must slow down after some point called the inflection point. The inflection point is essentially the midpoint of the spread. We attempt to model the number of COVID-19 cases using a logistic curve.
 
 ![logistic function](images/theory/logfn_ext.png)
 
 A logistic function or logistic curve is a common S-shaped curve (sigmoid curve) with equation
-
 
 <img src="https://latex.codecogs.com/gif.latex?\dpi{150}&space;f(t)=\frac{L}{1&plus;e^{-k(t-t_0)}}" />
 
@@ -239,9 +250,6 @@ The following growth metrics can be considered for the confirmed cases for each 
 * Growth Ratio
 * Growth Rate
 * 2nd Derivative
-
-
-
 
 These growth metrics can be explored to gain insight into which countries may have already hit their inflection points.
 For example, if a country's growth factor has stabilized around 1.0 then this can be a sign that that country has reached it's inflection point.  When fitting data with a logistic function, we may predict if a country has hit their inflection point, and therefore we can predict when they will reach a possible maximum number of confirmed cases.

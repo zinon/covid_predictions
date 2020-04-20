@@ -3,10 +3,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import pandas as pd
-import matplotlib.dates as mdates
+
 import matplotlib.ticker as plticker
 import proc as xp
 import tools as xt
+import matplotlib.dates as mdates
+from matplotlib.dates import DateFormatter
 
 def make_pie(df = None, title='', case = ''):
     print("Pie chart", case)
@@ -131,6 +133,7 @@ def country_view(ax, df : pd.DataFrame(), country:str):
 #options
 kshow= True
 
+kevolution = True
 kpiedeaths = True
 kpieconfirmed = True
 kcountryview = True
@@ -164,6 +167,44 @@ sns.set_style("whitegrid")
 
 
 #plot
+if kevolution:
+    fig, ax = plt.subplots(figsize=(20, 10))
+
+    dt = ld.ts_confirmed
+    #print(dt);exit(1)
+    ax = sns.lineplot(x="Date",
+                      y="Confirmed",
+                      markers=True,
+                      data=dt,
+                      color = 'red',
+                      marker = "o",
+                      label="Confirmed",
+                      ax = ax)
+
+
+    date_form = DateFormatter("%m-%d")
+    ax.xaxis.set_major_formatter(date_form)
+
+    # Ensure a major tick for each week using (interval=1) 
+    #ax.xaxis.set_major_locator(mdates.WeekdayLocator(interval=1))
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=2))
+    for tick in ax.xaxis.get_major_ticks():
+        tick.label.set_fontsize(14) 
+        # specify integer or one of preset strings, e.g.
+        #tick.label.set_fontsize('x-small') 
+        tick.label.set_rotation('vertical')
+                
+   # ax.set_xticklabels(ax.get_xticklabels(),
+   #                    rotation=45,
+   #                    horizontalalignment='right',
+   #                    fontweight='light',
+   #                    fontsize='medium')
+
+    
+    ax.set(xlabel='Date', ylabel='Number of cases')
+    ax.legend()
+    xt.save(fig, xt.name(odir, "daily_confirmed_germany"))
+
 if kpieconfirmed:
     fig, ax = plt.subplots(figsize=(15, 10))
     #plt.figure(figsize=(20,10))
@@ -264,6 +305,7 @@ if kstates:
                        y='Confirmed',
                        hue="State",
                        data = states,
+                       lw=3,
                        markers = True,
                        ax = ax)
     ax.legend()
@@ -273,12 +315,13 @@ if krates:
     ymin = 0
     ymax = 70
     print("lead:", leaders.head)
-    fig, ax = plt.subplots(figsize=(15,10))
+    fig, ax = plt.subplots(figsize=(20,10))
     ax0 = sns.lineplot(x='Date',
                        y='Deaths_All_Frac',
                        data = groups,
                        color = "red",
                        label = "Deaths",
+                       lw=3,
                        ax = ax)
     
 
@@ -287,6 +330,7 @@ if krates:
                        data = groups,
                        color = "blue",
                        label = "Recoved",
+                       lw=3,
                        ax = ax0)
 
     ax1 = sns.lineplot(x='Date',
@@ -294,6 +338,7 @@ if krates:
                        data = groups,
                        color = "orange",
                        label = "Global Confirmed",
+                       lw=3,
                        ax = ax0)
     ax.set(xlabel='Date', ylabel='Percentage')
     ax.set_ylim([ymin,ymax])
@@ -306,7 +351,7 @@ if krates:
         
 if kmortal:
     print("mortal:", mortal.head)
-    fig, ax = plt.subplots(figsize=(15,10))
+    fig, ax = plt.subplots(figsize=(20,10))
     #We filter out where mortality rate is above 15% 
     mortal = mortal[mortal['Mortality'] < 15]
 
@@ -330,6 +375,7 @@ if kmortal:
                        y='Mortality',
                        hue='Country',
                        data = mortal,
+                       lw=3,
                        ax = ax)
 
     ax.set(xlabel='Date', ylabel='Mortality Percentage')

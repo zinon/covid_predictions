@@ -13,6 +13,7 @@ class DataLoader(object):
         self.__countries         = kwargs.get('countries', self.__countries_default)
         #
         self.__covid_data         = None
+        self.__ts_confirmed       = None
         self.__country_data       = None
         self.__table              = None
         self.__leaders            = None
@@ -44,7 +45,11 @@ class DataLoader(object):
     @property
     def covid_data(self):
         return self.__covid_data if self.__status else None
-        
+
+    @property
+    def ts_confirmed(self):
+        return self.__ts_confirmed
+    
     @property
     def table(self):
         return self.__table if self.__status else None
@@ -105,6 +110,8 @@ class DataLoader(object):
 
         self.__country_data = pd.read_csv("data/countries of the world.csv")
 
+        self.__ts_confirmed = pd.read_csv('data/time_series_covid_19_confirmed.csv')
+
         print("Shape:", self.__covid_data.shape)
         return True
 
@@ -120,7 +127,24 @@ class DataLoader(object):
         #self.__country_data =  self.__country_data.apply(lambda x : x.str.replace(',','.'))
         #self.__country_data["population_density"] = self.__country_data[].astype(float)
         #Note: a place may have reported data more than once per day.
-        
+
+        #time series 
+        self.__ts_confirmed = self.__ts_confirmed.rename(columns={'Country/Region' : 'Country',
+                                                                  'Province/State' : 'State'})
+
+        self.__ts_confirmed = self.__ts_confirmed[ self.__ts_confirmed['Country'] == 'Germany' ]
+        self.__ts_confirmed = self.__ts_confirmed.drop(['State', 'Country', 'Lat', 'Long'], axis=1)
+        self.__ts_confirmed = self.__ts_confirmed.drop( self.__ts_confirmed.columns[0], axis='columns')
+        self.__ts_confirmed.reset_index(drop=True, inplace=True)
+        self.__ts_confirmed = self.__ts_confirmed.T
+        self.__ts_confirmed = self.__ts_confirmed.rename(columns={ 0:'Confirmed'})
+        self.__ts_confirmed.index.name = 'Date'
+        self.__ts_confirmed.reset_index(level=0, inplace=True)
+        self.__ts_confirmed['Date'] = self.__ts_confirmed['Date'].apply(pd.to_datetime)
+        ts_confirmed_minus1 =  self.__ts_confirmed.shift(1, axis=0)
+        self.__ts_confirmed['Confirmed'] = self.__ts_confirmed['Confirmed'] - ts_confirmed_minus1['Confirmed']
+        #print(self.__ts_confirmed)
+
         # covid data
         print("covid shape", self.__covid_data.shape)
 
