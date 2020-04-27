@@ -133,7 +133,8 @@ def country_view(ax, df : pd.DataFrame(), country:str):
 #options
 kshow= True
 
-kevolution = True
+kevolution_death_rate = True
+kevolution_confirmed = True
 kpiedeaths = True
 kpieconfirmed = True
 kcountryview = True
@@ -167,9 +168,44 @@ sns.set_style("whitegrid")
 
 
 #plot
-if kevolution:
+if kevolution_death_rate:
     fig, ax = plt.subplots(figsize=(20, 10))
 
+    #Global
+    dt = ld.ts_death_rate
+    print(dt)
+    #print(dt);exit(1)
+    ax = sns.lineplot(x="Date",
+                      y="DeathsPerMinute",
+                      markers=True,
+                      data=dt,
+                      color = 'red',
+                      marker = "o",
+                      label="DeathsPerMinute",
+                      ax = ax)
+
+
+    date_form = DateFormatter("%m-%d")
+    ax.xaxis.set_major_formatter(date_form)
+
+    # Ensure a major tick for each week using (interval=1) 
+    #ax.xaxis.set_major_locator(mdates.WeekdayLocator(interval=1))
+    ax.xaxis.set_major_locator(mdates.DayLocator(interval=2))
+    for tick in ax.xaxis.get_major_ticks():
+        tick.label.set_fontsize(14) 
+        # specify integer or one of preset strings, e.g.
+        #tick.label.set_fontsize('x-small') 
+        tick.label.set_rotation('vertical')
+
+    ax.set(xlabel='Date', ylabel='Number of deaths per minute')
+    ax.legend()
+    xt.save(fig, xt.name(odir, "daily_death_rate_global"))
+
+        
+if kevolution_confirmed:
+    fig, ax = plt.subplots(figsize=(20, 10))
+
+    #For Germany
     dt = ld.ts_confirmed
     #print(dt);exit(1)
     ax = sns.lineplot(x="Date",

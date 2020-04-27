@@ -9,11 +9,14 @@ class DataLoader(object):
         self.__prophet           = kwargs.get('prophet', False)
         self.__arima             = kwargs.get('arima', False)
         self.__countries_default = ['US', 'Spain', 'Italy', 'France', 'Germany',
-                                    'Mainland China', 'UK', 'Iran', 'Turkey', 'Belgium']
+                                    'Mainland China', 'UK', 'Iran', 'Turkey', 'Russia']
         self.__countries         = kwargs.get('countries', self.__countries_default)
         #
         self.__covid_data         = None
-        self.__ts_confirmed       = None
+        self.__ts_confirmed_data  = None #time series
+        self.__ts_confirmed       = None #time series
+        self.__ts_deaths_data     = None #time series
+        self.__ts_death_rate      = None #time series
         self.__country_data       = None
         self.__table              = None
         self.__leaders            = None
@@ -49,7 +52,11 @@ class DataLoader(object):
     @property
     def ts_confirmed(self):
         return self.__ts_confirmed
-    
+
+    @property
+    def ts_death_rate(self):
+        return self.__ts_death_rate
+
     @property
     def table(self):
         return self.__table if self.__status else None
@@ -110,7 +117,9 @@ class DataLoader(object):
 
         self.__country_data = pd.read_csv("data/countries of the world.csv")
 
-        self.__ts_confirmed = pd.read_csv('data/time_series_covid_19_confirmed.csv')
+        self.__ts_confirmed_data = pd.read_csv('data/time_series_covid_19_confirmed.csv')
+
+        self.__ts_deaths_data = pd.read_csv('data/time_series_covid_19_deaths.csv')
 
         print("Shape:", self.__covid_data.shape)
         return True
@@ -123,14 +132,21 @@ class DataLoader(object):
         # countries
         print("country shape", self.__country_data.shape)
         pd_col = 'Pop. Density (per sq. mi.)'
-        self.__country_data[pd_col] = self.__country_data[pd_col].str.replace(",","").astype(float)
+        #self.__country_data[pd_col] = self.__country_data[pd_col].str.replace(",","").astype(float)
+        #self.__country_data.columns = self.__country_data.columns.str.replace(' ', '')
+
+        #for country in self.__countries_default:
+        #    if country == "Mainland China": country = 'China'
+        #    df = self.__country_data[self.__country_data['Country'] == country]
+        #    print(country, df)
+
         #self.__country_data =  self.__country_data.apply(lambda x : x.str.replace(',','.'))
         #self.__country_data["population_density"] = self.__country_data[].astype(float)
         #Note: a place may have reported data more than once per day.
 
-        #time series 
-        self.__ts_confirmed = self.__ts_confirmed.rename(columns={'Country/Region' : 'Country',
-                                                                  'Province/State' : 'State'})
+        #time series - confirmed
+        self.__ts_confirmed = self.__ts_confirmed_data.rename(columns={'Country/Region' : 'Country',
+                                                                       'Province/State' : 'State'})
 
         self.__ts_confirmed = self.__ts_confirmed[ self.__ts_confirmed['Country'] == 'Germany' ]
         self.__ts_confirmed = self.__ts_confirmed.drop(['State', 'Country', 'Lat', 'Long'], axis=1)
@@ -143,8 +159,24 @@ class DataLoader(object):
         self.__ts_confirmed['Date'] = self.__ts_confirmed['Date'].apply(pd.to_datetime)
         ts_confirmed_minus1 =  self.__ts_confirmed.shift(1, axis=0)
         self.__ts_confirmed['Confirmed'] = self.__ts_confirmed['Confirmed'] - ts_confirmed_minus1['Confirmed']
-        #print(self.__ts_confirmed)
 
+        #death rate
+        self.__ts_death_rate = self.__ts_deaths_data.rename(columns={'Country/Region' : 'Country',
+                                                                     'Province/State' : 'State'})
+        self.__ts_death_rate = self.__ts_death_rate.drop(['State', 'Country', 'Lat', 'Long'], axis=1)
+        self.__ts_death_rate = self.__ts_death_rate.T
+        col_list= list(self.__ts_death_rate)
+        self.__ts_death_rate['Deaths'] = self.__ts_death_rate.sum(axis=1)
+        self.__ts_death_rate.index.name = 'Date'
+        self.__ts_death_rate.reset_index(level=0, inplace=True)
+        self.__ts_death_rate['Date'] = self.__ts_death_rate['Date'].apply(pd.to_datetime)
+        self.__ts_death_rate = self.__ts_death_rate.drop( col_list, axis='columns')        
+        ts_death_rate_minus1 =  self.__ts_death_rate.shift(1, axis=0)
+        self.__ts_death_rate['Deaths'] = self.__ts_death_rate['Deaths'] - ts_death_rate_minus1['Deaths']
+        self.__ts_death_rate['DeathsPerMinute'] = self.__ts_death_rate['Deaths'] / (24 * 60)
+        self.__ts_death_rate = self.__ts_death_rate.fillna(0)
+        self.__ts_death_rate.reset_index(drop=True, inplace=True)
+        
         # covid data
         print("covid shape", self.__covid_data.shape)
 

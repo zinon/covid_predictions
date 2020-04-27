@@ -79,7 +79,7 @@ data_train_arima = data_train_log
 #buidl model
 # p, d, q
 model = ARIMA(data_train_arima,
-              order=(10, 2, 1))
+              order=(10, 1, 2))
 
 model_fit = model.fit(trend='c',
                       full_output=True,

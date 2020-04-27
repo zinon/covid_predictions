@@ -4,25 +4,25 @@
 https://github.com/CSSEGISandData/COVID-19
 
 ## Overall Statistics
-- Last update: 2020-04-19 00:00:00
-- Total confirmed cases: 2401379
-- Total death cases: 165044
-- Total active cases: 1694616
-- Total recovered cases: 541719
-- Death rate %: 6.87
+- Last update: 2020-04-25 00:00:00
+- Total confirmed cases: 2896746
+- Total death cases: 202845
+- Total active cases: 1993601
+- Total recovered cases: 700300
+- Death rate %: 7.00
 
  | Country        |   Confirmed |   Deaths |   Recovered |   Active |   Death Rate |   Recovery Rate |
 |:---------------|------------:|---------:|------------:|---------:|-------------:|----------------:|
-| US             |      759086 |    40661 |           0 |   718425 |     5.35657  |        0        |
-| Spain          |      198674 |    20453 |       77357 |   100864 |    10.2948   |       38.9366   |
-| Italy          |      178972 |    23660 |       47055 |   108257 |    13.2199   |       26.2918   |
-| France         |      154097 |    19744 |       37183 |    97170 |    12.8127   |       24.1296   |
-| Germany        |      145184 |     4586 |       88000 |    52598 |     3.15875  |       60.6127   |
-| UK             |      121172 |    16095 |         436 |   104641 |    13.2828   |        0.359819 |
-| Turkey         |       86306 |     2017 |       11976 |    72313 |     2.33703  |       13.8762   |
-| Mainland China |       82735 |     4632 |       77068 |     1035 |     5.5986   |       93.1504   |
-| Iran           |       82211 |     5118 |       57023 |    20070 |     6.22544  |       69.3618   |
-| Russia         |       42853 |      361 |        3291 |    39201 |     0.842415 |        7.67974  |
+| US             |      938154 |    53755 |           0 |   884399 |     5.72987  |        0        |
+| Spain          |      223759 |    22902 |       95708 |   105149 |    10.2351   |       42.7728   |
+| Italy          |      195351 |    26384 |       63120 |   105847 |    13.5059   |       32.3111   |
+| France         |      161644 |    22648 |       45372 |    93624 |    14.011    |       28.0691   |
+| Germany        |      156513 |     5877 |      109800 |    40836 |     3.75496  |       70.1539   |
+| UK             |      149569 |    20381 |         774 |   128414 |    13.6265   |        0.517487 |
+| Turkey         |      107773 |     2706 |       25582 |    79485 |     2.51083  |       23.7369   |
+| Iran           |       89328 |     5650 |       68193 |    15485 |     6.325    |       76.34     |
+| Mainland China |       82827 |     4632 |       77394 |      801 |     5.59238  |       93.4405   |
+| Russia         |       74588 |      681 |        6250 |    67657 |     0.913015 |        8.37936  |
 
 
 Rates are reported in percentage.
@@ -50,6 +50,9 @@ Confirmed cases for the most affected countries and Germany.
 ## Mortality
 ![Mortality rate](images/eda/mortality.png?raw=true "Mortality rate")
 Percentage mortality (death rate) for top affected countries and Germany.
+
+![Mortality rate per minute](images/eda/daily_death_rate_global.png?raw=true "Mortality rate / minute")
+Mortality per minute.
 
 ## Death Rates - Head & Tail
 ![Death rate](images/eda/top_death_rates.png "Death rates")
@@ -289,7 +292,7 @@ with
 
 The growth ratio on day D is the number of confirmed cases on day D divided by the number of confirmed cases on day D-1:
 
-<img src="https://render.githubusercontent.com/render/math?math=\tfrac{N_i}{N_{i-1}}" />
+<img src="https://render.githubusercontent.com/render/math?math=\tfrac{N_i}{N_{i-1}}" />.
 
 ### Second derivative of exponential growth
 ![2ndDer](images/factor_analysis/second_derivative_Germany.png)
