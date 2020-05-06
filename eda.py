@@ -330,7 +330,7 @@ if klead:
                        data = leaders,
                        ax = ax)
     plt.setp(ax0.lines,linewidth=2) 
-    ax.legend()
+    ax.legend(prop={'size': 20})
     xt.save(fig, xt.name(odir, "leaders"))
 
 if kstates:
@@ -415,7 +415,7 @@ if kmortal:
                        ax = ax)
 
     ax.set(xlabel='Date', ylabel='Mortality Percentage')
-    ax.legend()
+    ax.legend(prop={'size': 20})
 
         
     xt.save(fig, xt.name(odir, "mortality"))

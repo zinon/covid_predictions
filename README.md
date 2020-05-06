@@ -4,26 +4,30 @@
 https://github.com/CSSEGISandData/COVID-19
 
 ## Overall Statistics
-- Last update: 2020-04-25 00:00:00
-- Total confirmed cases: 2896746
-- Total death cases: 202845
-- Total active cases: 1993601
-- Total recovered cases: 700300
-- Death rate %: 7.00
+- Last update: 2020-05-05 00:00:00
+- Total confirmed cases: 3662691
+- Total death cases: 257239
+- Total active cases: 2423417
+- Total recovered cases: 982035
+- Death rate %: 7.02
 
- | Country        |   Confirmed |   Deaths |   Recovered |   Active |   Death Rate |   Recovery Rate |
-|:---------------|------------:|---------:|------------:|---------:|-------------:|----------------:|
-| US             |      938154 |    53755 |           0 |   884399 |     5.72987  |        0        |
-| Spain          |      223759 |    22902 |       95708 |   105149 |    10.2351   |       42.7728   |
-| Italy          |      195351 |    26384 |       63120 |   105847 |    13.5059   |       32.3111   |
-| France         |      161644 |    22648 |       45372 |    93624 |    14.011    |       28.0691   |
-| Germany        |      156513 |     5877 |      109800 |    40836 |     3.75496  |       70.1539   |
-| UK             |      149569 |    20381 |         774 |   128414 |    13.6265   |        0.517487 |
-| Turkey         |      107773 |     2706 |       25582 |    79485 |     2.51083  |       23.7369   |
-| Iran           |       89328 |     5650 |       68193 |    15485 |     6.325    |       76.34     |
-| Mainland China |       82827 |     4632 |       77394 |      801 |     5.59238  |       93.4405   |
-| Russia         |       74588 |      681 |        6250 |    67657 |     0.913015 |        8.37936  |
+ | Country   |        Confirmed |   Deaths |   Recovered |           Active |   Death Rate |   Recovery Rate |
+|:----------|-----------------:|---------:|------------:|-----------------:|-------------:|----------------:|
+| US        |      1.20435e+06 |    71064 |           0 |      1.13329e+06 |      5.90061 |        0        |
+| Spain     | 219329           |    25613 |      123486 |  70230           |     11.6779  |       56.3017   |
+| Italy     | 213013           |    29315 |       85231 |  98467           |     13.7621  |       40.0121   |
+| UK        | 196243           |    29501 |         926 | 165816           |     15.0329  |        0.471864 |
+| France    | 170687           |    25537 |       52842 |  92308           |     14.9613  |       30.9584   |
+| Germany   | 167007           |     6993 |      135100 |  24914           |      4.18725 |       80.8948   |
+| Russia    | 155370           |     1451 |       19865 | 134054           |      0.9339  |       12.7856   |
+| Turkey    | 129491           |     3520 |       73285 |  52686           |      2.71834 |       56.5947   |
+| Brazil    | 115455           |     7938 |       48221 |  59296           |      6.87541 |       41.7661   |
+| Iran      |  99970           |     6340 |       80475 |  13155           |      6.3419  |       80.4991   |
 
+Re-evaluated Death Rate
+- Consider the smallest x-fold lower risk of COVID-19 death: 36
+- Re-evaluated death rate %: 0.20
+which is "as equivalent of death risk from driving a motor vehicle" according to  [Population-level COVID-19 mortality risk for non-elderly individuals overall and for non-elderly individuals without underlying diseases in pandemic epicenters, J. P. A. Ioannidis et al. (Stanford University School of Medicine)](https://www.medrxiv.org/content/10.1101/2020.04.05.20054361v2)
 
 Rates are reported in percentage.
 
@@ -52,7 +56,7 @@ Confirmed cases for the most affected countries and Germany.
 Percentage mortality (death rate) for top affected countries and Germany.
 
 ![Mortality rate per minute](images/eda/daily_death_rate_global.png?raw=true "Mortality rate / minute")
-Mortality per minute.
+Mortality per minute worldwide.
 
 ## Death Rates - Head & Tail
 ![Death rate](images/eda/top_death_rates.png "Death rates")
@@ -176,6 +180,29 @@ In particular for he coronavirus pandemia, the bigger doubling time (measured in
 the better is in terms of a slowingdown spread. Small values indicate steeply increasing populations.
 
 Note: We assume that the outbreak in Europe occured around 10-15 February 2020.
+
+### Time window - Last 25 days (06.05.2020)
+|    | Country   |   Doubling Time |   Doubling Time Error |
+|---:|:----------|----------------:|----------------------:|
+|  3 | Spain     |        197.108  |            132.198    |
+|  4 | France    |        118.915  |             10.5378   |
+|  5 | Greece    |         84.4565 |              9.47842  |
+|  0 | Germany   |         82.55   |              4.10417  |
+|  2 | Italy     |         65.5015 |              2.58676  |
+|  6 | US        |         24.6406 |              0.571902 |
+|  1 | UK        |         23.5213 |              0.392355 |
+
+
+### Time window - Last 25 days (19.04.2020)
+|    | Country   |   Doubling Time |   Doubling Time Error |
+|---:|:----------|----------------:|----------------------:|
+|  5 | Greece    |         50.5614 |              3.30644  |
+|  0 | Germany   |         42.3396 |              1.32327  |
+|  4 | France    |         41.145  |              3.49685  |
+|  2 | Italy     |         38.5042 |              0.946665 |
+|  3 | Spain     |         30.4402 |              0.64704  |
+|  6 | US        |         17.0534 |              0.356988 |
+|  1 | UK        |         15.7245 |              0.440931 |
 
 ### Time window - Last 15 days (19.04.2020)
 |    | Country   |   Doubling Time |   Doubling Time Error |

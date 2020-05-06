@@ -76,10 +76,10 @@ data_pred = data_valid.copy()
 ## prediction
 data_train_arima = data_train_log
 
-#buidl model
+#build model
 # p, d, q
 model = ARIMA(data_train_arima,
-              order=(10, 1, 2))
+              order=(15, 1, 2))
 
 model_fit = model.fit(trend='c',
                       full_output=True,

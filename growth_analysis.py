@@ -61,7 +61,7 @@ def plot_view(df : pd.DataFrame(), col : str, country : str, show : bool):
     if show: plt.show()
     
 
-    df[col+'T'].plot(title=col+' Doubling Time (T) ' + country, grid = True, ylim=(0,50))
+    df[col+'T'].plot(title=col+' Doubling Time (T) ' + country, grid = True, ylim=(0, 80))
     plt.plot(x_coordinates, y_coordinates) 
     plt.ylabel("Doubling time (T)")
     fig=plt.gcf()

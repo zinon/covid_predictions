@@ -69,25 +69,25 @@ confirmed_logistic = False
 confirmed_linear = False
 deaths_logistic = False
 deaths_linear = False
-mortality_linear = False
+mortality_linear = True
 
 active_logistic = False
 active_linear = False
-recovered_logistic = True
+recovered_logistic = False
 recovered_linear = False
 
 
 #case, floor, cap
 logparamsGlobal = op.LogParams()
-logparamsGlobal += op.LogParam("Confirmed", 0, 3.5e6) #
-logparamsGlobal += op.LogParam("Deaths", 0, 250e3) #
-logparamsGlobal += op.LogParam("Active", 0, 2.5e6)
-logparamsGlobal += op.LogParam("Recovered", 0, 1e6)
+logparamsGlobal += op.LogParam("Confirmed", 0, 4.2e6) #
+logparamsGlobal += op.LogParam("Deaths", 0, 350e3) #
+logparamsGlobal += op.LogParam("Active", 0, 3.0e6)
+logparamsGlobal += op.LogParam("Recovered", 0, 1.5e6)
 logparamsGlobal += op.LogParam("Mortality", 0, 500e3)
 print(logparamsGlobal)
 
 logparamsGerm = op.LogParams()
-logparamsGerm += op.LogParam("Confirmed", 0, 175e3) #
+logparamsGerm += op.LogParam("Confirmed", 0, 200e3) #
 logparamsGerm += op.LogParam("Deaths", 0, 8e3) #
 logparamsGerm += op.LogParam("Active", 0, 2e6)
 logparamsGerm += op.LogParam("Recovered", 0, 1e6)
@@ -105,8 +105,8 @@ qMort = xq.Query("Subperiod", "Confirmed > 0 and Date > '2020-02-20' and Date < 
 qAll = xq.Query("All Period", "Confirmed > 0 and Date < '2021-01-01'")
 qGerm = xq.Query("Germany", "Confirmed > 0 and Country == 'Germany'")
 
-#tag = ""; query = qMort; logparams = logparamsGlobal
-tag = ""; query = qAll; logparams = logparamsGlobal
+tag = ""; query = qMort; logparams = logparamsGlobal
+#tag = ""; query = qAll; logparams = logparamsGlobal
 #tag = "Germany"; query = qGerm; logparams = logparamsGerm
 
 #data loader

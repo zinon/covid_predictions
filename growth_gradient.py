@@ -36,6 +36,9 @@ for country in countries:
              T,
              label=country)
          
+    axes = plt.gca()
+    #axes.set_xlim([xmin,xmax])
+    axes.set_ylim([0, 400])
 
 plt.legend(loc='upper left', fontsize=18)
 plt.grid(axis='x', linestyle='--')

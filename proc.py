@@ -9,7 +9,8 @@ class DataLoader(object):
         self.__prophet           = kwargs.get('prophet', False)
         self.__arima             = kwargs.get('arima', False)
         self.__countries_default = ['US', 'Spain', 'Italy', 'France', 'Germany',
-                                    'Mainland China', 'UK', 'Iran', 'Turkey', 'Russia']
+                                    'Mainland China', 'UK', 'Iran', 'Turkey', 'Russia',
+                                    'Belgium', 'Netherlands']
         self.__countries         = kwargs.get('countries', self.__countries_default)
         #
         self.__covid_data         = None
@@ -342,9 +343,19 @@ class DataLoader(object):
             print('- Total death cases: %.d' %np.sum(self.__latest['Deaths']))
             print('- Total active cases: %.d' %np.sum(self.__latest['Active']))
             print('- Total recovered cases: %.d' %np.sum(self.__latest['Recovered']))
-            print('- Death rate %%: %.2f' % (np.sum(self.__latest['Deaths'])/np.sum(self.__latest['Confirmed'])*100))
-            
+
+            dr = np.sum(self.__latest['Deaths'])/np.sum(self.__latest['Confirmed'])*100
+            print('- Death rate %%: %.2f' % (dr))
+
+                  
             print("\n", self.__cty_data.head(self.__top).to_markdown(showindex=True))
+            xfoldlower = 36
+            drprime = dr / xfoldlower
+            print("\nRe-evaluated Death Rate")
+            print("- Consider the smallest x-fold lower risk of COVID-19 death:", xfoldlower)
+            print('- Re-evaluated death rate %%: %.2f' % (drprime))
+            print("which is \"as equivalent of death risk from driving a motor vehicle\" (*)")
+            
         else:
             print("Unable to print makrdown table -- empty DF.")
     def get_covid_group(self, col = ''):
