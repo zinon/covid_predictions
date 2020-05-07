@@ -28,7 +28,7 @@ Rates are reported in percentage.
 
 ## Demystification of the Death Rates reported by Mass Media
 
-### Re-evaluated Death Rate
+Re-evaluated Death Rate
 - Consider the smallest x-fold lower risk of COVID-19 death: 36
 - Re-evaluated death rate: 0.20%
 
