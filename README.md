@@ -37,7 +37,9 @@ This is "as equivalent of death risk from driving a motor vehicle" according to 
 
 According to the [Ministero della Salute](http://www.salute.gov.it/portale/nuovocoronavirus/dettaglioContenutiNuovoCoronavirus.jsp?lingua=italiano&id=5351&area=nuovoCoronavirus&menu=vuoto) of Italy
 - Conisder that only 3.80% of the deaths had previously NO pathologies 
-- Re-evaluated death rate becomes 0.52% which is at the level of a seasonal influenza (for which there's also vaccination).
+- Re-evaluated death rate becomes 0.52%
+
+which turns to be at the level of a seasonal influenza (for which there's also vaccination).
 
 Many studies reveal that seasonal influenza has more severe burdens. See for example, the study in this article [Global mortality associated with seasonal influenza epidemics: ...](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6815659/) where it is stated that "an average of 389 000 (uncertainty range 294 000-518 000) respiratory deaths were associated with influenza globally 
 each year during the study period, corresponding to ~ 2% of all annual respiratory deaths"
