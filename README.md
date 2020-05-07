@@ -26,7 +26,7 @@ https://github.com/CSSEGISandData/COVID-19
 
 Rates are reported in percentage.
 
-## Demystification of the Media Death Rates
+## Demystification of the Death Rates reported by Mass Media
 
 ### Re-evaluated Death Rate
 - Consider the smallest x-fold lower risk of COVID-19 death: 36
