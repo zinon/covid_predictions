@@ -44,7 +44,7 @@ which turns to be at the level of a seasonal influenza (for which additionally v
 Many studies reveal that seasonal influenza has more severe burdens. See for example, the study in this article [Global mortality associated with seasonal influenza epidemics: ...](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6815659/) where it is stated that "an average of 389 000 (uncertainty range 294 000-518 000) respiratory deaths were associated with influenza globally 
 each year during the study period, corresponding to ~2% of all annual respiratory deaths".
 
-For other diseases, such as whooping cough, despite they are much more dangerous, no draconian measures or lockdowns are imposed. For example,
+For other diseases, such as whooping cough, despite they are much more dangerous, no draconian measures or lockdowns are imposed as for COVID-19. For example,
 Pertussis, caused by Bordetella pertussis and for which there's vaccination, is endemic in all countries. Globally, it is estimated that there were 24.1 million pertussis cases and 160 700 deaths from pertussis in children < 5 years of age in 2014, according to this [reference](https://www.who.int/immunization/monitoring_surveillance/burden/vpd/WHO_SurveillanceVaccinePreventable_16_Pertussis_R1.pdf?ua=1).
 
 
