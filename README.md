@@ -32,18 +32,20 @@ Re-evaluated Death Rate
 - Consider the smallest x-fold lower risk of COVID-19 death: 36
 - Re-evaluated death rate: 0.20%
 
-This is "as equivalent of death risk from driving a motor vehicle" according to  [Population-level COVID-19 mortality risk for non-elderly individuals overall and for non-elderly individuals without underlying diseases in pandemic epicenters, J. P. A. Ioannidis et al. (Stanford University School of Medicine)](https://www.medrxiv.org/content/10.1101/2020.04.05.20054361v2)
+This is "as equivalent of death risk from driving a motor vehicle" according to  [Population-level COVID-19 mortality risk for non-elderly individuals overall and for non-elderly individuals without underlying diseases in pandemic epicenters, J. P. A. Ioannidis et al. (Stanford University School of Medicine)](https://www.medrxiv.org/content/10.1101/2020.04.05.20054361v2).
 
 
 According to the [Ministero della Salute](http://www.salute.gov.it/portale/nuovocoronavirus/dettaglioContenutiNuovoCoronavirus.jsp?lingua=italiano&id=5351&area=nuovoCoronavirus&menu=vuoto) of Italy
 - Conisder that only 3.80% of the deaths had previously NO pathologies 
-- Re-evaluated death rate becomes 0.52%
+- The re-evaluated death rate for Italy becomes 0.52%
 
-which turns to be at the level of a seasonal influenza (for which there's also vaccination).
+which turns to be at the level of a seasonal influenza (for which additionally vaccination is available).
 
 Many studies reveal that seasonal influenza has more severe burdens. See for example, the study in this article [Global mortality associated with seasonal influenza epidemics: ...](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6815659/) where it is stated that "an average of 389 000 (uncertainty range 294 000-518 000) respiratory deaths were associated with influenza globally 
-each year during the study period, corresponding to ~ 2% of all annual respiratory deaths"
+each year during the study period, corresponding to ~2% of all annual respiratory deaths".
 
+For other diseases, such as whooping cough, despite they are much more dangerous, no draconian measures or lockdowns are taken. For example,
+Pertussis, caused by Bordetella pertussis and for which there's vaccination, is endemic in all countries. Globally, it is estimated that there were 24.1 million pertussis cases and 160 700 deaths from pertussis in children < 5 years of age in 2014, according to this [reference](https://www.who.int/immunization/monitoring_surveillance/burden/vpd/WHO_SurveillanceVaccinePreventable_16_Pertussis_R1.pdf?ua=1).
 
 
 ## Pies
