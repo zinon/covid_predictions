@@ -353,8 +353,12 @@ class DataLoader(object):
             drprime = dr / xfoldlower
             print("\nRe-evaluated Death Rate")
             print("- Consider the smallest x-fold lower risk of COVID-19 death:", xfoldlower)
-            print('- Re-evaluated death rate %%: %.2f' % (drprime))
-            print("which is \"as equivalent of death risk from driving a motor vehicle\" (*)")
+            print('- Re-evaluated death rate %.2f%%: ' % (drprime))
+            print("which is \"as equivalent of death risk from driving a motor vehicle\" (1)")
+            print("\nItaly")
+            xitaly = 0.038
+            print("- Conisder that only %.2f%% of the deaths had previously NO pathologies "%(xitaly*100))
+            print('- Re-evaluated death rate x %%: ')
             
         else:
             print("Unable to print makrdown table -- empty DF.")

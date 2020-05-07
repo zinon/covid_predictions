@@ -24,12 +24,25 @@ https://github.com/CSSEGISandData/COVID-19
 | Brazil    | 115455           |     7938 |       48221 |  59296           |      6.87541 |       41.7661   |
 | Iran      |  99970           |     6340 |       80475 |  13155           |      6.3419  |       80.4991   |
 
-Re-evaluated Death Rate
-- Consider the smallest x-fold lower risk of COVID-19 death: 36
-- Re-evaluated death rate %: 0.20
-which is "as equivalent of death risk from driving a motor vehicle" according to  [Population-level COVID-19 mortality risk for non-elderly individuals overall and for non-elderly individuals without underlying diseases in pandemic epicenters, J. P. A. Ioannidis et al. (Stanford University School of Medicine)](https://www.medrxiv.org/content/10.1101/2020.04.05.20054361v2)
-
 Rates are reported in percentage.
+
+## Demystification of the Media Death Rates
+
+### Re-evaluated Death Rate
+- Consider the smallest x-fold lower risk of COVID-19 death: 36
+- Re-evaluated death rate: 0.20%
+
+This is "as equivalent of death risk from driving a motor vehicle" according to  [Population-level COVID-19 mortality risk for non-elderly individuals overall and for non-elderly individuals without underlying diseases in pandemic epicenters, J. P. A. Ioannidis et al. (Stanford University School of Medicine)](https://www.medrxiv.org/content/10.1101/2020.04.05.20054361v2)
+
+
+According to the [Ministero della Salute](http://www.salute.gov.it/portale/nuovocoronavirus/dettaglioContenutiNuovoCoronavirus.jsp?lingua=italiano&id=5351&area=nuovoCoronavirus&menu=vuoto) of Italy
+- Conisder that only 3.80% of the deaths had previously NO pathologies 
+- Re-evaluated death rate becomes 0.52% which is at the level of a seasonal influenza (for which there's also vaccination).
+
+Many studies reveal that seasonal influenza has more severe burdens. See for example, the study in this article [Global mortality associated with seasonal influenza epidemics: ...](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6815659/) where it is stated that "an average of 389 000 (uncertainty range 294 000-518 000) respiratory deaths were associated with influenza globally 
+each year during the study period, corresponding to ~ 2% of all annual respiratory deaths"
+
+
 
 ## Pies
 
