@@ -4,33 +4,35 @@
 https://github.com/CSSEGISandData/COVID-19
 
 ## Overall Statistics
-- Last update: 2020-05-05 00:00:00
-- Total confirmed cases: 3662691
-- Total death cases: 257239
-- Total active cases: 2423417
-- Total recovered cases: 982035
-- Death rate %: 7.02
+- Last update: 2020-06-12 00:00:00
+- Total confirmed cases: 7632802
+- Total death cases: 425393
+- Total active cases: 4380009
+- Total recovered cases: 2827400
+- Death rate %: 5.57
 
  | Country   |        Confirmed |   Deaths |   Recovered |           Active |   Death Rate |   Recovery Rate |
 |:----------|-----------------:|---------:|------------:|-----------------:|-------------:|----------------:|
-| US        |      1.20435e+06 |    71064 |           0 |      1.13329e+06 |      5.90061 |        0        |
-| Spain     | 219329           |    25613 |      123486 |  70230           |     11.6779  |       56.3017   |
-| Italy     | 213013           |    29315 |       85231 |  98467           |     13.7621  |       40.0121   |
-| UK        | 196243           |    29501 |         926 | 165816           |     15.0329  |        0.471864 |
-| France    | 170687           |    25537 |       52842 |  92308           |     14.9613  |       30.9584   |
-| Germany   | 167007           |     6993 |      135100 |  24914           |      4.18725 |       80.8948   |
-| Russia    | 155370           |     1451 |       19865 | 134054           |      0.9339  |       12.7856   |
-| Turkey    | 129491           |     3520 |       73285 |  52686           |      2.71834 |       56.5947   |
-| Brazil    | 115455           |     7938 |       48221 |  59296           |      6.87541 |       41.7661   |
-| Iran      |  99970           |     6340 |       80475 |  13155           |      6.3419  |       80.4991   |
+| US        |      2.04899e+06 |   114669 |           0 |      1.93432e+06 |      5.59638 |        0        |
+| Brazil    | 828810           |    41828 |      445123 | 341859           |      5.04675 |       53.7063   |
+| Russia    | 510761           |     6705 |      268862 | 235194           |      1.31275 |       52.6395   |
+| India     | 297535           |     8498 |      147195 | 141842           |      2.85613 |       49.4715   |
+| UK        | 294402           |    41566 |        1282 | 251554           |     14.1188  |        0.435459 |
+| Spain     | 243209           |    27136 |      150376 |  65697           |     11.1575  |       61.8299   |
+| Italy     | 236305           |    34223 |      173085 |  28997           |     14.4826  |       73.2464   |
+| Peru      | 214788           |     6088 |           0 | 208700           |      2.83442 |        0        |
+| France    | 193220           |    29377 |       72695 |  91148           |     15.2039  |       37.6229   |
+| Germany   | 187226           |     8783 |      171535 |   6908           |      4.69112 |       91.6192   |
 
-Rates are reported in percentage.
-
-## Demystification of the Death Rates reported by Mass Media
-
-Re-evaluated Death Rate from a study using data in the USA:
+Re-evaluated Death Rate
 - Consider the smallest x-fold lower risk of COVID-19 death: 36
-- Re-evaluated death rate: 0.20%
+- Re-evaluated death rate 0.15%: 
+which is "as equivalent of death risk from driving a motor vehicle" (1)
+
+Italy
+- Conisder that only 3.80% of the deaths had previously NO pathologies 
+- Re-evaluated death rate 0.55 %%: 
+
 
 This is "as equivalent of death risk from driving a motor vehicle" according to  [Population-level COVID-19 mortality risk for non-elderly individuals overall and for non-elderly individuals without underlying diseases in pandemic epicenters, J. P. A. Ioannidis et al. (Stanford University School of Medicine)](https://www.medrxiv.org/content/10.1101/2020.04.05.20054361v2).
 
@@ -46,6 +48,8 @@ each year during the study period, corresponding to ~2% of all annual respirat
 
 For other diseases, such as whooping cough, despite they are much more dangerous, no draconian measures or lockdowns are imposed as for COVID-19. For example,
 Pertussis, caused by Bordetella pertussis and for which there's vaccination, is endemic in all countries. Globally, it is estimated that there were 24.1 million pertussis cases and 160 700 deaths from pertussis in children < 5 years of age in 2014, according to this [reference](https://www.who.int/immunization/monitoring_surveillance/burden/vpd/WHO_SurveillanceVaccinePreventable_16_Pertussis_R1.pdf?ua=1).
+
+Verum ipsum factum.
 
 
 ## Pies
@@ -197,6 +201,18 @@ In particular for he coronavirus pandemia, the bigger doubling time (measured in
 the better is in terms of a slowingdown spread. Small values indicate steeply increasing populations.
 
 Note: We assume that the outbreak in Europe occured around 10-15 February 2020.
+
+### Time window - Last 25 days (14.06.2020)
+|    | Country   |   Doubling Time |   Doubling Time Error |
+|---:|:----------|----------------:|----------------------:|
+|  2 | Italy     |        547.294  |             11.3706   |
+|  3 | Spain     |        527.194  |             16.0999   |
+|  0 | Germany   |        395.294  |             11.0166   |
+|  4 | France    |        348.887  |             44.5096   |
+|  5 | Greece    |        144.65   |             10.389    |
+|  1 | UK        |        124.024  |              2.57789  |
+|  6 | US        |         60.8919 |              0.754979 |
+
 
 ### Time window - Last 25 days (06.05.2020)
 |    | Country   |   Doubling Time |   Doubling Time Error |

@@ -10,7 +10,7 @@ class DataLoader(object):
         self.__arima             = kwargs.get('arima', False)
         self.__countries_default = ['US', 'Spain', 'Italy', 'France', 'Germany',
                                     'Mainland China', 'UK', 'Iran', 'Turkey', 'Russia',
-                                    'Belgium', 'Netherlands']
+                                    'Sweden', 'Netherlands']
         self.__countries         = kwargs.get('countries', self.__countries_default)
         #
         self.__covid_data         = None
